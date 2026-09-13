@@ -84,8 +84,8 @@ const VALUE_PILLARS: ValuePillar[] = [
   },
   {
     id: "V3",
-    title: "Satu Langkah Nyata",
-    tagline: "Satu Langkah Nyata",
+    title: "Ajakan yang Konkret",
+    tagline: "Ajakan yang Konkret",
     voiceTrait: "Tawarkan satu tindakan yang konkret dan realistis. Jika ada banyak pilihan, bantu pembaca menentukan langkah yang paling masuk akal untuk dilakukan terlebih dahulu.",
     positionNote: "Terlalu banyak saran sekaligus dapat membuat pembaca bingung atau tidak melakukan apa pun. Satu langkah yang jelas membantu mengubah pemahaman menjadi tindakan.",
     boundaryCondition: "Tidak semua situasi cukup ditangani dengan satu langkah. Untuk masalah yang kompleks atau berkelanjutan, satu langkah berfungsi sebagai titik awal menuju dukungan atau penanganan berikutnya.",
@@ -112,8 +112,8 @@ const VALUE_PILLARS: ValuePillar[] = [
   },
   {
     id: "V4",
-    title: "Mulai dari yang Terlihat",
-    tagline: "Mulai dari yang Terlihat",
+    title: "Urutan Penyampaian Emosi",
+    tagline: "Urutan Penyampaian Emosi",
     voiceTrait: "Mulailah dari situasi, kebiasaan, atau perubahan yang bisa dikenali pembaca. Tunjukkan apa yang terjadi terlebih dahulu. Jangan langsung menyimpulkan apa yang mereka rasakan, pikirkan, atau alami.",
     positionNote: "Seseorang sering lebih mudah mengenali apa yang berubah dalam kesehariannya sebelum bisa menjelaskan apa yang sedang ia rasakan. Mulai dari hal yang bisa ia lihat atau alami langsung, lalu beri ruang baginya untuk menghubungkan pola tersebut dan menamai perasaannya sendiri.",
     boundaryCondition: "Situasi konkret tetap perlu beragam dan sesuai konteks. Jangan menganggap satu kebiasaan atau pengalaman mewakili semua laki-laki.",
@@ -140,8 +140,8 @@ const VALUE_PILLARS: ValuePillar[] = [
   },
   {
     id: "V5",
-    title: "Jelas Soal Keterbatasan",
-    tagline: "Jelas Soal Keterbatasan",
+    title: "Tingkat Kepastian Informasi",
+    tagline: "Tingkat Kepastian Informasi",
     voiceTrait: "Sampaikan informasi sesuai tingkat kepastian yang tersedia. Bedakan apa yang sudah diketahui, apa yang masih berupa kemungkinan, dan apa yang belum diketahui. Jangan mengklaim lebih dari bukti atau kapasitas yang Menungsa miliki.",
     positionNote: "Dengan jujur dan terbuka menjelaskan apa yang sudah diketahui, apa yang belum diketahui, dan apa yang belum bisa dilakukan, audiens dapat memahami informasi yang diterima dengan lebih jelas dan akurat.",
     boundaryCondition: "Tidak semua ketidakpastian perlu dijelaskan panjang lebar. Sesuaikan dengan pentingnya informasi dan risiko jika terjadi kesalahpahaman. Dalam situasi darurat, prioritaskan langkah yang jelas dan informasi layanan yang sudah diverifikasi.",
@@ -168,8 +168,8 @@ const VALUE_PILLARS: ValuePillar[] = [
   },
   {
     id: "V6",
-    title: "Tunjukkan Tindakan, Bukan Tuntutan",
-    tagline: "Tunjukkan Tindakan, Bukan Tuntutan",
+    title: "Arah Tindakan",
+    tagline: "Arah Tindakan",
     voiceTrait: "Jelaskan secara konkret apa yang Menungsa lakukan, pilih, atau ubah. Saat menyatakan nilai atau sikap, tunjukkan bagaimana hal itu diterapkan dalam tindakan.",
     positionNote: "Mengatakan apa yang “seharusnya” dilakukan orang lain (misalnya, “laki-laki harus...”) dapat terasa seperti tekanan terhadap kebebasan mereka untuk memilih, sehingga memicu sikap defensif atau penolakan. Menunjukkan apa yang Menungsa lakukan sendiri memberi contoh tanpa memaksa dan membuat sikap lebih nyata lewat praktiknya.",
     boundaryCondition: "Ada situasi ketika Menungsa perlu menyampaikan batas atau sikap dengan tegas, terutama terkait keselamatan, kekerasan, diskriminasi, atau tindakan yang merugikan orang lain. Dalam situasi seperti ini, ketegasan tetap perlu diikuti dengan penjelasan tentang apa yang akan Menungsa lakukan atau batas apa yang akan Menungsa pegang.",
