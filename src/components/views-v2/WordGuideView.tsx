@@ -8,7 +8,9 @@ import {
   Compass,
   Check,
   X,
-  HeartHandshake
+  HeartHandshake,
+  Award,
+  SlidersHorizontal
 } from 'lucide-react';
 import { RegisterMap, LunarPips, MoonPhase } from '../charts/RegisterMap';
 import { handleTablistKeys } from '../../utils/overlay';
@@ -167,6 +169,7 @@ interface EthicalAlternativeItem {
   mechanismId: string;
   functionName: string;
   shortLabel: string;
+  icon: React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }>;
   psychologicalNeed: string;
   whyCompelling: string;
   harmfulVersion: string;
@@ -178,8 +181,9 @@ const ETHICAL_ALTERNATIVES: EthicalAlternativeItem[] = [
   {
     id: 'certainty',
     mechanismId: 'M03',
-    shortLabel: 'Orientasi & Kejelasan',
-    functionName: 'Orientasi & Kejelasan Arah Hidup',
+    icon: Compass,
+    shortLabel: 'Kejelasan & Arah Hidup',
+    functionName: 'Kejelasan & Arah Hidup',
     psychologicalNeed: 'Kebutuhan untuk memahami apa yang sedang terjadi, mengurangi kebingungan, dan melihat pilihan atau langkah yang masih tersedia.',
     whyCompelling: 'Penjelasan yang sederhana dan terstruktur dapat membuat situasi yang rumit terasa lebih mudah dipahami dan memberi titik awal untuk bertindak.',
     harmfulVersion: 'Memberikan satu penjelasan mutlak untuk masalah yang kompleks, mengklaim bahwa nasib laki-laki sudah ditentukan oleh biologi atau gender, atau menunjuk kelompok tertentu sebagai penyebab utama semua masalah.',
@@ -189,8 +193,9 @@ const ETHICAL_ALTERNATIVES: EthicalAlternativeItem[] = [
   {
     id: 'validation',
     mechanismId: 'M05',
-    shortLabel: 'Pengakuan Beban',
-    functionName: 'Pengakuan Beban & Rasa Didengar',
+    icon: HeartHandshake,
+    shortLabel: 'Validasi Beban',
+    functionName: 'Validasi Beban & Rasa Didengar',
     psychologicalNeed: 'Kebutuhan untuk merasa bahwa kesulitan yang dialami benar-benar dilihat dan tidak langsung dianggap sebagai kelemahan, kegagalan, atau kekurangan pribadi.',
     whyCompelling: 'Ketika pengalaman seseorang diakui dengan konkret, ia tidak perlu terus membuktikan bahwa bebannya nyata sebelum percakapan bisa dimulai.',
     harmfulVersion: 'Mengubah pengalaman kecewa atau terluka menjadi narasi bahwa kelompok lain adalah penyebab bersama, lalu memperkuat kemarahan melalui permusuhan kolektif.',
@@ -200,8 +205,9 @@ const ETHICAL_ALTERNATIVES: EthicalAlternativeItem[] = [
   {
     id: 'status',
     mechanismId: 'M08',
-    shortLabel: 'Keahlian & Martabat',
-    functionName: 'Kompetensi, Penghargaan & Martabat',
+    icon: Award,
+    shortLabel: 'Harga Diri & Kompetensi',
+    functionName: 'Harga Diri, Penghargaan & Martabat',
     psychologicalNeed: 'Kebutuhan untuk merasa mampu melakukan sesuatu dengan baik, melihat perkembangan diri, mendapatkan penghargaan yang wajar, dan tetap diperlakukan sebagai manusia yang bernilai.',
     whyCompelling: 'Kemampuan yang berkembang dan hasil yang dapat dilihat memberi rasa kemajuan. Pengakuan dari orang lain juga dapat memperkuat rasa bahwa usaha seseorang memiliki arti.',
     harmfulVersion: 'Mengubah harga diri menjadi hierarki—siapa yang paling kaya, kuat, menarik, dominan, atau “bernilai tinggi”—lalu memperlakukan orang yang berada di bawah standar tersebut sebagai kurang layak dihormati.',
@@ -211,8 +217,9 @@ const ETHICAL_ALTERNATIVES: EthicalAlternativeItem[] = [
   {
     id: 'agency',
     mechanismId: 'M02',
-    shortLabel: 'Pilihan & Tindakan',
-    functionName: 'Pilihan & Kemampuan Bertindak',
+    icon: SlidersHorizontal,
+    shortLabel: 'Otonomi',
+    functionName: 'Otonomi & Kemampuan Bertindak',
     psychologicalNeed: 'Kebutuhan untuk melihat bahwa masih ada sesuatu yang bisa dipilih, dicoba, dihentikan, atau diubah meskipun tidak semua keadaan berada dalam kendali.',
     whyCompelling: 'Satu langkah yang konkret dapat membuat masalah yang besar terasa lebih mungkin untuk dihadapi dan membantu seseorang melihat pilihan yang masih tersedia.',
     harmfulVersion: 'Menganggap semua hasil bergantung pada kemauan dan disiplin individu, mengabaikan keterbatasan ekonomi atau sosial, atau menjadikan kelelahan dan kesulitan sebagai bukti bahwa seseorang kurang berusaha.',
@@ -222,8 +229,9 @@ const ETHICAL_ALTERNATIVES: EthicalAlternativeItem[] = [
   {
     id: 'belonging',
     mechanismId: 'M04',
-    shortLabel: 'Rasa Memiliki',
-    functionName: 'Rasa Memiliki & Kebersamaan',
+    icon: Users,
+    shortLabel: 'Keterhubungan',
+    functionName: 'Keterhubungan & Kebersamaan',
     psychologicalNeed: 'Kebutuhan untuk memiliki hubungan dan tempat di mana seseorang dapat hadir tanpa terus-menerus membuktikan kemampuan, status, atau kesesuaian dirinya.',
     whyCompelling: 'Kebersamaan memberi pengalaman bahwa seseorang dikenali, dibutuhkan, dan memiliki orang lain untuk berbagi waktu, kegiatan, atau percakapan.',
     harmfulVersion: 'Membangun solidaritas melalui musuh bersama, memperkuat identitas “kita melawan mereka”, atau menjadikan kesetiaan pada kelompok sebagai syarat untuk diterima.',
@@ -233,6 +241,7 @@ const ETHICAL_ALTERNATIVES: EthicalAlternativeItem[] = [
   {
     id: 'purpose',
     mechanismId: 'M09',
+    icon: Sparkles,
     shortLabel: 'Makna & Kontribusi',
     functionName: 'Makna, Arah & Kontribusi',
     psychologicalNeed: 'Kebutuhan untuk merasa bahwa waktu, hubungan, pekerjaan, minat, atau tindakan seseorang memiliki arti yang dianggap penting olehnya.',
@@ -243,21 +252,22 @@ const ETHICAL_ALTERNATIVES: EthicalAlternativeItem[] = [
   }
 ];
 
-type GuideTab = 'pronouns' | 'gender' | 'alternatives';
+type GuideTab = 'needs' | 'gender' | 'pronouns';
 
 /** The page's primary choice, so it is rendered as one full-width switcher. */
-const GUIDE_TAB_ITEMS: { id: GuideTab; label: string; icon: typeof Users; tabId: string; panelId: string }[] = [
-  { id: 'pronouns', label: '1. Sapaan & Kata Ganti', icon: Users, tabId: 'tab-pronouns', panelId: 'panel-pronouns' },
+const GUIDE_TAB_ITEMS: { id: GuideTab; label: string; icon: React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }>; tabId: string; panelId: string }[] = [
+  { id: 'needs', label: '1. Pemenuhan Kebutuhan Audiens', icon: Sparkles, tabId: 'tab-needs', panelId: 'panel-needs' },
   { id: 'gender', label: '2. Sebutan Gender', icon: ShieldCheck, tabId: 'tab-gender', panelId: 'panel-gender' },
-  { id: 'alternatives', label: '3. Kebutuhan Pembaca & Alternatif Etis', icon: Sparkles, tabId: 'tab-alternatives', panelId: 'panel-alternatives' },
+  { id: 'pronouns', label: '3. Sapaan & Kata Ganti', icon: Users, tabId: 'tab-pronouns', panelId: 'panel-pronouns' },
 ];
 
 export const WordGuideView: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<GuideTab>('pronouns');
+  const [activeTab, setActiveTab] = useState<GuideTab>('needs');
   const [selectedRegisterId, setSelectedRegisterId] = useState<string>('kamu');
-  const [selectedFunctionId, setSelectedFunctionId] = useState<string>('all');
+  const [selectedNeedId, setSelectedNeedId] = useState<string>('certainty');
 
   const activeRegister = REGISTERS.find((r) => r.id === selectedRegisterId) ?? REGISTERS[0];
+  const selectedNeed = ETHICAL_ALTERNATIVES.find((a) => a.id === selectedNeedId) ?? ETHICAL_ALTERNATIVES[0];
 
   return (
     <div className="space-y-10 pb-16">
@@ -276,18 +286,232 @@ export const WordGuideView: React.FC = () => {
 
         {/* Tab Switcher */}
         <div className="pt-3">
-          <SegmentedTabs
-            items={GUIDE_TAB_ITEMS}
-            value={activeTab}
-            onChange={(id) => setActiveTab(id as GuideTab)}
-            ariaLabel="Navigasi Panduan Kata"
-            fill
-            size="lg"
-          />
+          <div className="p-1 sm:p-1.5 rounded-2xl bg-stone-900 border border-stone-800 shadow-sm inline-block w-full max-w-3xl">
+            <SegmentedTabs
+              items={GUIDE_TAB_ITEMS}
+              value={activeTab}
+              onChange={(id) => setActiveTab(id as GuideTab)}
+              ariaLabel="Navigasi Panduan Kata"
+              fill
+              size="lg"
+            />
+          </div>
         </div>
       </div>
 
-      {/* TAB 1: PRONOUNS */}
+      {/* TAB 1: PEMENUHAN KEBUTUHAN AUDIENS */}
+      {activeTab === 'needs' && (
+        <div role="tabpanel" id="panel-needs" aria-labelledby="tab-needs" className="space-y-6">
+          {/* Header */}
+          <div>
+            <h3 className="text-xl md:text-2xl font-serif font-bold text-stone-100">
+              Menanggapi kebutuhan tanpa memperkuat kebencian
+            </h3>
+            <p className="text-xs md:text-sm text-stone-400 mt-1 max-w-3xl leading-relaxed">
+              Sebagian konten manosphere menawarkan kejelasan, pengakuan, atau rasa diterima. Tanggapi kebutuhan itu tanpa membenarkan penjelasan yang menyalahkan atau merendahkan kelompok lain.
+            </p>
+          </div>
+
+          {/* Side-by-Side Master-Detail Grid: 1/3 left buttons, 2/3 right card */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            {/* 1/3 Left Column: Need Selector Buttons with Lucide Icons */}
+            <div className="lg:col-span-4 space-y-2">
+              <span className="text-[11px] font-sans font-bold uppercase tracking-[0.14em] text-stone-500 block px-1">
+                Pilih kebutuhan yang ingin dibahas
+              </span>
+              <div
+                role="tablist"
+                aria-label="Pilih kebutuhan yang ingin dibahas"
+                className="flex flex-col gap-2 p-1.5 rounded-2xl bg-stone-950/80 border border-stone-800 shadow-inner"
+              >
+                {ETHICAL_ALTERNATIVES.map((alt) => {
+                  const isSelected = selectedNeedId === alt.id;
+                  const NeedIcon = alt.icon;
+                  return (
+                    <button
+                      key={alt.id}
+                      type="button"
+                      role="tab"
+                      id={`tab-need-${alt.id}`}
+                      aria-selected={isSelected}
+                      aria-controls={`panel-need-${alt.id}`}
+                      onClick={() => setSelectedNeedId(alt.id)}
+                      className={`w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-left transition cursor-pointer ${
+                        isSelected
+                          ? 'bg-stone-900 border border-amber-500/70 text-amber-300 font-semibold shadow-raised'
+                          : 'border border-transparent text-stone-300 hover:text-stone-100 hover:bg-stone-900/50'
+                      }`}
+                    >
+                      <span
+                        className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border ${
+                          isSelected
+                            ? 'bg-amber-500/20 border-amber-500/40 text-amber-400'
+                            : 'bg-stone-900 border-stone-800 text-stone-400'
+                        }`}
+                      >
+                        <NeedIcon size={16} strokeWidth={isSelected ? 2.2 : 1.9} />
+                      </span>
+                      <span className="text-xs sm:text-[13px] font-sans truncate flex-1">
+                        {alt.shortLabel}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* 2/3 Right Column: Detailed Need Card */}
+            <div className="lg:col-span-8">
+              {selectedNeed && (
+                <article
+                  id={`panel-need-${selectedNeed.id}`}
+                  role="tabpanel"
+                  aria-labelledby={`tab-need-${selectedNeed.id}`}
+                  className="rounded-2xl border border-stone-800 bg-stone-900 overflow-hidden shadow-raised animate-fadeIn"
+                >
+                  {/* Card Header */}
+                  <header className="flex items-start gap-3.5 border-b border-stone-800 bg-stone-950 p-5 md:p-6">
+                    <span className="h-11 w-11 shrink-0 rounded-[10px] border border-amber-900/60 bg-amber-950/70 text-amber-400 flex items-center justify-center">
+                      <selectedNeed.icon size={20} strokeWidth={1.9} />
+                    </span>
+                    <div className="min-w-0 space-y-0.5">
+                      <span className="text-[10.5px] font-sans font-bold uppercase tracking-[0.16em] text-amber-500 block">
+                        Kebutuhan dan cara menanggapinya
+                      </span>
+                      <h4 className="text-lg md:text-xl font-serif font-semibold text-stone-100 leading-tight">
+                        {selectedNeed.functionName}
+                      </h4>
+                    </div>
+                  </header>
+
+                  <div className="p-5 md:p-6 space-y-5">
+                    {/* 1. Kebutuhan yang ingin dipenuhi */}
+                    <div className="space-y-3">
+                      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                        <span className="text-[10.5px] font-sans font-bold uppercase tracking-[0.14em] text-amber-400">
+                          1. Kebutuhan yang ingin dipenuhi
+                        </span>
+                        <span className="text-[10px] font-mono text-stone-500">
+                          Kebutuhan audiens
+                        </span>
+                      </div>
+                      <p className="text-[15px] md:text-base text-stone-100 leading-[1.6] font-sans">
+                        {selectedNeed.psychologicalNeed}
+                      </p>
+
+                      <div className="border-t border-stone-800 pt-3 space-y-1.5">
+                        <span className="text-[10.5px] font-sans font-bold uppercase tracking-[0.14em] text-stone-500 block">
+                          2. Mengapa menarik
+                        </span>
+                        <p className="text-[13px] text-stone-400 leading-[1.65] font-sans">
+                          {selectedNeed.whyCompelling}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* 3 & 4. Harmful vs Ethical Alternative */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
+                      <div className="h-full rounded-xl border border-rose-900 bg-rose-950 p-4 space-y-2">
+                        <div className="flex items-center gap-1.5 text-rose-700 dark:text-rose-400">
+                          <X size={15} className="shrink-0 stroke-[2.5]" />
+                          <span className="text-[10.5px] font-sans font-bold uppercase tracking-[0.14em]">
+                            3. Cara yang dapat merugikan
+                          </span>
+                        </div>
+                        <p className="text-[13px] text-stone-400 leading-[1.65] font-sans">
+                          {selectedNeed.harmfulVersion}
+                        </p>
+                      </div>
+
+                      <div className="h-full rounded-xl border border-emerald-900 bg-emerald-950 p-4 space-y-2">
+                        <div className="flex items-center gap-1.5 text-emerald-700 dark:text-emerald-400">
+                          <Check size={15} className="shrink-0 stroke-[2.5]" />
+                          <span className="text-[10.5px] font-sans font-bold uppercase tracking-[0.14em]">
+                            4. Pendekatan Menungsa
+                          </span>
+                        </div>
+                        <p className="text-[13px] text-stone-400 leading-[1.65] font-sans">
+                          {selectedNeed.ethicalAlternative}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Pegangan penulisan */}
+                    <div className="rounded-xl bg-mn-gold-soft p-4 flex items-start gap-3">
+                      <ShieldCheck size={18} strokeWidth={1.9} className="shrink-0 text-mn-blue mt-0.5" />
+                      <div className="min-w-0 space-y-1">
+                        <span className="text-[10.5px] font-sans font-bold uppercase tracking-[0.14em] text-mn-green block">
+                          Pegangan penulisan
+                        </span>
+                        <p className="font-serif italic text-[15px] md:text-base text-mn-blue leading-snug">
+                          "{selectedNeed.keyPrinciple}"
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* TAB 2: GENDER ADDRESS */}
+      {activeTab === 'gender' && (
+        <div role="tabpanel" id="panel-gender" aria-labelledby="tab-gender" className="space-y-6">
+          <div className="rounded-xl border border-stone-800 bg-stone-900 p-6 space-y-5 shadow-raised">
+            <div>
+              <h3 className="text-lg font-serif font-bold text-stone-100">Kapan Menggunakan "Pria", "Laki-laki", atau Tanpa Label?</h3>
+              <p className="text-xs md:text-sm text-stone-400 leading-relaxed mt-1">
+                Sebut identitas gender jika relevan. Hindari menjadikan suatu tindakan sebagai syarat untuk disebut laki-laki yang baik atau sejati.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+              <div className="rounded-xl border border-emerald-900/40 bg-emerald-950/60 p-5 space-y-2.5 text-xs shadow-xs">
+                <div className="text-emerald-700 dark:text-emerald-400 font-mono font-bold uppercase flex items-center gap-1.5">
+                  <CheckCircle2 size={15} />
+                  <span>Sebut tindakan atau situasinya</span>
+                </div>
+                <p className="text-stone-300 leading-relaxed">
+                  Tidak perlu menyebut kata "pria" sama sekali jika pesannya tentang rutinitas sehari-hari atau ritme kerja.
+                </p>
+                <div className="font-serif italic text-emerald-700 dark:text-emerald-300 pt-2 border-t border-emerald-900/40 leading-snug font-medium">
+                  "Menghadapi tumpukan pekerjaan setelah akhir pekan memang menguras energi."
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-amber-900/40 bg-amber-950/60 p-5 space-y-2.5 text-xs shadow-xs">
+                <div className="text-amber-700 dark:text-amber-400 font-mono font-bold uppercase flex items-center gap-1.5">
+                  <CheckCircle2 size={15} />
+                  <span>Sebut gender jika relevan</span>
+                </div>
+                <p className="text-stone-300 leading-relaxed">
+                  Gunakan “pria” atau “laki-laki” saat informasi tentang gender diperlukan untuk memahami pesan.
+                </p>
+                <div className="font-serif italic text-amber-700 dark:text-amber-300 pt-2 border-t border-amber-900/40 leading-snug font-medium">
+                  “Panduan dukungan untuk laki-laki dewasa.”
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-rose-900/40 bg-rose-950/60 p-5 space-y-2.5 text-xs shadow-xs">
+                <div className="text-rose-700 dark:text-rose-400 font-mono font-bold uppercase flex items-center gap-1.5">
+                  <AlertCircle size={15} />
+                  <span>Hindari syarat “pria sejati”</span>
+                </div>
+                <p className="text-stone-300 leading-relaxed">
+                  Menungsa tidak memakai label ini untuk menilai harga diri pembaca atau mendesaknya melakukan sesuatu.
+                </p>
+                <div className="font-serif italic text-rose-700 dark:text-rose-300 pt-2 border-t border-rose-900/40 leading-snug font-medium">
+                  "✕ Pria sejati adalah pria yang berani menangis dan meminta tolong."
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* TAB 3: PRONOUNS */}
       {activeTab === 'pronouns' && (
         <div role="tabpanel" id="panel-pronouns" aria-labelledby="tab-pronouns" className="space-y-6">
           {/* Interactive 2D Register Map & Active Register Deep Dive (2-Column Desktop Grid) */}
@@ -404,192 +628,6 @@ export const WordGuideView: React.FC = () => {
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-      )}
-
-      {/* TAB 2: GENDER ADDRESS */}
-      {activeTab === 'gender' && (
-        <div role="tabpanel" id="panel-gender" aria-labelledby="tab-gender" className="space-y-6">
-          <div className="rounded-xl border border-stone-800 bg-stone-900 p-6 space-y-5 shadow-raised">
-            <div>
-              <h3 className="text-lg font-serif font-bold text-stone-100">Kapan Menggunakan "Pria", "Laki-laki", atau Tanpa Label?</h3>
-              <p className="text-xs md:text-sm text-stone-400 leading-relaxed mt-1">
-                Sebut identitas gender jika relevan. Hindari menjadikan suatu tindakan sebagai syarat untuk disebut laki-laki yang baik atau sejati.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-              <div className="rounded-xl border border-emerald-900/40 bg-emerald-950/60 p-5 space-y-2.5 text-xs shadow-xs">
-                <div className="text-emerald-700 dark:text-emerald-400 font-mono font-bold uppercase flex items-center gap-1.5">
-                  <CheckCircle2 size={15} />
-                  <span>Sebut tindakan atau situasinya</span>
-                </div>
-                <p className="text-stone-300 leading-relaxed">
-                  Tidak perlu menyebut kata "pria" sama sekali jika pesannya tentang rutinitas sehari-hari atau ritme kerja.
-                </p>
-                <div className="font-serif italic text-emerald-700 dark:text-emerald-300 pt-2 border-t border-emerald-900/40 leading-snug font-medium">
-                  "Menghadapi tumpukan pekerjaan setelah akhir pekan memang menguras energi."
-                </div>
-              </div>
-
-              <div className="rounded-xl border border-amber-900/40 bg-amber-950/60 p-5 space-y-2.5 text-xs shadow-xs">
-                <div className="text-amber-700 dark:text-amber-400 font-mono font-bold uppercase flex items-center gap-1.5">
-                  <CheckCircle2 size={15} />
-                  <span>Sebut gender jika relevan</span>
-                </div>
-                <p className="text-stone-300 leading-relaxed">
-                  Gunakan “pria” atau “laki-laki” saat informasi tentang gender diperlukan untuk memahami pesan.
-                </p>
-                <div className="font-serif italic text-amber-700 dark:text-amber-300 pt-2 border-t border-amber-900/40 leading-snug font-medium">
-                  “Panduan dukungan untuk laki-laki dewasa.”
-                </div>
-              </div>
-
-              <div className="rounded-xl border border-rose-900/40 bg-rose-950/60 p-5 space-y-2.5 text-xs shadow-xs">
-                <div className="text-rose-700 dark:text-rose-400 font-mono font-bold uppercase flex items-center gap-1.5">
-                  <AlertCircle size={15} />
-                  <span>Hindari syarat “pria sejati”</span>
-                </div>
-                <p className="text-stone-300 leading-relaxed">
-                  Menungsa tidak memakai label ini untuk menilai harga diri pembaca atau mendesaknya melakukan sesuatu.
-                </p>
-                <div className="font-serif italic text-rose-700 dark:text-rose-300 pt-2 border-t border-rose-900/40 leading-snug font-medium">
-                  "✕ Pria sejati adalah pria yang berani menangis dan meminta tolong."
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* TAB 3: ETHICAL ALTERNATIVES (DECONSTRUCTING MANOSPHERE APPEALS INTO ETHICAL ALTERNATIVES) */}
-      {activeTab === 'alternatives' && (
-        <div role="tabpanel" id="panel-alternatives" aria-labelledby="tab-alternatives" className="space-y-6">
-          {/* Header */}
-          <div>
-            <h3 className="text-xl md:text-2xl font-serif font-bold text-stone-100">
-              Menanggapi kebutuhan tanpa memperkuat kebencian
-            </h3>
-            <p className="text-xs md:text-sm text-stone-400 mt-1 max-w-3xl leading-relaxed">
-              Sebagian konten manosphere menawarkan kejelasan, pengakuan, atau rasa diterima. Tanggapi kebutuhan itu tanpa membenarkan penjelasan yang menyalahkan atau merendahkan kelompok lain.
-            </p>
-          </div>
-
-          {/* Function Selector */}
-          <div className="space-y-2">
-            <span className="text-[11px] font-sans font-bold uppercase tracking-[0.14em] text-stone-500 block">
-              Pilih kebutuhan yang ingin dibahas
-            </span>
-            <SegmentedTabs
-              items={[
-                { id: 'all', label: `Semua Kebutuhan (${ETHICAL_ALTERNATIVES.length})` },
-                ...ETHICAL_ALTERNATIVES.map((alt) => ({ id: alt.id, label: alt.shortLabel })),
-              ]}
-              value={selectedFunctionId}
-              onChange={setSelectedFunctionId}
-              ariaLabel="Pilih kebutuhan yang ingin dibahas"
-            />
-          </div>
-
-          {/* One need per card, read as a sequence: what the reader wants, why the
-              pull works, the two ways of answering it, and the line to write by.
-              Every block used to be a filled panel at the same weight, so the card
-              was four competing boxes and the reader had no entry point. The need
-              is now the lead, the two answers are a matched pair, and the rule
-              closes on `gold` — the palette's one occasional surface (§2.1), which
-              is exactly what a takeaway line is for. */}
-          <div className="grid grid-cols-1 gap-6">
-            {(selectedFunctionId === 'all'
-              ? ETHICAL_ALTERNATIVES
-              : ETHICAL_ALTERNATIVES.filter((a) => a.id === selectedFunctionId)
-            ).map((item) => (
-              <article
-                key={item.id}
-                className="rounded-2xl border border-stone-800 bg-stone-900 overflow-hidden"
-              >
-                {/* Card Header */}
-                <header className="flex items-start gap-3.5 border-b border-stone-800 bg-stone-950 p-5 md:p-6">
-                  <span className="h-11 w-11 shrink-0 rounded-[10px] border border-sky-900 bg-sky-950 text-sky-700 dark:border-sky-800 dark:text-sky-400 flex items-center justify-center">
-                    <HeartHandshake size={20} strokeWidth={1.9} />
-                  </span>
-                  <div className="min-w-0 space-y-0.5">
-                    <span className="text-[10.5px] font-sans font-bold uppercase tracking-[0.16em] text-amber-500 block">
-                      Kebutuhan dan cara menanggapinya
-                    </span>
-                    <h4 className="text-lg md:text-xl font-serif font-semibold text-stone-100 leading-tight">
-                      {item.functionName}
-                    </h4>
-                  </div>
-                </header>
-
-                <div className="p-5 md:p-6 space-y-5">
-                  {/* The need itself — the card's lead, set larger than anything under it. */}
-                  <div className="space-y-3">
-                    <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-                      <span className="text-[10.5px] font-sans font-bold uppercase tracking-[0.14em] text-sky-700 dark:text-sky-400">
-                        1. Kebutuhan yang ingin dipenuhi
-                      </span>
-                      <span className="text-[10px] font-mono text-stone-500">
-                        Kebutuhan pembaca
-                      </span>
-                    </div>
-                    <p className="text-[15px] md:text-base text-stone-100 leading-[1.6] font-sans">
-                      {item.psychologicalNeed}
-                    </p>
-
-                    <div className="border-t border-stone-800 pt-3 space-y-1.5">
-                      <span className="text-[10.5px] font-sans font-bold uppercase tracking-[0.14em] text-stone-500 block">
-                        2. Mengapa menarik
-                      </span>
-                      <p className="text-[13px] text-stone-400 leading-[1.65] font-sans">
-                        {item.whyCompelling}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* The two answers, as a matched pair at equal weight. */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
-                    <div className="h-full rounded-xl border border-rose-900 bg-rose-950 p-4 space-y-2">
-                      <div className="flex items-center gap-1.5 text-rose-700 dark:text-rose-400">
-                        <X size={15} className="shrink-0 stroke-[2.5]" />
-                        <span className="text-[10.5px] font-sans font-bold uppercase tracking-[0.14em]">
-                          3. Cara yang dapat merugikan
-                        </span>
-                      </div>
-                      <p className="text-[13px] text-stone-400 leading-[1.65] font-sans">
-                        {item.harmfulVersion}
-                      </p>
-                    </div>
-
-                    <div className="h-full rounded-xl border border-emerald-900 bg-emerald-950 p-4 space-y-2">
-                      <div className="flex items-center gap-1.5 text-emerald-700 dark:text-emerald-400">
-                        <Check size={15} className="shrink-0 stroke-[2.5]" />
-                        <span className="text-[10.5px] font-sans font-bold uppercase tracking-[0.14em]">
-                          4. Pendekatan Menungsa
-                        </span>
-                      </div>
-                      <p className="text-[13px] text-stone-400 leading-[1.65] font-sans">
-                        {item.ethicalAlternative}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Governing Rule / Prinsip Emas — blue on gold is 7.81:1 (§3). */}
-                  <div className="rounded-xl bg-mn-gold-soft p-4 flex items-start gap-3">
-                    <ShieldCheck size={18} strokeWidth={1.9} className="shrink-0 text-mn-blue mt-0.5" />
-                    <div className="min-w-0 space-y-1">
-                      <span className="text-[10.5px] font-sans font-bold uppercase tracking-[0.14em] text-mn-green block">
-                        Pegangan penulisan
-                      </span>
-                      <p className="font-serif italic text-[15px] md:text-base text-mn-blue leading-snug">
-                        "{item.keyPrinciple}"
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            ))}
           </div>
         </div>
       )}

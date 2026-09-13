@@ -195,7 +195,7 @@ const CHANNELS_LIST = [
   { id: 'chat', label: '💬 WhatsApp & Komunitas', match: ['WhatsApp', 'Broadcast', 'Community', 'Note', 'Email', 'Notice', 'Gathering', 'Onboarding'] },
   { id: 'campaign', label: '📢 Kampanye & Advokasi', match: ['Campaign', 'Poster', 'Announcement', 'Ad', 'Advocacy', 'Statement', 'Release'] },
   { id: 'guide', label: '🏥 Panduan & Faskes', match: ['Guide', 'Clinical', 'Health', 'Debrief', 'Navigation', 'Bulletin', 'Logistics', 'Slide', 'Vignette', 'Feature'] },
-  { id: 'crisis', label: '🚨 Krisis & Keamanan', match: ['Crisis', 'Support', 'First-Person', 'Safety', 'Bereavement', 'De-escalation'] },
+  { id: 'crisis', label: '🚨 Situasi krisis', match: ['Crisis', 'Support', 'First-Person', 'Safety', 'Bereavement', 'De-escalation'] },
 ];
 
 export const WritingStudioView: React.FC = () => {
@@ -264,7 +264,7 @@ export const WritingStudioView: React.FC = () => {
       <div className="space-y-3">
         <div className="kicker flex items-center gap-1.5">
           <Sparkles size={12} className="text-amber-500" />
-          <span>PUSTAKA CONTOH TULISAN NYATA ({toneExemplars.length} CONTOH)</span>
+          <span>CONTOH PENERAPAN</span>
         </div>
         <h1 className="text-3xl md:text-4xl font-serif font-semibold tracking-tight text-stone-100 leading-tight">
           Voice Menungsa dalam Praktik

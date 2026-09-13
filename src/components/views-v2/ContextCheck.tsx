@@ -89,8 +89,8 @@ const CONTEXT_TABS: TabData[] = [
   },
   {
     id: 'gender',
-    label: 'Cek norma gender',
-    title: 'Cek norma gender',
+    label: 'Sadari norma gender',
+    title: 'Sadari norma gender',
     description:
       'Jika suatu tindakan masih berpotensi dianggap ‘tidak laki-laki’, jangan menjadikan maskulinitas sebagai medan pembuktian. Fokuskan pesan pada kegunaan, pilihan, dan situasinya.',
     pairs: [
@@ -140,11 +140,11 @@ interface ContextStepItem {
 const CONTEXT_STEPS: ContextStepItem[] = [
   {
     id: 'space',
-    stepNumber: 'Langkah 01',
+    stepNumber: 'Ruang',
     label: 'Cek ruangnya',
     scopeTag: 'Keterlihatan',
     focusTitle: 'Menilai keterlihatan respons pembaca',
-    question: '“Apakah respons pembaca akan terlihat oleh teman, keluarga, rekan kerja, pasangan, atau publik?”',
+    question: '“Apakah respons pembaca dapat terlihat oleh orang terdekat atau orang lain?”',
     footerLabel: 'Pilihan kanal:',
     footerValue: 'Publik vs. Privat',
     theme: 'emerald',
@@ -152,11 +152,11 @@ const CONTEXT_STEPS: ContextStepItem[] = [
   },
   {
     id: 'social-cost',
-    stepNumber: 'Langkah 02',
+    stepNumber: 'Social Cost',
     label: 'Cek social cost',
-    scopeTag: 'Social Cost',
+    scopeTag: 'Stigma & Norma',
     focusTitle: 'Menilai potensi risiko penilaian sosial',
-    question: '“Apakah tindakan yang kita ajak masih berpotensi dinilai memalukan, lemah, atau ‘tidak laki-laki’ dalam konteks audiens ini?”',
+    question: '“Apakah tindakan yang kita dorong dan ajak berpotensi dinilai memalukan, lemah, atau ‘kurang laki-laki’ dalam konteks audiens ini?”',
     footerLabel: 'Konsekuensi:',
     footerValue: 'Stigma & Norma Gender',
     theme: 'amber',
@@ -164,7 +164,7 @@ const CONTEXT_STEPS: ContextStepItem[] = [
   },
   {
     id: 'calibrate',
-    stepNumber: 'Langkah 03 · Kalibrasi',
+    stepNumber: 'Sesuaikan',
     label: 'Sesuaikan ajakannya',
     scopeTag: 'Aturan Utama',
     focusTitle: 'Hasil sintesis ruang & risiko sosial',
@@ -177,7 +177,10 @@ const CONTEXT_STEPS: ContextStepItem[] = [
 ];
 
 export const ContextCheck: React.FC = () => {
-  const [openTabId, setOpenTabId] = useState<string | null>('public');
+  const [activeTabId, setActiveTabId] = useState<'public' | 'private' | 'gender'>('public');
+  const [isPracticesExpanded, setIsPracticesExpanded] = useState<boolean>(true);
+
+  const activeTab = CONTEXT_TABS.find((t) => t.id === activeTabId) ?? CONTEXT_TABS[0];
 
   return (
     <section className="space-y-6 sm:space-y-8 rounded-3xl border border-stone-800/80 bg-stone-900/40 dark:bg-stone-950/70 p-6 sm:p-8 lg:p-9 shadow-sm">
@@ -188,7 +191,7 @@ export const ContextCheck: React.FC = () => {
           <span>CONTEXT CHECK</span>
         </div>
         <h2 className="text-2xl sm:text-3xl font-serif font-bold text-stone-100 leading-tight">
-          Pertimbangkan siapa yang bisa melihat
+          Selalu pertimbangkan situasi
         </h2>
         <p className="text-sm sm:text-base text-stone-500 dark:text-stone-300 font-sans leading-[1.65]">
           Cara orang merespons sebuah pesan dapat berubah ketika tindakan atau pengalaman mereka terlihat oleh orang lain. Untuk topik yang masih membawa stigma atau norma gender tertentu, ruang publik dapat meningkatkan kekhawatiran akan penilaian sosial.
@@ -221,7 +224,7 @@ export const ContextCheck: React.FC = () => {
           </div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-stone-900/90 dark:bg-stone-900/80 border border-stone-800 text-[11px] font-mono text-stone-400 shrink-0 self-start sm:self-auto shadow-2xs">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
-            <span>01 Ruang → 02 Risiko → 03 Kalibrasi</span>
+            <span>01 Ruang → 02 Risiko → 03 Sesuaikan</span>
           </div>
         </div>
 
@@ -369,141 +372,136 @@ export const ContextCheck: React.FC = () => {
         </div>
       </div>
 
-      {/* D. Collapsible Context Cards (Buttons as Section Titles) */}
+      {/* D. Browser Tab Strip for Practical Contexts (Ruang publik, Ruang privat, Sadari norma gender) */}
       <div className="space-y-4 pt-4 border-t border-stone-800/80">
-        <div className="space-y-1">
-          <span className="text-[10.5px] font-mono font-bold uppercase tracking-[0.16em] text-stone-400 dark:text-stone-500 block">
-            Panduan & Contoh Praktis
-          </span>
-          <h3 className="text-lg sm:text-xl font-serif font-bold text-stone-100 leading-snug">
-            Penerapan Berdasarkan Situasi & Norma
-          </h3>
-          <p className="text-xs sm:text-sm text-stone-500 dark:text-stone-400 font-sans">
-            Buka masing-masing bagian untuk melihat perbandingan DO dan DON'T saat menulis untuk ruang publik, privat, dan isu norma gender.
-          </p>
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+          <div className="space-y-1">
+            <span className="text-[10.5px] font-mono font-bold uppercase tracking-[0.16em] text-stone-400 dark:text-stone-500 block">
+              Panduan & Contoh Praktis
+            </span>
+            <h3 className="text-lg sm:text-xl font-serif font-bold text-stone-100 leading-snug">
+              Penerapan Berdasarkan Situasi & Norma
+            </h3>
+            <p className="text-xs sm:text-sm text-stone-500 dark:text-stone-400 font-sans">
+              Pilih situasi untuk melihat perbandingan DO dan DON'T saat menulis untuk ruang publik, privat, dan isu norma gender.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setIsPracticesExpanded(!isPracticesExpanded)}
+            aria-expanded={isPracticesExpanded}
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-stone-800 bg-stone-950/70 text-xs font-sans font-medium text-stone-300 hover:text-stone-100 hover:border-stone-700 transition cursor-pointer self-start sm:self-auto shrink-0"
+          >
+            <span>{isPracticesExpanded ? 'Tutup panduan' : 'Buka panduan'}</span>
+            <ChevronDown
+              size={16}
+              className={`transition-transform duration-200 ${isPracticesExpanded ? 'rotate-180' : ''}`}
+            />
+          </button>
         </div>
 
-        <div className="space-y-3.5 pt-1">
-        {CONTEXT_TABS.map((tab) => {
-          const isOpen = openTabId === tab.id;
-          const TabIcon =
-            tab.id === 'public' ? Globe : tab.id === 'private' ? Lock : ShieldAlert;
-
-          return (
+        {isPracticesExpanded && (
+          <div className="space-y-4 animate-fadeIn">
+            {/* Browser Tab Bar (No subhead text underneath) */}
             <div
-              key={tab.id}
-              className={`rounded-2xl border transition-all duration-200 shadow-2xs overflow-hidden ${
-                isOpen
-                  ? 'border-amber-500/70 dark:border-amber-500/50 bg-stone-900/90 dark:bg-stone-900/90 shadow-sm'
-                  : 'border-stone-800/80 bg-stone-900/70 dark:bg-stone-900/50 hover:border-stone-700 dark:hover:border-stone-700 hover:bg-stone-900'
-              }`}
+              role="tablist"
+              aria-label="Pilihan situasi komunikasi"
+              className="grid grid-cols-1 sm:grid-cols-3 gap-2 p-1.5 rounded-2xl bg-stone-950/80 border border-stone-800 shadow-inner"
             >
-              {/* Header as the title button */}
-              <button
-                type="button"
-                onClick={() => setOpenTabId(isOpen ? null : tab.id)}
-                aria-expanded={isOpen}
-                aria-controls={`context-content-${tab.id}`}
-                className="w-full flex items-center justify-between gap-4 p-4 sm:p-5 text-left cursor-pointer transition-colors"
-              >
-                <div className="flex items-center gap-3.5 min-w-0">
-                  <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 border ${
-                      tab.id === 'public'
-                        ? 'bg-[#EBF0FA] dark:bg-sky-950/60 text-[#17243D] dark:text-sky-300 border-[#C6D0E2] dark:border-sky-800/50'
-                        : tab.id === 'private'
-                        ? 'bg-[#ECF2EE] dark:bg-emerald-950/60 text-[#2E4034] dark:text-emerald-300 border-[#C7D3CB] dark:border-emerald-800/50'
-                        : 'bg-[#FFEBE5] dark:bg-amber-950/60 text-[#AF4D28] dark:text-amber-300 border-[#FCBFAA] dark:border-amber-800/50'
+              {CONTEXT_TABS.map((tab) => {
+                const isSelected = activeTabId === tab.id;
+                const TabIcon =
+                  tab.id === 'public' ? Globe : tab.id === 'private' ? Lock : ShieldAlert;
+
+                return (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    role="tab"
+                    id={`tab-${tab.id}`}
+                    aria-selected={isSelected}
+                    aria-controls={`panel-${tab.id}`}
+                    onClick={() => setActiveTabId(tab.id)}
+                    className={`flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl text-xs sm:text-sm font-medium transition-all cursor-pointer ${
+                      isSelected
+                        ? 'bg-stone-900 border border-amber-500/60 text-amber-300 font-semibold shadow-raised'
+                        : 'border border-transparent text-stone-400 hover:text-stone-200 hover:bg-stone-900/50'
                     }`}
                   >
-                    <TabIcon size={18} strokeWidth={1.9} />
-                  </div>
-                  <div className="min-w-0">
-                    <h3 className="font-serif font-bold text-base sm:text-lg text-stone-100 leading-snug">
-                      {tab.title}
-                    </h3>
-                    <p className="text-xs sm:text-[13px] text-stone-500 dark:text-stone-400 font-sans line-clamp-1 mt-0.5">
-                      {tab.description}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2 shrink-0 ml-2">
-                  <span className="text-[11px] font-sans font-medium text-stone-500 dark:text-stone-400 hidden sm:inline">
-                    {isOpen ? 'Tutup panduan' : 'Lihat panduan'}
-                  </span>
-                  <div className="p-1.5 rounded-lg text-stone-500 dark:text-stone-400 hover:text-stone-100 hover:bg-stone-800/40 transition">
-                    <ChevronDown
-                      size={18}
-                      className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+                    <TabIcon
+                      size={17}
+                      className={isSelected ? 'text-amber-400' : 'text-stone-400'}
+                      strokeWidth={isSelected ? 2.2 : 1.9}
                     />
-                  </div>
-                </div>
-              </button>
-
-              {/* Collapsible Content: DO and DON'T Table */}
-              {isOpen && (
-                <div
-                  id={`context-content-${tab.id}`}
-                  role="region"
-                  className="px-4 pb-5 sm:px-5 sm:pb-6 pt-1 border-t border-stone-800/70 space-y-4 animate-fadeIn"
-                >
-                  <p className="text-[13px] sm:text-sm text-stone-500 dark:text-stone-300 leading-relaxed font-sans pt-3">
-                    {tab.description}
-                  </p>
-
-                  {/* Unified Comparison Table */}
-                  <ComparisonTable
-                    positiveLabel={
-                      <>
-                        <CheckCircle2 size={14} className="shrink-0 text-emerald-400" />
-                        <span>DO (Sesuai Panduan)</span>
-                      </>
-                    }
-                    negativeLabel={
-                      <>
-                        <XCircle size={14} className="shrink-0 text-rose-500 dark:text-rose-400" />
-                        <span>DON'T (Perlu Dihindari)</span>
-                      </>
-                    }
-                    rows={tab.pairs.map((pair, idx) => ({
-                      id: `${tab.id}-${idx}`,
-                      positive: (
-                        <>
-                          <p className="font-serif italic text-emerald-700 dark:text-emerald-300 leading-snug">
-                            "{pair.doText}"
-                          </p>
-                          {pair.doWhy && (
-                            <p className="text-[13px] text-stone-500 dark:text-stone-400 leading-relaxed font-sans">
-                              {pair.doWhy}
-                            </p>
-                          )}
-                        </>
-                      ),
-                      negative: (
-                        <>
-                          <p className="font-serif italic text-rose-700 dark:text-rose-300 leading-snug">
-                            "{pair.dontText}"
-                          </p>
-                          {pair.dontWhy && (
-                            <p className="text-[13px] text-stone-500 dark:text-stone-400 leading-relaxed font-sans">
-                              {pair.dontWhy}
-                            </p>
-                          )}
-                        </>
-                      ),
-                    }))}
-                  />
-
-                  <p className="text-[12.5px] sm:text-[13px] text-stone-500 dark:text-stone-400 bg-stone-950/60 p-3.5 rounded-xl border border-stone-800/70 leading-relaxed font-sans">
-                    {tab.note}
-                  </p>
-                </div>
-              )}
+                    <span>{tab.title}</span>
+                  </button>
+                );
+              })}
             </div>
-          );
-        })}
-        </div>
+
+            {/* Active Panel (Non-collapsible, switches immediately) */}
+            {activeTab && (
+              <div
+                id={`panel-${activeTab.id}`}
+                role="tabpanel"
+                aria-labelledby={`tab-${activeTab.id}`}
+                className="rounded-2xl border border-stone-800/80 bg-stone-900/80 p-5 sm:p-6 space-y-4 animate-fadeIn"
+              >
+                <p className="text-[13px] sm:text-sm text-stone-300 leading-relaxed font-sans">
+                  {activeTab.description}
+                </p>
+
+                {/* Unified Comparison Table */}
+                <ComparisonTable
+                  positiveLabel={
+                    <>
+                      <CheckCircle2 size={14} className="shrink-0 text-emerald-400" />
+                      <span>DO (Sesuai Panduan)</span>
+                    </>
+                  }
+                  negativeLabel={
+                    <>
+                      <XCircle size={14} className="shrink-0 text-rose-500 dark:text-rose-400" />
+                      <span>DON'T (Perlu Dihindari)</span>
+                    </>
+                  }
+                  rows={activeTab.pairs.map((pair, idx) => ({
+                    id: `${activeTab.id}-${idx}`,
+                    positive: (
+                      <>
+                        <p className="font-serif italic text-emerald-700 dark:text-emerald-300 leading-snug">
+                          "{pair.doText}"
+                        </p>
+                        {pair.doWhy && (
+                          <p className="text-[13px] text-stone-400 leading-relaxed font-sans">
+                            {pair.doWhy}
+                          </p>
+                        )}
+                      </>
+                    ),
+                    negative: (
+                      <>
+                        <p className="font-serif italic text-rose-700 dark:text-rose-300 leading-snug">
+                          "{pair.dontText}"
+                        </p>
+                        {pair.dontWhy && (
+                          <p className="text-[13px] text-stone-400 leading-relaxed font-sans">
+                            {pair.dontWhy}
+                          </p>
+                        )}
+                      </>
+                    ),
+                  }))}
+                />
+
+                <p className="text-[12.5px] sm:text-[13px] text-stone-400 bg-stone-950/70 p-3.5 rounded-xl border border-stone-800/70 leading-relaxed font-sans">
+                  {activeTab.note}
+                </p>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* E. Rangkuman / Takeaway */}

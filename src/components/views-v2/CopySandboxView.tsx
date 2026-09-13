@@ -12,7 +12,8 @@ import {
   Check,
   RotateCcw,
   Gauge,
-  Activity
+  Activity,
+  ChevronDown
 } from 'lucide-react';
 import { playSound } from '../../utils/sound';
 import cheatsheetRaw from '../../data/copyCheatsheet.json';
@@ -90,6 +91,7 @@ export const CopySandboxView: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [visibleCount, setVisibleCount] = useState<number>(36);
   const [copiedTerm, setCopiedTerm] = useState<string | null>(null);
+  const [isDictionaryExpanded, setIsDictionaryExpanded] = useState<boolean>(false);
 
   // Left Column Keyword Category Filter
   const [filterCategory, setFilterCategory] = useState<string | null>(null);
@@ -394,7 +396,7 @@ export const CopySandboxView: React.FC = () => {
           Periksa Draf sebelum Dipublikasikan
         </h1>
         <p className="text-sm md:text-base text-stone-300 max-w-[74ch] leading-relaxed font-sans">
-          Tempel draf tulisan untuk melihat kata atau frasa yang mungkin perlu ditinjau kembali. Pemeriksaan akan menandai bahasa yang berpotensi menghakimi, terlalu memaksa, terlalu klinis, atau kurang sesuai dengan Voice Menungsa; lalu menunjukkan alternatif yang bisa dipertimbangkan.
+          Tempel (copy-paste) draf tulisan untuk melihat kata atau frasa yang mungkin perlu ditinjau kembali. Pemeriksaan akan menandai bahasa yang berpotensi judgmental, terlalu klinis, atau kurang sesuai dengan Voice Menungsa.
         </p>
       </div>
 
@@ -427,7 +429,7 @@ export const CopySandboxView: React.FC = () => {
           </div>
 
           {/* Quick Presets */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {PRESETS.map((p) => (
               <button
                 key={p.id}
@@ -436,16 +438,13 @@ export const CopySandboxView: React.FC = () => {
                   setInputText(p.text);
                   setSelectedWord(null);
                 }}
-                className={`text-left px-3 py-2 rounded-[6px] border text-xs font-sans transition cursor-pointer flex flex-col gap-0.5 ${
+                className={`text-center px-3 py-2 rounded-lg border text-xs font-sans transition cursor-pointer ${
                   inputText === p.text
-                    ? 'bg-amber-500/20 border-amber-500 text-amber-500 dark:text-amber-200 font-semibold shadow-raised'
+                    ? 'bg-amber-500/20 border-amber-500 text-amber-300 font-semibold shadow-raised'
                     : 'bg-stone-900/70 border-stone-800 text-stone-300 hover:border-stone-700 hover:text-stone-100'
                 }`}
               >
-                <span className="font-semibold text-[11px] truncate">{p.label}</span>
-                <span className="text-[10px] text-stone-400 line-clamp-1">
-                  {p.text}
-                </span>
+                <span className="font-semibold text-xs truncate">{p.label}</span>
               </button>
             ))}
           </div>
@@ -980,11 +979,25 @@ export const CopySandboxView: React.FC = () => {
             <span className="text-xs font-mono text-stone-400 bg-stone-900 border border-stone-800 px-3 py-1.5 rounded-lg">
               Total Database: <strong className="text-amber-300 font-mono">{cheatsheet.length.toLocaleString('id-ID')}</strong> Kata/Frasa
             </span>
+            <button
+              type="button"
+              onClick={() => setIsDictionaryExpanded(!isDictionaryExpanded)}
+              aria-expanded={isDictionaryExpanded}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-amber-500/15 border border-amber-500/40 text-amber-300 hover:bg-amber-500/25 hover:border-amber-500/60 font-sans text-xs font-semibold transition cursor-pointer shadow-raised"
+            >
+              <span>{isDictionaryExpanded ? 'Tutup Kamus' : 'Buka Kamus'}</span>
+              <ChevronDown
+                size={15}
+                className={`transition-transform duration-200 ${isDictionaryExpanded ? 'rotate-180' : ''}`}
+              />
+            </button>
           </div>
         </div>
 
-        {/* Search Bar & Category Filters */}
-        <div className="ctl-sticky space-y-3 py-2">
+        {isDictionaryExpanded && (
+          <div className="space-y-6 animate-fadeIn">
+            {/* Search Bar & Category Filters */}
+            <div className="ctl-sticky space-y-3 py-2">
           <div className="relative">
             <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-500" />
             <input
@@ -1150,6 +1163,8 @@ export const CopySandboxView: React.FC = () => {
             >
               Tampilkan 36 Kata Berikutnya ({filteredCheatsheet.length - displayedCheatsheet.length} tersisa)
             </button>
+          </div>
+        )}
           </div>
         )}
       </div>

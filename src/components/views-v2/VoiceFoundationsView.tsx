@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { ViewType } from '../../types';
-import { CheckCircle2, XCircle, Sparkles, ArrowRight, SlidersHorizontal, Lightbulb, ShieldCheck } from 'lucide-react';
+import { CheckCircle2, XCircle, Sparkles, ArrowRight, SlidersHorizontal, Lightbulb, ShieldCheck, ChevronDown } from 'lucide-react';
 import { ValueSpectrum } from '../charts/ValueSpectrum';
 import { ContextCheck } from './ContextCheck';
 import { ComparisonTable } from '../common/ComparisonTable';
@@ -24,7 +24,7 @@ interface ValuePillar {
 const VALUE_PILLARS: ValuePillar[] = [
   {
     id: "V1",
-    title: "Setara, Bukan Menghakimi",
+    title: "Membersamai, Bukan Menghakimi",
     voiceTrait: "Sapa dan temui pembaca di titik mereka berada (meet them where they are). Jangan menilai mereka dari kekuatan, keberanian, atau kepantasan untuk dihargai.",
     positionNote: "Memberikan rasa aman dan mengurangi kemungkinan pembaca bereaksi secara defensif. Membuat audiens merasa menjadi bagian dari Menungsa, alih-alih merasa sebagai orang luar yang perlu 'diperbaiki' atau 'diubah'.",
     boundaryCondition: "Prinsip ini tidak berarti menghindari penilaian terhadap risiko, perilaku, atau situasi. Dalam konteks keselamatan, kesehatan, atau kondisi darurat, gunakan bahasa yang akurat dan tegas untuk menjelaskan risiko. Yang dihindari adalah menghakimi pembaca, bukan menyamarkan atau mereduksi realita dan risiko.",
@@ -290,6 +290,7 @@ const VOICE_TRAITS = [
 export const VoiceFoundationsView: React.FC<Props> = ({ onNavigate }) => {
   const [activeValueId, setActiveValueId] = useState<string>('V1');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [isPlaybookExpanded, setIsPlaybookExpanded] = useState<boolean>(true);
 
   const categories = [
     { id: 'all', label: 'Semua panduan' },
@@ -348,7 +349,7 @@ export const VoiceFoundationsView: React.FC<Props> = ({ onNavigate }) => {
           </h1>
 
           <p className="text-sm sm:text-base md:text-lg leading-relaxed text-stone-200/90 font-sans max-w-xl text-balance">
-            Menungsa berbicara dengan mengandalkan apa yang telah menjadi kekuatan pembaca, tidak menggurui, serta hadir sebagai sosok yang merangkul dan mendukung.
+            Menungsa hadir sebagai sosok yang merangkul dan mendukung, transparan dan menginspirasi, serta mengapresiasi apa yang telah menjadi kekuatan audiens.
           </p>
 
           {/* Unlimited Scrolling Voice Traits Ticker */}
@@ -495,30 +496,48 @@ export const VoiceFoundationsView: React.FC<Props> = ({ onNavigate }) => {
       {/* The Golden Do's & Don'ts Playbook */}
       <section className="rounded-2xl sm:rounded-3xl border border-stone-800 bg-stone-900 p-5 sm:p-7 lg:p-9 space-y-7">
         <div className="space-y-5">
-          <div className="flex items-start gap-3.5">
-            <span className="h-10 w-10 shrink-0 rounded-[10px] border border-amber-900 bg-amber-950 text-amber-500 flex items-center justify-center">
-              <SlidersHorizontal size={18} strokeWidth={1.9} />
-            </span>
-            <div className="space-y-1 pt-0.5">
-              <h2 className="text-xl md:text-2xl font-serif font-semibold text-stone-100 leading-tight">
-                Panduan singkat menulis
-              </h2>
-              <p className="text-xs md:text-sm text-stone-500 font-sans leading-relaxed max-w-[64ch]">
-                Gunakan contoh berikut untuk meninjau cara menyapa, mengajak, dan menjelaskan informasi kepada pembaca.
-              </p>
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3.5">
+            <div className="flex items-start gap-3.5">
+              <span className="h-10 w-10 shrink-0 rounded-[10px] border border-amber-900 bg-amber-950 text-amber-500 flex items-center justify-center">
+                <SlidersHorizontal size={18} strokeWidth={1.9} />
+              </span>
+              <div className="space-y-1 pt-0.5">
+                <h2 className="text-xl md:text-2xl font-serif font-semibold text-stone-100 leading-tight">
+                  Panduan singkat menulis
+                </h2>
+                <p className="text-xs md:text-sm text-stone-500 font-sans leading-relaxed max-w-[64ch]">
+                  Gunakan contoh berikut untuk meninjau cara menyapa, mengajak, dan menjelaskan informasi kepada pembaca.
+                </p>
+              </div>
             </div>
+
+            <button
+              type="button"
+              onClick={() => setIsPlaybookExpanded(!isPlaybookExpanded)}
+              aria-expanded={isPlaybookExpanded}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-stone-800 bg-stone-950/70 text-xs font-sans font-medium text-stone-300 hover:text-stone-100 hover:border-stone-700 transition cursor-pointer self-start sm:self-auto shrink-0"
+            >
+              <span>{isPlaybookExpanded ? 'Tutup panduan' : 'Buka panduan'}</span>
+              <ChevronDown
+                size={16}
+                className={`transition-transform duration-200 ${isPlaybookExpanded ? 'rotate-180' : ''}`}
+              />
+            </button>
           </div>
 
-          <SegmentedTabs
-            items={categories}
-            value={selectedCategory}
-            onChange={setSelectedCategory}
-            ariaLabel="Panduan singkat menulis"
-          />
+          {isPlaybookExpanded && (
+            <SegmentedTabs
+              items={categories}
+              value={selectedCategory}
+              onChange={setSelectedCategory}
+              ariaLabel="Panduan singkat menulis"
+            />
+          )}
         </div>
 
         {/* Playbook Rules Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {isPlaybookExpanded && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 animate-fadeIn">
           {filteredRules.map((rule) => (
             <div
               key={rule.id}
@@ -573,6 +592,7 @@ export const VoiceFoundationsView: React.FC<Props> = ({ onNavigate }) => {
             </div>
           ))}
         </div>
+        )}
       </section>
     </div>
   );

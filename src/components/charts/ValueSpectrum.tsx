@@ -33,7 +33,7 @@ interface ValueConfig {
 const SPECTRUM_CONFIG: Record<string, ValueConfig> = {
   V1: {
     icon: Users,
-    title: 'Setara, Bukan Menghakimi',
+    title: 'Membersamai, Bukan Menghakimi',
     description: 'Seberapa setara dan tidak menghakimi cara kami berbicara kepada pembaca.',
     left: 'Menilai pembaca',
     right: 'Menyapa setara',

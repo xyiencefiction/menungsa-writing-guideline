@@ -225,19 +225,19 @@ const CULTURAL_REALITIES: CulturalReality[] = [
   {
     icon: Eye,
     chip: 'border-amber-900 bg-amber-950 text-amber-500',
-    title: 'Siapa yang Bisa Melihat?',
+    title: 'Apakah Privasi Terjaga?',
     body: 'Sebelum meminta respons atau cerita pribadi, pertimbangkan siapa yang dapat melihatnya. Di ruang publik atau grup, beri informasi tanpa menuntut pengakuan pribadi. Jika percakapan membutuhkan keterbukaan lebih jauh, sediakan jalur yang lebih privat dan jelaskan batas privasinya.',
   },
   {
     icon: ShieldCheck,
     chip: 'border-emerald-900 bg-emerald-950 text-emerald-700 dark:border-emerald-800 dark:text-emerald-400',
-    title: 'Siapa yang Ikut Memengaruhi Keputusan?',
+    title: 'Siapa dan Apa Saja yang Memengaruhi?',
     body: 'Keluarga, teman, komunitas, dan keyakinan dapat menjadi sumber dukungan, tekanan, atau keduanya sekaligus. Jangan menganggap keterlibatan mereka selalu membantu atau selalu menghambat. Beri pembaca pilihan tentang siapa yang ingin mereka libatkan.',
   },
   {
     icon: Scale,
     chip: 'border-sky-900 bg-sky-950 text-sky-700 dark:border-sky-800 dark:text-sky-400',
-    title: 'Apa yang Benar-Benar Bisa Diakses?',
+    title: 'Akses Apa yang Realistis?',
     body: 'Jangan menganggap seseorang belum mencari bantuan hanya karena malu atau enggan terbuka. Biaya, jarak, jadwal kerja, transportasi, ketersediaan tenaga, prosedur layanan, dan kekhawatiran soal privasi juga dapat membatasi pilihan. Jika menyarankan layanan, berikan informasi akses yang sudah diverifikasi.',
   },
 ];
@@ -256,13 +256,13 @@ export const IndonesianNuancesView: React.FC = () => {
       <div className="space-y-3">
         <div className="kicker flex items-center gap-1.5">
           <MapPin size={12} className="text-amber-500" />
-          <span>KOMPAS BUDAYA INDONESIA</span>
+          <span>PERTIMBANGAN BUDAYA</span>
         </div>
         <h1 className="text-3xl md:text-4xl font-serif font-semibold tracking-tight text-stone-100 leading-tight">
           Menulis dalam Konteks Indonesia
         </h1>
         <p className="text-sm md:text-base text-stone-300 max-w-[74ch] leading-relaxed font-sans">
-          Indonesia bukan satu konteks yang seragam. Hubungan keluarga, agama, kondisi ekonomi, bahasa, akses layanan, dan norma sosial dapat berbeda menurut daerah, usia, kelas sosial, dan lingkungan tempat seseorang hidup. Gunakan panduan ini untuk mempertimbangkan konteks tersebut tanpa menganggap satu pola berlaku bagi semua pembaca.
+          Konteks di Indonesia sangat beragam. Hubungan keluarga, agama, kondisi ekonomi, bahasa, akses layanan, dan norma sosial dapat berbeda menurut daerah, usia, kelas sosial, dan lingkungan tempat seseorang hidup. Gunakan panduan ini untuk mempertimbangkan konteks tersebut tanpa menganggap satu pola berlaku bagi semua pembaca.
         </p>
       </div>
 
@@ -307,19 +307,19 @@ export const IndonesianNuancesView: React.FC = () => {
       </ol>
 
       {/* Practical Comparison Table */}
-      <div className="space-y-4">
+      <div className="space-y-4 pt-12 sm:pt-16 border-t border-stone-800/80">
         <div className="space-y-3">
           <div>
             <h2 className="text-xl md:text-2xl font-serif font-semibold text-stone-100 flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-amber-500" />
-              Apa yang Bisa Diterapkan di Indonesia, dan Apa yang Berbeda
+              Temuan: Apa yang Relevan dan Berbeda di Indonesia
             </h2>
             <p className="text-xs md:text-sm text-stone-400 mt-1 font-sans">
               Temuan berikut berasal dari sumber dengan populasi dan metode yang berbeda. Contoh kalimat adalah usulan penerapan, bukan hasil eksperimen pilihan kata di Indonesia.
             </p>
           </div>
 
-          <div role="group" aria-label="Apa yang Bisa Diterapkan di Indonesia, dan Apa yang Berbeda" className="ctl-row no-scrollbar">
+          <div role="group" aria-label="Temuan: Apa yang Relevan dan Berbeda di Indonesia" className="ctl-row no-scrollbar">
             <button
               onClick={() => setActiveFilter('all')}
               aria-pressed={activeFilter === 'all'}
