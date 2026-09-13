@@ -67,7 +67,7 @@ export const SegmentedTabs: React.FC<Props> = ({
       const el = e.currentTarget;
       el.dataset.atEnd = String(el.scrollLeft + el.clientWidth >= el.scrollWidth - 2);
     }}
-    className={`seg-tabs no-scrollbar scroll-hint-x ${fill ? 'seg-tabs-fill' : ''} ${
+    className={`seg-tabs no-scrollbar ${fill ? 'seg-tabs-fill' : ''} ${
       size === 'lg' ? 'seg-tabs-lg' : ''
     } ${className}`}
   >

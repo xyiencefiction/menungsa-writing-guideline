@@ -211,7 +211,7 @@ export const RegisterMap: React.FC<Props> = ({ registers, selectedId, onSelect, 
       {/* `role="img"` hid the eight nodes that are `role="button"` and keyboard
           reachable; a group keeps the label without flattening the controls. */}
       <div
-        className="p-3 overflow-x-auto relative scroll-hint-x"
+        className="p-3 overflow-x-auto relative"
         onScroll={(e) => {
           const el = e.currentTarget;
           el.dataset.atEnd = String(el.scrollLeft + el.clientWidth >= el.scrollWidth - 2);

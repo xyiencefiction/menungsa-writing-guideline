@@ -319,7 +319,7 @@ export const IndonesianNuancesView: React.FC = () => {
             </p>
           </div>
 
-          <div role="group" aria-label="Apa yang Bisa Diterapkan di Indonesia, dan Apa yang Berbeda" className="ctl-row no-scrollbar scroll-hint-x">
+          <div role="group" aria-label="Apa yang Bisa Diterapkan di Indonesia, dan Apa yang Berbeda" className="ctl-row no-scrollbar">
             <button
               onClick={() => setActiveFilter('all')}
               aria-pressed={activeFilter === 'all'}

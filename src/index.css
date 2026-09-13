@@ -1141,16 +1141,16 @@ input[type="range"]:disabled {
    trailing edge is the cue that there is more to the right; it is removed once
    the region is scrolled to the end. */
 .scroll-hint-x {
-  -webkit-mask-image: linear-gradient(to right, black calc(100% - 2.5rem), transparent 100%);
-  mask-image: linear-gradient(to right, black calc(100% - 2.5rem), transparent 100%);
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 .scroll-hint-x[data-at-end="true"] {
   -webkit-mask-image: none;
   mask-image: none;
 }
 .scroll-hint-y {
-  -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 1.75rem), transparent 100%);
-  mask-image: linear-gradient(to bottom, black calc(100% - 1.75rem), transparent 100%);
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 .scroll-hint-y[data-at-end="true"] {
   -webkit-mask-image: none;

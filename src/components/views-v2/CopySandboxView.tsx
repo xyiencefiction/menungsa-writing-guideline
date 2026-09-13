@@ -574,7 +574,7 @@ export const CopySandboxView: React.FC = () => {
               </div>
 
               <div
-                className="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto pr-1 scroll-hint-y"
+                className="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto pr-1"
                 onScroll={(e) => {
                   const el = e.currentTarget;
                   el.dataset.atEnd = String(el.scrollTop + el.clientHeight >= el.scrollHeight - 2);
@@ -1010,7 +1010,7 @@ export const CopySandboxView: React.FC = () => {
           </div>
 
           {/* Category Filter Pills */}
-          <div role="group" aria-label="Cari kata, frasa, atau penjelasan…" className="ctl-row no-scrollbar scroll-hint-x">
+          <div role="group" aria-label="Cari kata, frasa, atau penjelasan…" className="ctl-row no-scrollbar">
             {CATEGORY_TABS.map((tab) => {
               const isActive = activeCategory === tab.id;
               return (

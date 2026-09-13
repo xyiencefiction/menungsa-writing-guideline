@@ -186,7 +186,7 @@ export const Header: React.FC<Props> = ({ currentView, onSelectView, onOpenSearc
         ref={railRef}
         onScroll={syncRailEdge}
         data-at-end={railAtEnd}
-        className={`md:hidden flex items-center gap-1.5 overflow-x-auto no-scrollbar scroll-hint-x px-4 pb-2.5 pt-0.5 ${
+        className={`md:hidden flex items-center gap-1.5 overflow-x-auto no-scrollbar px-4 pb-2.5 pt-0.5 ${
           isScrolled ? '' : 'border-t border-stone-800/60'
         }`}
       >
