@@ -4,16 +4,12 @@ import { handleTablistKeys } from '../../utils/overlay';
 /**
  * One filter row, one shape.
  *
- * The playbook, the writing studio and the cultural compass each grew their own
- * pill row, so the same choice looked like three different controls depending on
- * which view the reader had landed in. A segmented track states the set — the
- * options are bounded and mutually exclusive — while the underline states the
- * position inside it, and neither needs a filled chip shouting at full contrast
- * for every unselected option.
+ * A segmented track states the set — the options are bounded and mutually
+ * exclusive. The active state is an elevated tactile pill with subtle shadow
+ * and crisp border contrast, providing clear visual hierarchy without clashing
+ * underlines or noisy vertical hairline dividers.
  *
- * Styling lives in `index.css` under `.seg-tabs`: the active state needs an
- * `::after` rule for the underline and an `::before` rule for the hairline
- * between segments, and neither is expressible as a utility class.
+ * Styling lives in `index.css` under `.seg-tabs`.
  */
 
 export interface SegmentedTabItem {
@@ -63,10 +59,6 @@ export const SegmentedTabs: React.FC<Props> = ({
     role="tablist"
     aria-label={ariaLabel}
     onKeyDown={(e) => handleTablistKeys(e, (i) => onChange(items[i].id))}
-    onScroll={(e) => {
-      const el = e.currentTarget;
-      el.dataset.atEnd = String(el.scrollLeft + el.clientWidth >= el.scrollWidth - 2);
-    }}
     className={`seg-tabs no-scrollbar ${fill ? 'seg-tabs-fill' : ''} ${
       size === 'lg' ? 'seg-tabs-lg' : ''
     } ${className}`}

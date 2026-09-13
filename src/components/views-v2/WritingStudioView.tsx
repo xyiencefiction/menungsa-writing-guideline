@@ -300,8 +300,8 @@ export const WritingStudioView: React.FC = () => {
                 aria-label="Tampilkan kartu dalam dua kolom"
                 className={`p-1.5 rounded-[6px] cursor-pointer transition ${
                   layoutMode === 'two-column'
-                    ? 'bg-amber-500 text-stone-950'
-                    : 'text-stone-500 hover:text-stone-200'
+                    ? 'bg-stone-900 border border-stone-800 text-amber-500 shadow-sm'
+                    : 'text-stone-500 hover:text-stone-200 border border-transparent'
                 }`}
                 title="Dua kolom"
               >
@@ -314,8 +314,8 @@ export const WritingStudioView: React.FC = () => {
                 aria-label="Tampilkan kartu dalam satu kolom"
                 className={`p-1.5 rounded-[6px] cursor-pointer transition ${
                   layoutMode === 'single-column'
-                    ? 'bg-amber-500 text-stone-950'
-                    : 'text-stone-500 hover:text-stone-200'
+                    ? 'bg-stone-900 border border-stone-800 text-amber-500 shadow-sm'
+                    : 'text-stone-500 hover:text-stone-200 border border-transparent'
                 }`}
                 title="Satu kolom"
               >
