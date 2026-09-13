@@ -80,7 +80,7 @@ export const SegmentedTabs: React.FC<Props> = ({
           className={`seg-tab ${isActive ? 'seg-tab-active' : ''}`}
         >
           {Icon && <Icon size={size === 'lg' ? 16 : 14} strokeWidth={1.9} className="shrink-0" />}
-          <span>{item.label}</span>
+          <span className="whitespace-nowrap">{item.label}</span>
         </button>
       );
     })}

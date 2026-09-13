@@ -268,7 +268,7 @@ type GuideTab = 'needs' | 'gender' | 'pronouns';
 
 /** The page's primary choice, so it is rendered as one full-width switcher. */
 const GUIDE_TAB_ITEMS: { id: GuideTab; label: string; icon: React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }>; tabId: string; panelId: string }[] = [
-  { id: 'needs', label: '1. Pemenuhan Kebutuhan Audiens', icon: Sparkles, tabId: 'tab-needs', panelId: 'panel-needs' },
+  { id: 'needs', label: '1. Kebutuhan Audiens', icon: Sparkles, tabId: 'tab-needs', panelId: 'panel-needs' },
   { id: 'gender', label: '2. Sebutan Gender', icon: ShieldCheck, tabId: 'tab-gender', panelId: 'panel-gender' },
   { id: 'pronouns', label: '3. Sapaan & Kata Ganti', icon: Users, tabId: 'tab-pronouns', panelId: 'panel-pronouns' },
 ];
@@ -298,7 +298,7 @@ export const WordGuideView: React.FC = () => {
 
         {/* Tab Switcher */}
         <div className="pt-3">
-          <div className="p-1 sm:p-1.5 rounded-2xl bg-stone-900 border border-stone-800 shadow-sm inline-block w-full max-w-3xl">
+          <div className="p-1 sm:p-1.5 rounded-2xl bg-stone-900 border border-stone-800 shadow-sm inline-block w-full max-w-4xl">
             <SegmentedTabs
               items={GUIDE_TAB_ITEMS}
               value={activeTab}
