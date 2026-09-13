@@ -208,21 +208,7 @@ export const ContextCheck: React.FC = () => {
       </div>
 
       {/* C. Interactive Decision Flow Diagram (Distinct from Collapsible Accordion Cards) */}
-      <div className="relative rounded-3xl border border-stone-800/80 bg-stone-950/40 dark:bg-stone-950/80 p-5 sm:p-7 md:p-8 overflow-hidden shadow-sm">
-        {/* Soft Ambient Radiance in Background */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -left-16 -top-16 w-64 h-64 rounded-full bg-emerald-500/10 dark:bg-emerald-500/15 blur-3xl"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 -top-20 -translate-x-1/2 w-72 h-72 rounded-full bg-amber-500/10 dark:bg-amber-500/15 blur-3xl"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-16 -bottom-16 w-64 h-64 rounded-full bg-yellow-500/10 dark:bg-yellow-500/15 blur-3xl"
-        />
-
+      <div className="relative rounded-3xl border border-stone-800/80 bg-stone-950/40 dark:bg-stone-950/80 p-5 sm:p-7 md:p-8 shadow-sm">
         {/* Framework Header & Connecting Axis Label */}
         <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-5 border-b border-stone-800/70">
           <div>
@@ -255,7 +241,7 @@ export const ContextCheck: React.FC = () => {
                       ? 'border border-emerald-500/30 dark:border-emerald-500/25 bg-emerald-950/15 dark:bg-emerald-950/30 hover:border-emerald-500/50 hover:shadow-raised'
                       : isAmber
                       ? 'border border-amber-500/30 dark:border-amber-500/25 bg-amber-950/15 dark:bg-amber-950/30 hover:border-amber-500/50 hover:shadow-raised'
-                      : 'border-2 border-amber-500/60 dark:border-amber-500/50 bg-gradient-to-b from-amber-500/10 via-amber-500/5 to-stone-900/40 dark:from-amber-950/40 dark:to-stone-900/80 shadow-raised hover:border-amber-500'
+                      : 'border-2 border-amber-500/60 dark:border-amber-500/50 bg-amber-500/10 dark:bg-amber-950/40 shadow-raised hover:border-amber-500'
                   }`}
                 >
                   <div className="space-y-4">
