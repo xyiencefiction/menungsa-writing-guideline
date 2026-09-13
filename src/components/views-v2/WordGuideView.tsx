@@ -194,24 +194,24 @@ const ETHICAL_ALTERNATIVES: EthicalAlternativeItem[] = [
     id: 'certainty',
     mechanismId: 'M03',
     icon: Compass,
-    shortLabel: 'Kejelasan & Arah Hidup',
-    functionName: 'Kejelasan & Arah Hidup',
-    psychologicalNeed: 'Kebutuhan untuk memahami apa yang sedang terjadi, mengurangi kebingungan, dan melihat pilihan atau langkah yang masih tersedia.',
-    whyCompelling: 'Penjelasan yang sederhana dan terstruktur dapat membuat situasi yang rumit terasa lebih mudah dipahami dan memberi titik awal untuk bertindak.',
-    harmfulVersion: 'Memberikan satu penjelasan mutlak untuk masalah yang kompleks, mengklaim bahwa nasib laki-laki sudah ditentukan oleh biologi atau gender, atau menunjuk kelompok tertentu sebagai penyebab utama semua masalah.',
-    ethicalAlternative: 'Berikan penjelasan yang cukup jelas untuk membantu pembaca berorientasi, tetapi tetap bedakan apa yang diketahui, apa yang masih mungkin, dan apa yang belum diketahui. Jika persoalannya kompleks, jangan berpura-pura ada satu penyebab atau satu jawaban.',
-    keyPrinciple: 'Beri arah tanpa menjual kepastian palsu.'
+    shortLabel: 'Kejelasan & Arah Bertindak',
+    functionName: 'Kejelasan & Arah Bertindak',
+    psychologicalNeed: 'Kebutuhan untuk memahami apa yang sedang terjadi, mengurangi kebingungan, dan melihat pilihan atau langkah yang realistis untuk dilakukan.',
+    whyCompelling: 'Ketika menghadapi situasi yang rumit, penjelasan yang jelas dan terstruktur membantu laki-laki memahami persoalan, memilah apa yang bisa dilakukan, dan menentukan langkah berikutnya.',
+    harmfulVersion: 'Memberikan jawaban tunggal untuk persoalan yang kompleks, menyederhanakan masalah menjadi soal biologi atau gender semata, atau menunjuk kelompok tertentu sebagai penyebab utama masalah laki-laki.',
+    ethicalAlternative: 'Berikan penjelasan yang cukup jelas untuk membantu pembaca memahami situasinya dan melihat pilihan yang tersedia. Bedakan antara apa yang diketahui, apa yang masih mungkin, dan apa yang belum diketahui. Jika persoalannya kompleks, jangan memaksakan satu penyebab atau satu jawaban.',
+    keyPrinciple: 'Beri kejelasan tanpa menciptakan kepastian palsu.'
   },
   {
     id: 'validation',
     mechanismId: 'M05',
     icon: HeartHandshake,
-    shortLabel: 'Validasi Beban',
-    functionName: 'Validasi Beban & Rasa Didengar',
+    shortLabel: 'Pengalaman Diakui & Didengar',
+    functionName: 'Pengalaman Diakui & Rasa Didengar',
     psychologicalNeed: 'Kebutuhan untuk merasa bahwa kesulitan yang dialami benar-benar dilihat dan tidak langsung dianggap sebagai kelemahan, kegagalan, atau kekurangan pribadi.',
-    whyCompelling: 'Ketika pengalaman seseorang diakui dengan konkret, ia tidak perlu terus membuktikan bahwa bebannya nyata sebelum percakapan bisa dimulai.',
-    harmfulVersion: 'Mengubah pengalaman kecewa atau terluka menjadi narasi bahwa kelompok lain adalah penyebab bersama, lalu memperkuat kemarahan melalui permusuhan kolektif.',
-    ethicalAlternative: 'Akui beban, emosi, dan kondisi yang memang sedang dihadapi tanpa otomatis membenarkan kesimpulan tentang siapa yang harus disalahkan. Jika faktor sosial atau struktural relevan, jelaskan secara spesifik dan berdasarkan bukti.',
+    whyCompelling: 'Ketika pengalaman seseorang diakui dengan konkret, ia tidak perlu terus membuktikan bahwa kesulitan atau bebannya nyata sebelum percakapan bisa berlanjut.',
+    harmfulVersion: 'Mengubah pengalaman kecewa atau terluka menjadi generalisasi bahwa kelompok tertentu adalah penyebab masalah, lalu memperkuat kemarahan atau permusuhan terhadap kelompok tersebut.',
+    ethicalAlternative: 'Akui beban, emosi, dan kondisi yang sedang dihadapi tanpa otomatis membenarkan kesimpulan tentang siapa yang harus disalahkan. Jika faktor sosial atau struktural memang relevan, jelaskan secara spesifik dan berdasarkan bukti.',
     keyPrinciple: 'Akui pengalamannya tanpa mengubah luka menjadi musuh bersama.'
   },
   {
@@ -219,48 +219,48 @@ const ETHICAL_ALTERNATIVES: EthicalAlternativeItem[] = [
     mechanismId: 'M08',
     icon: Award,
     shortLabel: 'Harga Diri & Kompetensi',
-    functionName: 'Harga Diri, Penghargaan & Martabat',
-    psychologicalNeed: 'Kebutuhan untuk merasa mampu melakukan sesuatu dengan baik, melihat perkembangan diri, mendapatkan penghargaan yang wajar, dan tetap diperlakukan sebagai manusia yang bernilai.',
-    whyCompelling: 'Kemampuan yang berkembang dan hasil yang dapat dilihat memberi rasa kemajuan. Pengakuan dari orang lain juga dapat memperkuat rasa bahwa usaha seseorang memiliki arti.',
-    harmfulVersion: 'Mengubah harga diri menjadi hierarki—siapa yang paling kaya, kuat, menarik, dominan, atau “bernilai tinggi”—lalu memperlakukan orang yang berada di bawah standar tersebut sebagai kurang layak dihormati.',
-    ethicalAlternative: 'Dorong keterampilan, disiplin, kesehatan, atau pencapaian ketika itu memang penting bagi pembaca. Bedakan dengan jelas antara sesuatu yang dapat dikembangkan dan martabat dasar yang tidak perlu diperoleh melalui pencapaian.',
+    functionName: 'Harga Diri & Kompetensi',
+    psychologicalNeed: 'Kebutuhan untuk merasa mampu dan berkembang, melihat kemajuan diri, mendapatkan pengakuan yang wajar, dan tetap diperlakukan sebagai manusia yang layak dihormati.',
+    whyCompelling: 'Kemampuan yang bertambah dan kemajuan yang terlihat dapat memperkuat rasa mampu. Pengakuan dari orang lain juga dapat memperkuat rasa bahwa usaha seseorang berarti.',
+    harmfulVersion: 'Mengubah harga diri menjadi hierarki—siapa yang paling kaya, kuat, menarik, dominan, atau “bernilai tinggi”—lalu memperlakukan orang yang tidak memenuhi standar itu sebagai kurang layak dihormati.',
+    ethicalAlternative: 'Dorong keterampilan, disiplin, kesehatan, atau pencapaian ketika itu memang relevan bagi pembaca. Bedakan dengan jelas antara hal-hal yang dapat dikembangkan dan martabat dasar yang tidak bergantung pada pencapaian.',
     keyPrinciple: 'Kemampuan bisa dibangun; martabat tidak perlu dibuktikan.'
   },
   {
     id: 'agency',
     mechanismId: 'M02',
     icon: SlidersHorizontal,
-    shortLabel: 'Otonomi',
+    shortLabel: 'Otonomi & Kemampuan Bertindak',
     functionName: 'Otonomi & Kemampuan Bertindak',
-    psychologicalNeed: 'Kebutuhan untuk melihat bahwa masih ada sesuatu yang bisa dipilih, dicoba, dihentikan, atau diubah meskipun tidak semua keadaan berada dalam kendali.',
-    whyCompelling: 'Satu langkah yang konkret dapat membuat masalah yang besar terasa lebih mungkin untuk dihadapi dan membantu seseorang melihat pilihan yang masih tersedia.',
-    harmfulVersion: 'Menganggap semua hasil bergantung pada kemauan dan disiplin individu, mengabaikan keterbatasan ekonomi atau sosial, atau menjadikan kelelahan dan kesulitan sebagai bukti bahwa seseorang kurang berusaha.',
-    ethicalAlternative: 'Tawarkan langkah yang cukup kecil dan realistis berdasarkan waktu, tenaga, uang, akses, dan kondisi pembaca. Akui dengan jelas bagian yang memang tidak dapat dikendalikan oleh individu.',
+    psychologicalNeed: 'Kebutuhan untuk menyadari bahwa masih ada hal yang bisa dipilih, dicoba, dihentikan, atau diubah, meskipun tidak semua keadaan bisa dikendalikan.',
+    whyCompelling: 'Satu langkah konkret dapat membuat masalah besar terasa lebih bisa dihadapi dan membantu seseorang melihat pilihan yang masih ada.',
+    harmfulVersion: 'Menganggap semua hasil ditentukan oleh kemauan dan disiplin pribadi, mengabaikan keterbatasan ekonomi atau sosial, atau menjadikan kelelahan dan kesulitan sebagai bukti bahwa seseorang kurang berusaha.',
+    ethicalAlternative: 'Tawarkan langkah yang cukup kecil dan realistis dengan mempertimbangkan waktu, tenaga, uang, akses, dan kondisi pembaca. Akui dengan jelas bagian-bagian yang memang tidak dapat dikendalikan individu.',
     keyPrinciple: 'Perluas pilihan yang nyata, bukan tuntutan untuk mengendalikan semuanya.'
   },
   {
     id: 'belonging',
     mechanismId: 'M04',
     icon: Users,
-    shortLabel: 'Keterhubungan',
-    functionName: 'Keterhubungan & Kebersamaan',
-    psychologicalNeed: 'Kebutuhan untuk memiliki hubungan dan tempat di mana seseorang dapat hadir tanpa terus-menerus membuktikan kemampuan, status, atau kesesuaian dirinya.',
-    whyCompelling: 'Kebersamaan memberi pengalaman bahwa seseorang dikenali, dibutuhkan, dan memiliki orang lain untuk berbagi waktu, kegiatan, atau percakapan.',
-    harmfulVersion: 'Membangun solidaritas melalui musuh bersama, memperkuat identitas “kita melawan mereka”, atau menjadikan kesetiaan pada kelompok sebagai syarat untuk diterima.',
-    ethicalAlternative: 'Bangun kebersamaan melalui percakapan, aktivitas, humor, saling membantu, dan pengalaman bersama tanpa mensyaratkan semua anggota memiliki pandangan, gaya hidup, atau bentuk maskulinitas yang sama.',
-    keyPrinciple: 'Bangun rasa memiliki dari apa yang dilakukan bersama, bukan dari siapa yang dibenci bersama.'
+    shortLabel: 'Keterhubungan & Rasa Memiliki',
+    functionName: 'Keterhubungan & Rasa Memiliki',
+    psychologicalNeed: 'Kebutuhan untuk memiliki hubungan dan tempat di mana seseorang dapat merasa diterima tanpa terus-menerus membuktikan kemampuan, status, atau kesesuaian dirinya.',
+    whyCompelling: 'Kebersamaan memberi pengalaman bahwa seseorang dikenal, dianggap berarti, dan memiliki orang lain untuk berbagi waktu, kegiatan, atau percakapan.',
+    harmfulVersion: 'Membangun kebersamaan melalui musuh bersama, memperkuat identitas “kita melawan mereka”, atau menjadikan kesetiaan dan keseragaman sebagai syarat untuk diterima.',
+    ethicalAlternative: 'Bangun kebersamaan melalui percakapan, aktivitas, humor, saling membantu, dan pengalaman bersama tanpa menuntut semua orang memiliki pandangan, gaya hidup, atau cara menjadi laki-laki yang sama.',
+    keyPrinciple: 'Bangun rasa memiliki dari apa yang dilakukan bersama, bukan dari siapa yang dijadikan musuh bersama.'
   },
   {
     id: 'purpose',
     mechanismId: 'M09',
     icon: Sparkles,
-    shortLabel: 'Makna & Kontribusi',
+    shortLabel: 'Makna, Arah & Kontribusi',
     functionName: 'Makna, Arah & Kontribusi',
-    psychologicalNeed: 'Kebutuhan untuk merasa bahwa waktu, hubungan, pekerjaan, minat, atau tindakan seseorang memiliki arti yang dianggap penting olehnya.',
-    whyCompelling: 'Memiliki sesuatu yang dianggap berarti dapat memberi arah pada keputusan sehari-hari dan membantu seseorang menentukan apa yang ingin ia jaga, bangun, atau kejar.',
-    harmfulVersion: 'Menentukan satu misi hidup yang dianggap wajib bagi semua laki-laki—menjadi penyedia, pelindung, pemenang, pemimpin, atau pejuang—dan menjadikannya ukuran nilai seseorang.',
-    ethicalAlternative: 'Beri ruang bagi pembaca untuk menentukan sendiri apa yang dianggap berarti: hubungan, keluarga, pekerjaan, belajar, kesehatan, karya, komunitas, kesenangan, atau bentuk kontribusi lain. Tujuan hidup tidak harus heroik atau sama bagi semua orang.',
-    keyPrinciple: 'Bantu orang menemukan apa yang berarti tanpa menentukan untuk apa hidup mereka seharusnya digunakan.'
+    psychologicalNeed: 'Kebutuhan untuk merasa bahwa waktu, hubungan, pekerjaan, minat, atau tindakan seseorang memiliki arti dan berarti bagi dirinya.',
+    whyCompelling: 'Memiliki sesuatu yang dianggap berarti dapat memberi arah pada keputusan sehari-hari dan membantu seseorang menentukan apa yang ingin dijaga, dibangun, atau dikejar.',
+    harmfulVersion: 'Menetapkan satu tujuan hidup sebagai kewajiban bagi semua laki-laki—menjadi penyedia, pelindung, pemenang, pemimpin, atau pejuang—lalu menjadikannya ukuran nilai seseorang.',
+    ethicalAlternative: 'Beri ruang bagi pembaca untuk menentukan sendiri apa yang berarti bagi mereka: hubungan, keluarga, pekerjaan, belajar, kesehatan, karya, komunitas, kesenangan, atau bentuk kontribusi lain. Hidup yang berarti tidak harus heroik atau terlihat sama bagi semua orang.',
+    keyPrinciple: 'Bantu orang menemukan apa yang berarti tanpa menentukan seperti apa hidup yang seharusnya mereka jalani.'
   }
 ];
 
@@ -363,7 +363,7 @@ export const WordGuideView: React.FC = () => {
                       >
                         <NeedIcon size={16} strokeWidth={isSelected ? 2.2 : 1.9} />
                       </span>
-                      <span className="text-xs sm:text-[13px] font-sans truncate flex-1">
+                      <span className="text-xs sm:text-[13px] font-sans flex-1 leading-snug">
                         {alt.shortLabel}
                       </span>
                     </button>
@@ -413,7 +413,7 @@ export const WordGuideView: React.FC = () => {
 
                       <div className="border-t border-stone-800 pt-3 space-y-1.5">
                         <span className="text-[10.5px] font-sans font-bold uppercase tracking-[0.14em] text-stone-500 block">
-                          2. Mengapa menarik
+                          2. Mengapa ini penting
                         </span>
                         <p className="text-[13px] text-stone-400 leading-[1.65] font-sans">
                           {selectedNeed.whyCompelling}
