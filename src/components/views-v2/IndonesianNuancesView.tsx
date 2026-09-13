@@ -213,6 +213,35 @@ const INDONESIAN_CONTRASTS: ContrastItem[] = [
   }
 ];
 
+interface CulturalReality {
+  icon: React.ComponentType<{ size?: number; strokeWidth?: number }>;
+  /** Icon tint only — the cards themselves share one surface so the set reads calm. */
+  chip: string;
+  title: string;
+  body: string;
+}
+
+const CULTURAL_REALITIES: CulturalReality[] = [
+  {
+    icon: Eye,
+    chip: 'border-amber-900 bg-amber-950 text-amber-500',
+    title: 'Siapa yang Bisa Melihat?',
+    body: 'Sebelum meminta respons atau cerita pribadi, pertimbangkan siapa yang dapat melihatnya. Di ruang publik atau grup, beri informasi tanpa menuntut pengakuan pribadi. Jika percakapan membutuhkan keterbukaan lebih jauh, sediakan jalur yang lebih privat dan jelaskan batas privasinya.',
+  },
+  {
+    icon: ShieldCheck,
+    chip: 'border-emerald-900 bg-emerald-950 text-emerald-700 dark:border-emerald-800 dark:text-emerald-400',
+    title: 'Siapa yang Ikut Memengaruhi Keputusan?',
+    body: 'Keluarga, teman, komunitas, dan keyakinan dapat menjadi sumber dukungan, tekanan, atau keduanya sekaligus. Jangan menganggap keterlibatan mereka selalu membantu atau selalu menghambat. Beri pembaca pilihan tentang siapa yang ingin mereka libatkan.',
+  },
+  {
+    icon: Scale,
+    chip: 'border-sky-900 bg-sky-950 text-sky-700 dark:border-sky-800 dark:text-sky-400',
+    title: 'Apa yang Benar-Benar Bisa Diakses?',
+    body: 'Jangan menganggap seseorang belum mencari bantuan hanya karena malu atau enggan terbuka. Biaya, jarak, jadwal kerja, transportasi, ketersediaan tenaga, prosedur layanan, dan kekhawatiran soal privasi juga dapat membatasi pilihan. Jika menyarankan layanan, berikan informasi akses yang sudah diverifikasi.',
+  },
+];
+
 export const IndonesianNuancesView: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<'all' | 'CONVERGES' | 'DIVERGES' | 'GAP'>('all');
 
@@ -238,46 +267,44 @@ export const IndonesianNuancesView: React.FC = () => {
       </div>
 
       {/* The 3 Golden Cultural Realities */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Card 1 */}
-        <div className="rounded-[9px] border border-stone-800 bg-stone-900/50 p-6 space-y-3 shadow-raised">
-          <div className="h-10 w-10 rounded-[6px] bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-500">
-            <Eye size={20} />
-          </div>
-          <h3 className="font-serif text-lg font-semibold text-stone-100">
-            1. Siapa yang Bisa Melihat?
-          </h3>
-          <p className="text-xs text-stone-300 leading-relaxed font-sans">
-            Sebelum meminta respons atau cerita pribadi, pertimbangkan siapa yang dapat melihatnya. Di ruang publik atau grup, beri informasi tanpa menuntut pengakuan pribadi. Jika percakapan membutuhkan keterbukaan lebih jauh, sediakan jalur yang lebih privat dan jelaskan batas privasinya.
-          </p>
-        </div>
+      {/* Icon, number, title and body were four stacked layers, so the eye
+          re-oriented twice before reaching a sentence. One header line carries
+          all three markers, a hairline closes it, and the body follows. The
+          ordinal moved out of the heading text — it was printed twice, once as
+          the chip's position and once as `1.` in the title. */}
+      <ol className="grid grid-cols-1 md:grid-cols-3 gap-5 list-none p-0 m-0">
+        {CULTURAL_REALITIES.map((reality, idx) => {
+          const Icon = reality.icon;
+          return (
+            <li
+              key={reality.title}
+              className="h-full rounded-xl border border-stone-800 bg-stone-900 p-5"
+            >
+              <div className="flex items-start gap-3 min-h-[3.75rem]">
+                <span
+                  className={`h-10 w-10 shrink-0 rounded-[9px] border flex items-center justify-center ${reality.chip}`}
+                >
+                  <Icon size={18} strokeWidth={1.9} />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <span className="block font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-stone-500">
+                    {String(idx + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="font-serif text-base sm:text-[17px] font-semibold text-stone-100 leading-[1.3] mt-0.5 text-balance">
+                    {reality.title}
+                  </h3>
+                </div>
+              </div>
 
-        {/* Card 2 */}
-        <div className="rounded-[9px] border border-stone-800 bg-stone-900/50 p-6 space-y-3 shadow-raised">
-          <div className="h-10 w-10 rounded-[6px] bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 dark:text-emerald-400">
-            <ShieldCheck size={20} />
-          </div>
-          <h3 className="font-serif text-lg font-semibold text-stone-100">
-            2. Siapa yang Ikut Memengaruhi Keputusan?
-          </h3>
-          <p className="text-xs text-stone-300 leading-relaxed font-sans">
-            Keluarga, teman, komunitas, dan keyakinan dapat menjadi sumber dukungan, tekanan, atau keduanya sekaligus. Jangan menganggap keterlibatan mereka selalu membantu atau selalu menghambat. Beri pembaca pilihan tentang siapa yang ingin mereka libatkan.
-          </p>
-        </div>
+              <hr className="my-3.5 border-0 border-t border-stone-800" />
 
-        {/* Card 3 */}
-        <div className="rounded-[9px] border border-stone-800 bg-stone-900/50 p-6 space-y-3 shadow-raised">
-          <div className="h-10 w-10 rounded-[6px] bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-500 dark:text-sky-400">
-            <Scale size={20} />
-          </div>
-          <h3 className="font-serif text-lg font-semibold text-stone-100">
-            3. Apa yang Benar-Benar Bisa Diakses?
-          </h3>
-          <p className="text-xs text-stone-300 leading-relaxed font-sans">
-            Jangan menganggap seseorang belum mencari bantuan hanya karena malu atau enggan terbuka. Biaya, jarak, jadwal kerja, transportasi, ketersediaan tenaga, prosedur layanan, dan kekhawatiran soal privasi juga dapat membatasi pilihan. Jika menyarankan layanan, berikan informasi akses yang sudah diverifikasi.
-          </p>
-        </div>
-      </div>
+              <p className="text-[13px] text-stone-400 leading-[1.62] font-sans">
+                {reality.body}
+              </p>
+            </li>
+          );
+        })}
+      </ol>
 
       {/* Practical Comparison Table */}
       <div className="space-y-4">

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Eye, Lock, Globe, CheckCircle2, XCircle, ShieldAlert } from 'lucide-react';
+import { Eye, Lock, Globe, Users, BarChart3, CheckCircle2, XCircle, ShieldAlert } from 'lucide-react';
 import { ComparisonTable } from '../common/ComparisonTable';
 import { handleTablistKeys } from '../../utils/overlay';
 
@@ -133,10 +133,73 @@ const CONTEXT_TABS: TabData[] = [
  * entirely, and when it is active no position is claimed rather than a wrong one
  * being lit.
  */
-const VISIBILITY_POINTS: { tab: 'public' | 'private' | null; label: string; dot: string; tone: string }[] = [
-  { tab: 'private', label: 'Privat', dot: 'bg-emerald-500', tone: 'text-emerald-700 dark:text-emerald-400' },
-  { tab: null, label: 'Terlihat orang lain', dot: 'bg-amber-500', tone: 'text-amber-700 dark:text-amber-300' },
-  { tab: 'public', label: 'Publik + personal', dot: 'bg-rose-500', tone: 'text-rose-700 dark:text-rose-400' },
+const VISIBILITY_POINTS: {
+  tab: 'public' | 'private' | null;
+  label: string;
+  dot: string;
+  tone: string;
+  /** Where the marker sits on the rail, and how the label lines up beneath it. */
+  place: string;
+  align: string;
+  guide: boolean;
+}[] = [
+  {
+    tab: 'private',
+    label: 'Privat',
+    dot: 'bg-mn-green',
+    tone: 'text-emerald-700 dark:text-emerald-400',
+    place: 'left-0',
+    align: 'text-left',
+    guide: false,
+  },
+  {
+    tab: null,
+    label: 'Terlihat orang lain',
+    dot: 'bg-mn-gold',
+    tone: 'text-yellow-700 dark:text-yellow-500',
+    place: 'left-1/2 -translate-x-1/2',
+    align: 'text-center',
+    guide: true,
+  },
+  {
+    tab: 'public',
+    label: 'Publik + personal',
+    dot: 'bg-mn-orange',
+    tone: 'text-rose-700 dark:text-rose-400',
+    place: 'right-0',
+    align: 'text-right',
+    guide: true,
+  },
+];
+
+/** The three checks, in the order they are meant to be run. */
+const CONTEXT_STEPS: {
+  icon: React.ComponentType<{ size?: number; strokeWidth?: number }>;
+  chip: string;
+  label: string;
+  question: string;
+}[] = [
+  {
+    icon: Eye,
+    chip: 'border-emerald-900 bg-emerald-950 text-emerald-700 dark:border-emerald-800 dark:text-emerald-400',
+    label: 'Cek ruangnya',
+    question:
+      '“Apakah respons pembaca akan terlihat oleh teman, keluarga, rekan kerja, pasangan, atau publik?”',
+  },
+  {
+    icon: Users,
+    chip: 'border-amber-900 bg-amber-950 text-amber-500',
+    label: 'Cek social cost',
+    question:
+      '“Apakah tindakan yang kita ajak masih berpotensi dinilai memalukan, lemah, atau ‘tidak laki-laki’ dalam konteks audiens ini?”',
+  },
+  {
+    icon: BarChart3,
+    chip: 'border-sky-900 bg-sky-950 text-sky-700 dark:border-sky-800 dark:text-sky-400',
+    label: 'Sesuaikan ajakannya',
+    question:
+      '“Semakin tinggi risiko penilaian sosial, semakin kecil tuntutan untuk mengungkapkan pengalaman pribadi di depan orang lain.”',
+  },
 ];
 
 export const ContextCheck: React.FC = () => {
@@ -145,7 +208,7 @@ export const ContextCheck: React.FC = () => {
   const activeTab = CONTEXT_TABS.find((t) => t.id === activeTabId) ?? CONTEXT_TABS[0];
 
   return (
-    <section className="space-y-8 rounded-2xl border border-stone-800 bg-stone-950/80 p-6 sm:p-8 shadow-xl">
+    <section className="space-y-8 rounded-2xl sm:rounded-3xl border border-stone-800 bg-stone-950 p-6 sm:p-8 lg:p-9">
       {/* A. Intro */}
       <div className="space-y-2 max-w-3xl">
         <div className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold uppercase tracking-wider text-amber-500">
@@ -155,18 +218,25 @@ export const ContextCheck: React.FC = () => {
         <h2 className="text-2xl sm:text-3xl font-serif font-bold text-stone-100 leading-tight">
           Pertimbangkan siapa yang bisa melihat
         </h2>
-        <p className="text-sm sm:text-base text-stone-300/90 font-sans leading-relaxed">
+        <p className="text-sm sm:text-base text-stone-400 font-sans leading-[1.65]">
           Cara orang merespons sebuah pesan dapat berubah ketika tindakan atau pengalaman mereka terlihat oleh orang lain. Untuk topik yang masih membawa stigma atau norma gender tertentu, ruang publik dapat meningkatkan kekhawatiran akan penilaian sosial.
         </p>
       </div>
 
       {/* B. Prinsip Utama */}
-      <div className="rounded-xl border border-stone-800/90 bg-stone-900/40 p-5 sm:p-6">
-        <div className="space-y-2 max-w-3xl">
-          <span className="text-[10.5px] font-mono uppercase tracking-wider text-amber-500 dark:text-amber-400 font-semibold block">
+      <div className="relative overflow-hidden rounded-xl border border-amber-900 bg-amber-950 border-l-4 border-l-amber-500 p-5 sm:p-6">
+        {/* The principle is about being watched; the figures say so without a caption. */}
+        <Users
+          size={132}
+          strokeWidth={1.1}
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-6 -top-6 text-amber-900 opacity-60"
+        />
+        <div className="relative space-y-2 max-w-3xl">
+          <span className="text-[10.5px] font-sans font-bold uppercase tracking-[0.16em] text-amber-500 block">
             Prinsip Utama
           </span>
-          <blockquote className="text-base sm:text-lg font-serif italic text-amber-800 dark:text-amber-200/95 border-l-2 border-amber-500/70 pl-3 leading-snug">
+          <blockquote className="text-base sm:text-lg font-serif italic text-amber-700 dark:text-amber-400 leading-snug">
             “Semakin publik dan semakin personal tindakannya, semakin rendah tuntutan untuk membuka diri.”
           </blockquote>
         </div>
@@ -174,66 +244,78 @@ export const ContextCheck: React.FC = () => {
 
       {/* C. Tiga Context Check Cards */}
       <ol className="cc-steps grid grid-cols-1 md:grid-cols-3 gap-4 list-none p-0 m-0">
-        <li className="cc-step rounded-xl border border-stone-800 bg-stone-900/30 p-4 space-y-2">
-          <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-stone-300">
-            <span className="flex items-center justify-center w-5 h-5 rounded-full bg-stone-800 text-stone-200 text-[10px]">1</span>
-            <span>Cek ruangnya</span>
-          </div>
-          <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-sans">
-            “Apakah respons pembaca akan terlihat oleh teman, keluarga, rekan kerja, pasangan, atau publik?”
-          </p>
-        </li>
-
-        <li className="cc-step rounded-xl border border-stone-800 bg-stone-900/30 p-4 space-y-2">
-          <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-stone-300">
-            <span className="flex items-center justify-center w-5 h-5 rounded-full bg-stone-800 text-stone-200 text-[10px]">2</span>
-            <span>Cek social cost</span>
-          </div>
-          <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-sans">
-            “Apakah tindakan yang kita ajak masih berpotensi dinilai memalukan, lemah, atau ‘tidak laki-laki’ dalam konteks audiens ini?”
-          </p>
-        </li>
-
-        <li className="cc-step rounded-xl border border-stone-800 bg-stone-900/30 p-4 space-y-2">
-          <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-stone-300">
-            <span className="flex items-center justify-center w-5 h-5 rounded-full bg-stone-800 text-stone-200 text-[10px]">3</span>
-            <span>Sesuaikan ajakannya</span>
-          </div>
-          <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-sans">
-            “Semakin tinggi risiko penilaian sosial, semakin kecil tuntutan untuk mengungkapkan pengalaman pribadi di depan orang lain.”
-          </p>
-        </li>
+        {CONTEXT_STEPS.map((step) => {
+          const Icon = step.icon;
+          return (
+            <li
+              key={step.label}
+              className="cc-step rounded-xl border border-stone-800 bg-stone-900 p-5 space-y-3"
+            >
+              <div className="flex items-center gap-3">
+                <span className={`h-10 w-10 shrink-0 rounded-full border flex items-center justify-center ${step.chip}`}>
+                  <Icon size={18} strokeWidth={1.9} />
+                </span>
+                <span className="text-[11px] font-sans font-bold uppercase tracking-[0.14em] text-stone-300">
+                  {step.label}
+                </span>
+              </div>
+              <p className="text-[13px] text-stone-500 leading-[1.62] font-sans">
+                {step.question}
+              </p>
+            </li>
+          );
+        })}
       </ol>
 
       {/* D. Interactive Context Examples */}
       <div className="space-y-4">
         {/* The spectrum now sits directly above the control that moves it, so the
             highlight changing is visible in the same glance as the click. */}
-        <div className="rounded-xl border border-stone-800/80 bg-stone-950/60 p-4 space-y-3">
-          <span className="text-[10px] font-mono uppercase tracking-wider text-stone-500 dark:text-stone-400 block">
+        <div className="rounded-xl border border-stone-800 bg-stone-900 p-4 sm:p-5 space-y-3">
+          <span className="text-[10px] font-sans font-bold uppercase tracking-[0.16em] text-stone-500 block">
             Spektrum Keterlihatan
           </span>
-          <div className="flex items-center justify-between text-[11px] font-sans relative">
-            <div className="absolute top-[7px] left-3 right-3 h-0.5 bg-stone-800 -translate-y-1/2" aria-hidden="true" />
-            {VISIBILITY_POINTS.map((point) => {
-              const claimed = VISIBILITY_POINTS.some((p) => p.tab === activeTabId);
-              const isActive = point.tab === activeTabId;
-              return (
-                <div
-                  key={point.label}
-                  className={`relative z-10 flex flex-col items-center gap-1 text-center transition-opacity duration-200 ${
-                    !claimed ? 'opacity-70' : isActive ? 'opacity-100' : 'opacity-35'
-                  }`}
-                >
+
+          {/* The rail carries the brand gradient (§2.5) from the green end of the
+              spectrum to the orange one; the markers sit on it rather than on a
+              hairline, so position and colour say the same thing twice. */}
+          <div className="space-y-2">
+            <div className="relative h-4">
+              <div
+                className="absolute inset-x-0 top-1/2 h-3 -translate-y-1/2 rounded-full"
+                style={{ background: 'linear-gradient(90deg, #2E4034 0%, #AF4D28 100%)' }}
+                aria-hidden="true"
+              />
+              {VISIBILITY_POINTS.map((point) => {
+                const claimed = VISIBILITY_POINTS.some((p) => p.tab === activeTabId);
+                const isActive = point.tab === activeTabId;
+                return (
                   <span
-                    className={`w-3 h-3 rounded-full ring-2 ring-stone-950 transition-transform duration-200 ${point.dot} ${
-                      isActive ? 'scale-150' : ''
+                    key={point.label}
+                    className={`absolute top-1/2 h-4 w-4 -translate-y-1/2 rounded-full ring-2 ring-stone-900 transition duration-200 ${point.place} ${point.dot} ${
+                      !claimed ? 'opacity-80' : isActive ? 'opacity-100 scale-125' : 'opacity-40'
                     }`}
                   />
-                  <span className={`text-[10.5px] font-medium ${point.tone}`}>{point.label}</span>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
+
+            <div className="grid grid-cols-3 gap-2 text-[10.5px] font-sans">
+              {VISIBILITY_POINTS.map((point) => {
+                const claimed = VISIBILITY_POINTS.some((p) => p.tab === activeTabId);
+                const isActive = point.tab === activeTabId;
+                return (
+                  <span
+                    key={point.label}
+                    className={`font-medium transition-opacity duration-200 ${point.align} ${point.tone} ${
+                      !claimed ? 'opacity-80' : isActive ? 'opacity-100' : 'opacity-45'
+                    }`}
+                  >
+                    {point.label}
+                  </span>
+                );
+              })}
+            </div>
           </div>
         </div>
 
@@ -255,10 +337,10 @@ export const ContextCheck: React.FC = () => {
                 aria-controls="context-tabpanel"
                 tabIndex={isActive ? 0 : -1}
                 onClick={() => setActiveTabId(tab.id)}
-                className={`px-4 py-2 rounded-lg text-xs font-sans font-medium transition cursor-pointer flex items-center gap-2 ${
+                className={`px-4 py-2.5 rounded-[10px] text-xs font-sans font-medium transition cursor-pointer flex items-center gap-2 border ${
                   isActive
-                    ? 'bg-amber-500 text-stone-950 font-semibold shadow-raised'
-                    : 'bg-stone-900 border border-stone-800 text-stone-400 hover:text-stone-200 hover:bg-stone-850'
+                    ? 'border-amber-500 bg-amber-500 text-stone-950 font-semibold'
+                    : 'border-stone-800 bg-stone-900 text-stone-500 hover:text-stone-200 hover:border-stone-700'
                 }`}
               >
                 {tab.id === 'public' && <Globe size={13} />}
@@ -275,11 +357,11 @@ export const ContextCheck: React.FC = () => {
           role="tabpanel"
           id="context-tabpanel"
           aria-labelledby={`context-tab-${activeTab.id}`}
-          className="rounded-xl border border-stone-800 bg-stone-900/50 p-5 space-y-4"
+          className="rounded-xl border border-stone-800 bg-stone-900 p-5 sm:p-6 space-y-4"
         >
           <div className="space-y-1">
             <h3 className="text-lg font-serif font-semibold text-stone-100">{activeTab.title}</h3>
-            <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-sans">{activeTab.description}</p>
+            <p className="text-[13px] sm:text-sm text-stone-500 leading-[1.65] font-sans">{activeTab.description}</p>
           </div>
 
           {/* Unified Comparison Table */}
@@ -327,18 +409,18 @@ export const ContextCheck: React.FC = () => {
             }))}
           />
 
-          <p className="text-xs text-stone-400 bg-stone-950/50 p-3 rounded-lg border border-stone-800/80 leading-relaxed font-sans">
+          <p className="text-[13px] text-stone-500 bg-stone-950 p-3.5 rounded-lg border border-stone-800 leading-[1.62] font-sans">
             {activeTab.note}
           </p>
         </div>
       </div>
 
       {/* E. Rangkuman / Takeaway */}
-      <div className="rounded-xl border border-stone-800/80 bg-stone-950/60 p-5 space-y-3">
-        <span className="text-[11px] font-mono uppercase tracking-wider text-amber-500 dark:text-amber-400 font-bold block">
+      <div className="rounded-xl border border-stone-800 bg-stone-900 p-5 sm:p-6 space-y-3">
+        <span className="text-[11px] font-sans font-bold uppercase tracking-[0.16em] text-amber-500 block">
           Prinsip sederhananya
         </span>
-        <div className="space-y-2 text-xs sm:text-sm text-stone-300 leading-relaxed font-sans">
+        <div className="space-y-2 text-[13px] sm:text-sm text-stone-500 leading-[1.65] font-sans">
           <p>
             “Di ruang publik, beri informasi dan pilihan tanpa meminta pengakuan pribadi. Jika percakapan membutuhkan keterbukaan lebih jauh, sediakan jalur yang lebih privat dan jelaskan batas privasinya.”
           </p>
@@ -346,7 +428,7 @@ export const ContextCheck: React.FC = () => {
             “Jika tindakan yang kita ajak masih berpotensi dinilai sebagai ‘tidak laki-laki’, jangan memperkuat stereotip dengan mengatakan ‘cowok juga boleh…’. Fokuskan pesan pada kegunaan, pilihan, dan situasinya.”
           </p>
         </div>
-        <div className="text-[11px] font-mono text-stone-500 pt-1 border-t border-stone-800/60">
+        <div className="text-[11px] font-mono text-stone-500 pt-2.5 border-t border-stone-800">
           * Ini adalah contextual check, bukan aturan terpisah untuk setiap topik.
         </div>
       </div>

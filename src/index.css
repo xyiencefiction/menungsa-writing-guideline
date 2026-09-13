@@ -928,7 +928,7 @@ input[type="range"]:disabled {
   .cc-step + .cc-step::before {
     content: '';
     position: absolute;
-    top: 2.1rem;
+    top: 2.5rem;
     inset-inline-start: calc(-1rem - 1px);
     width: 1rem;
     border-block-start: 1px dashed var(--color-stone-700);
@@ -950,6 +950,136 @@ input[type="range"]:disabled {
 .cmp-stagger .cmp-row:nth-child(4) { animation-delay: 120ms; }
 .cmp-stagger .cmp-row:nth-child(5) { animation-delay: 160ms; }
 .cmp-stagger .cmp-row:nth-child(6) { animation-delay: 200ms; }
+
+/* ── Segmented tabs ──────────────────────────────────────────
+   A bounded, mutually exclusive choice — format, category, filter — reads as one
+   control rather than as N competing buttons. The track states the set; the
+   underline states the position in it.
+
+   The active segment is marked twice on purpose: an underline in `--accent` and
+   a lift to the surface step above the track. Colour alone would put the whole
+   state on a red-green axis (§11), and the track's own hue is the one thing that
+   cannot carry it. */
+
+.seg-tabs {
+  display: flex;
+  align-items: stretch;
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid var(--color-stone-800);
+  background: var(--color-stone-950);
+  padding: 0.25rem;
+}
+
+.seg-tab {
+  position: relative;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.05rem 0.7rem;
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  color: var(--color-stone-500);
+  cursor: pointer;
+  transition: color 120ms ease-out, background-color 120ms ease-out;
+}
+
+.seg-tab:hover {
+  color: var(--color-stone-200);
+}
+
+/* Hairline between neighbours, suppressed either side of the active segment so
+   the lifted surface reads as one continuous shape. */
+.seg-tab + .seg-tab::before {
+  content: '';
+  position: absolute;
+  inset-block: 0.5rem;
+  inset-inline-start: 0;
+  border-inline-start: 1px solid var(--color-stone-800);
+}
+
+.seg-tab-active::before,
+.seg-tab-active + .seg-tab::before {
+  border-inline-start-color: transparent;
+}
+
+.seg-tab-active,
+.seg-tab-active:hover {
+  color: var(--accent);
+  font-weight: 600;
+  background: var(--color-stone-900);
+}
+
+.seg-tab-active::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0.9rem;
+  bottom: 0.28rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+@media (min-width: 40rem) {
+  .seg-tabs {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+/* Primary mode: the control fills its line and the segments share it equally, so
+   it reads as one switcher rather than as a handful of buttons that happen to be
+   adjacent. Wrapping is off here — equal thirds that reflow into a 2 + 1 stack
+   stop looking like a set — so a narrow screen scrolls the track instead. */
+.seg-tabs-fill {
+  width: 100%;
+  /* Equal segments never need to scroll: a label that does not fit wraps inside
+     its own third instead. So the trailing fade — which exists to say "there is
+     more to the right" — would be a lie here. */
+  overflow-x: visible;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.seg-tabs-fill .seg-tab {
+  flex: 1 1 0;
+  min-width: 0;
+  justify-content: center;
+  text-align: center;
+  white-space: normal;
+  line-height: 1.3;
+}
+
+@media (min-width: 40rem) {
+  .seg-tabs-fill {
+    flex-wrap: nowrap;
+  }
+}
+
+.seg-tabs-lg .seg-tab {
+  padding: 0.85rem 1.15rem 0.95rem;
+  font-size: 0.875rem;
+  gap: 0.55rem;
+}
+
+.seg-tabs-lg .seg-tab-active::after {
+  inset-inline: 1.1rem;
+  bottom: 0.4rem;
+  height: 2.5px;
+}
+
+/* A primary switcher says "there is a choice here" before it says which one is
+   active, so the whole track gets a visible edge rather than only the segment
+   inside it. */
+.seg-tabs-lg {
+  border-color: var(--color-stone-700);
+}
 
 /* ── Control rows ────────────────────────────────────────────
    Filters were sharing a row with the heading in three views, so long Indonesian
@@ -997,6 +1127,13 @@ input[type="range"]:disabled {
   .ctl-sticky {
     top: 4.25rem;
   }
+}
+
+/* `.ctl-sticky` is unlayered, so it outranks any `bg-*` utility set on the same
+   element. A bar that wants the white surface step — because it holds a bone
+   segmented track that would otherwise vanish into it — asks for it here. */
+.ctl-sticky-raised {
+  background: color-mix(in srgb, var(--color-stone-900) 94%, transparent);
 }
 
 /* ── Scroll affordance ───────────────────────────────────────

@@ -24,60 +24,60 @@ interface ValueConfig {
 const SPECTRUM_CONFIG: Record<string, ValueConfig> = {
   V1: {
     icon: Users,
-    iconBgLight: 'bg-[#FFEBE5] text-[#AF4D28] border border-[#FCBFAA]',
-    iconBgDark: 'dark:bg-amber-950/50 dark:text-amber-300 dark:border-amber-800/50',
-    title: 'Teman Pembaca yang Baik',
-    description: 'Nada sapaan dan cara kami membangun kedekatan dengan pembaca.',
+    iconBgLight: 'bg-amber-950 text-amber-500 border border-amber-900',
+    iconBgDark: 'dark:bg-amber-950 dark:text-amber-500 dark:border-amber-900',
+    title: 'Setara, Bukan Menghakimi',
+    description: 'Seberapa setara dan tidak menghakimi cara kami berbicara kepada pembaca.',
     left: 'Menilai pembaca',
     right: 'Menyapa setara',
     positionPercent: 100
   },
   V2: {
     icon: MessageCircle,
-    iconBgLight: 'bg-[#EBF0FA] text-[#17243D] border border-[#C6D0E2]',
-    iconBgDark: 'dark:bg-sky-950/50 dark:text-sky-300 dark:border-sky-800/50',
+    iconBgLight: 'bg-sky-950 text-sky-700 border border-sky-900',
+    iconBgDark: 'dark:text-sky-400 dark:border-sky-800',
     title: 'Mudah untuk Dimulai',
-    description: 'Seberapa ringan usaha yang dibutuhkan pembaca untuk mulai terlibat.',
+    description: 'Seberapa ringan langkah pertama yang dibutuhkan pembaca untuk mulai terlibat.',
     left: 'Berat untuk dimulai',
     right: 'Mudah untuk dimulai',
     positionPercent: 100
   },
   V3: {
     icon: Lightbulb,
-    iconBgLight: 'bg-[#FDF9ED] text-[#AD8E3C] border border-[#E2CE9C]',
-    iconBgDark: 'dark:bg-yellow-950/50 dark:text-yellow-300 dark:border-yellow-800/50',
-    title: 'Ajakan yang Konkret',
-    description: 'Seberapa konkret dan praktis ajakan atau saran yang kami berikan.',
+    iconBgLight: 'bg-mn-gold-soft text-mn-blue border border-mn-gold-mid',
+    iconBgDark: 'dark:bg-mn-gold-mid/15 dark:text-mn-gold dark:border-mn-gold-mid/45',
+    title: 'Satu Langkah Nyata',
+    description: 'Seberapa jelas dan realistis tindakan pertama yang kami tawarkan.',
     left: 'Dorongan yang umum',
     right: 'Langkah yang nyata',
     positionPercent: 75
   },
   V4: {
     icon: Heart,
-    iconBgLight: 'bg-[#FDF0ED] text-[#AF4D28] border border-[#FCBFAA]',
-    iconBgDark: 'dark:bg-rose-950/50 dark:text-rose-300 dark:border-rose-800/50',
-    title: 'Urutan Penyampaian Emosi',
-    description: 'Urutan penyampaian antara label/emosi dan situasi yang mendasarinya.',
+    iconBgLight: 'bg-amber-950 text-amber-500 border border-amber-900',
+    iconBgDark: 'dark:bg-amber-950 dark:text-amber-500 dark:border-amber-900',
+    title: 'Mulai dari yang Terlihat',
+    description: 'Seberapa jauh kami memulai dari situasi yang bisa dikenali sebelum menafsirkan pengalaman pembaca.',
     left: 'Label/perasaan dulu',
     right: 'Situasi nyata dulu',
     positionPercent: 75
   },
   V5: {
     icon: ShieldCheck,
-    iconBgLight: 'bg-[#ECF2EE] text-[#2E4034] border border-[#C7D3CB]',
-    iconBgDark: 'dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800/50',
-    title: 'Tingkat Kepastian Informasi',
-    description: 'Seberapa tegas kami menyampaikan batasan dan tingkat kepastian informasi.',
+    iconBgLight: 'bg-emerald-950 text-emerald-700 border border-emerald-900',
+    iconBgDark: 'dark:text-emerald-400 dark:border-emerald-800',
+    title: 'Jelas soal Batasan',
+    description: 'Seberapa jelas kami membedakan apa yang diketahui, belum diketahui, dan belum bisa dilakukan.',
     left: 'Kepastian mutlak',
     right: 'Kepastian sesuai bukti',
     positionPercent: 75
   },
   V6: {
     icon: Target,
-    iconBgLight: 'bg-[#F2EFFC] text-[#5B3E96] border border-[#DDD6FE]',
-    iconBgDark: 'dark:bg-purple-950/50 dark:text-purple-300 dark:border-purple-800/50',
-    title: 'Arah Tindakan',
-    description: 'Bagaimana kami mendorong perubahan pada pembaca.',
+    iconBgLight: 'bg-sky-950 text-sky-700 border border-sky-900',
+    iconBgDark: 'dark:text-sky-400 dark:border-sky-800',
+    title: 'Tindakan, Bukan Tuntutan',
+    description: 'Seberapa konkret kami menunjukkan tindakan Menungsa tanpa menentukan apa yang orang lain seharusnya lakukan.',
     left: 'Menuntut berubah',
     right: 'Tindakan & bukti nyata',
     positionPercent: 75
@@ -104,20 +104,20 @@ export const ValueSpectrum: React.FC<Props> = ({
 }) => {
   return (
     <div
-      className={`rounded-3xl border border-stone-800/80 bg-stone-900/40 dark:bg-stone-950/70 p-5 sm:p-7 md:p-9 shadow-sm space-y-6 sm:space-y-8 ${
+      className={`rounded-3xl border border-stone-800 bg-stone-900 p-5 sm:p-7 md:p-9 space-y-6 sm:space-y-8 ${
         className ?? ''
       }`}
     >
       {/* Header matching DESIGN.md typography tokens */}
-      <div className="border-b border-stone-800/70 pb-6">
+      <div className="border-b border-stone-800 pb-6">
         <div className="space-y-1.5 max-w-2xl">
-          <span className="text-[11px] font-sans font-bold tracking-[0.2em] text-stone-500 dark:text-stone-400 uppercase block">
+          <span className="text-[11px] font-sans font-bold tracking-[0.2em] text-amber-500 uppercase block">
             MENUNGSA
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-stone-100 tracking-tight leading-tight">
             Spektrum Voice Menungsa
           </h2>
-          <p className="text-xs sm:text-sm text-stone-500 dark:text-stone-300 font-sans leading-relaxed">
+          <p className="text-xs sm:text-sm text-stone-500 font-sans leading-relaxed">
             Atur posisi yang paling sesuai dengan voice Menungsa untuk setiap aspek.
           </p>
         </div>
@@ -128,8 +128,8 @@ export const ValueSpectrum: React.FC<Props> = ({
         {values.map((v) => {
           const cfg = SPECTRUM_CONFIG[v.id] ?? {
             icon: Users,
-            iconBgLight: 'bg-[#FFEBE5] text-[#AF4D28] border border-[#FCBFAA]',
-            iconBgDark: 'dark:bg-amber-950/50 dark:text-amber-300 dark:border-amber-800/50',
+            iconBgLight: 'bg-amber-950 text-amber-500 border border-amber-900',
+            iconBgDark: 'dark:bg-amber-950 dark:text-amber-500 dark:border-amber-900',
             title: rowTitles?.[v.id] ?? v.value,
             description: v.voiceTrait,
             left: v.spectrum.leftPole,
@@ -143,10 +143,10 @@ export const ValueSpectrum: React.FC<Props> = ({
           return (
             <div
               key={v.id}
-              className={`rounded-2xl border transition-all duration-200 p-4 sm:p-5 lg:p-6 shadow-2xs ${
+              className={`rounded-2xl border transition-colors duration-200 p-4 sm:p-5 lg:p-6 ${
                 isOpen
-                  ? 'border-amber-500/80 dark:border-amber-500/60 bg-stone-900 dark:bg-stone-900/90 shadow-sm'
-                  : 'border-stone-800/80 bg-stone-900/80 dark:bg-stone-900/50 hover:border-stone-700 dark:hover:border-stone-700 hover:bg-stone-900'
+                  ? 'border-amber-500 bg-stone-900'
+                  : 'border-stone-800 bg-stone-950 hover:border-stone-700'
               }`}
             >
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
@@ -154,7 +154,7 @@ export const ValueSpectrum: React.FC<Props> = ({
                 <div className="flex items-start gap-3.5 sm:gap-4 flex-1 min-w-0">
                   {/* Icon Circle with individual wash background */}
                   <div
-                    className={`w-11 h-11 rounded-full flex items-center justify-center shrink-0 shadow-2xs transition-colors ${cfg.iconBgLight} ${cfg.iconBgDark}`}
+                    className={`w-11 h-11 rounded-full flex items-center justify-center shrink-0 transition-colors ${cfg.iconBgLight} ${cfg.iconBgDark}`}
                   >
                     <IconComponent size={20} strokeWidth={1.85} />
                   </div>
@@ -174,7 +174,7 @@ export const ValueSpectrum: React.FC<Props> = ({
                 </div>
 
                 {/* Right Block: Spectrum Rail directly followed by Chevron */}
-                <div className="flex items-center gap-4 sm:gap-6 shrink-0 w-full lg:w-auto pt-2 lg:pt-0 border-t lg:border-t-0 border-stone-800/60 justify-between lg:justify-end">
+                <div className="flex items-center gap-4 sm:gap-6 shrink-0 w-full lg:w-auto pt-2 lg:pt-0 border-t lg:border-t-0 border-stone-800 justify-between lg:justify-end">
                   {/* Spectrum Rail Container */}
                   <div
                     className="w-full sm:w-[300px] md:w-[360px] lg:w-[380px] xl:w-[440px] select-none pointer-events-none cursor-default"
@@ -183,27 +183,26 @@ export const ValueSpectrum: React.FC<Props> = ({
                   >
                     <div className="relative py-2 flex flex-col justify-center">
                       {/* Rail Track: soft warm bone in light mode, dark stone in dark mode */}
-                      <div className="relative h-2.5 sm:h-3 w-full rounded-full bg-[#E5DFD1] dark:bg-stone-800 overflow-hidden shadow-inner">
-                        {/* Gradient Fill ending in calibrated target green */}
+                      <div className="relative h-2.5 sm:h-3 w-full rounded-full bg-bone-shade dark:bg-stone-800 overflow-hidden">
+                        {/* Gradient fill, anchored to the whole rail and clipped */}
                         <div
-                          className="absolute top-0 bottom-0 left-0 rounded-full"
+                          className="absolute inset-0 rounded-full"
                           style={{
-                            width: `${cfg.positionPercent}%`,
-                            background:
-                              cfg.positionPercent === 100
-                                ? 'linear-gradient(90deg, #AF4D28 0%, #D47B53 25%, #D9B44F 50%, #688C68 75%, #2E4034 100%)'
-                                : 'linear-gradient(90deg, #AF4D28 0%, #D47B53 30%, #D9B44F 55%, #2E4034 100%)',
+                            background: 'linear-gradient(90deg, #AF4D28 0%, #2E4034 100%)',
+                            clipPath: `inset(0 ${100 - cfg.positionPercent}% 0 0)`,
                           }}
-                        />
-
-                        {/* Segment separators over the track */}
-                        {(cfg.positionPercent === 100 ? [25, 50, 75] : [25, 50]).map((sep) => (
-                          <div
-                            key={sep}
-                            className="absolute top-0 bottom-0 w-[1.5px] bg-white/50 dark:bg-stone-900/60 pointer-events-none -translate-x-1/2"
-                            style={{ left: `${sep}%` }}
-                          />
-                        ))}
+                        >
+                          {/* Segment separators, drawn only over the filled part */}
+                          {[25, 50, 75]
+                            .filter((sep) => sep < cfg.positionPercent)
+                            .map((sep) => (
+                              <div
+                                key={sep}
+                                className="absolute top-0 bottom-0 w-[1.5px] bg-bone/55 pointer-events-none -translate-x-1/2"
+                                style={{ left: `${sep}%` }}
+                              />
+                            ))}
+                        </div>
                       </div>
                     </div>
 
@@ -239,7 +238,7 @@ export const ValueSpectrum: React.FC<Props> = ({
                 <div
                   role="region"
                   id={`vs-panel-${v.id}`}
-                  className="mt-5 pt-5 border-t border-stone-800/70 animate-fadeIn"
+                  className="mt-5 pt-5 border-t border-stone-800 animate-fadeIn"
                 >
                   {renderDetail(v.id)}
                 </div>

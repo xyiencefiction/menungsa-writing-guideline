@@ -13,6 +13,7 @@ import {
 import { RegisterMap, LunarPips, MoonPhase } from '../charts/RegisterMap';
 import { handleTablistKeys } from '../../utils/overlay';
 import { languageRegisters } from '../../data';
+import { SegmentedTabs } from '../common/SegmentedTabs';
 
 interface RegisterItem {
   id: string;
@@ -242,10 +243,17 @@ const ETHICAL_ALTERNATIVES: EthicalAlternativeItem[] = [
   }
 ];
 
-const GUIDE_TABS = ['pronouns', 'gender', 'alternatives'] as const;
+type GuideTab = 'pronouns' | 'gender' | 'alternatives';
+
+/** The page's primary choice, so it is rendered as one full-width switcher. */
+const GUIDE_TAB_ITEMS: { id: GuideTab; label: string; icon: typeof Users; tabId: string; panelId: string }[] = [
+  { id: 'pronouns', label: '1. Sapaan & Kata Ganti', icon: Users, tabId: 'tab-pronouns', panelId: 'panel-pronouns' },
+  { id: 'gender', label: '2. Sebutan Gender', icon: ShieldCheck, tabId: 'tab-gender', panelId: 'panel-gender' },
+  { id: 'alternatives', label: '3. Kebutuhan Pembaca & Alternatif Etis', icon: Sparkles, tabId: 'tab-alternatives', panelId: 'panel-alternatives' },
+];
 
 export const WordGuideView: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'pronouns' | 'gender' | 'alternatives'>('pronouns');
+  const [activeTab, setActiveTab] = useState<GuideTab>('pronouns');
   const [selectedRegisterId, setSelectedRegisterId] = useState<string>('kamu');
   const [selectedFunctionId, setSelectedFunctionId] = useState<string>('all');
 
@@ -267,60 +275,15 @@ export const WordGuideView: React.FC = () => {
         </p>
 
         {/* Tab Switcher */}
-        <div
-          role="tablist"
-          aria-label="Navigasi Panduan Kata"
-          onKeyDown={(e) => handleTablistKeys(e, (i) => setActiveTab(GUIDE_TABS[i]))}
-          className="flex flex-wrap gap-2 pt-2"
-        >
-          <button
-            role="tab"
-            id="tab-pronouns"
-            aria-selected={activeTab === 'pronouns'}
-            aria-controls="panel-pronouns"
-            tabIndex={activeTab === 'pronouns' ? 0 : -1}
-            onClick={() => setActiveTab('pronouns')}
-            className={`px-4 py-2 rounded-[6px] text-xs font-sans transition cursor-pointer flex items-center gap-2 ${
-              activeTab === 'pronouns'
-                ? 'bg-emerald-700 text-bone font-semibold shadow-raised border border-emerald-800 dark:border-emerald-500 dark:bg-emerald-800'
-                : 'bg-stone-900 border border-stone-800 text-stone-400 hover:text-stone-100 hover:bg-stone-850'
-            }`}
-          >
-            <Users size={14} />
-            <span>1. Sapaan & Kata Ganti</span>
-          </button>
-          <button
-            role="tab"
-            id="tab-gender"
-            aria-selected={activeTab === 'gender'}
-            aria-controls="panel-gender"
-            tabIndex={activeTab === 'gender' ? 0 : -1}
-            onClick={() => setActiveTab('gender')}
-            className={`px-4 py-2 rounded-[6px] text-xs font-sans transition cursor-pointer flex items-center gap-2 ${
-              activeTab === 'gender'
-                ? 'bg-emerald-700 text-bone font-semibold shadow-raised border border-emerald-800 dark:border-emerald-500 dark:bg-emerald-800'
-                : 'bg-stone-900 border border-stone-800 text-stone-400 hover:text-stone-100 hover:bg-stone-850'
-            }`}
-          >
-            <ShieldCheck size={14} />
-            <span>2. Sebutan Gender</span>
-          </button>
-          <button
-            role="tab"
-            id="tab-alternatives"
-            aria-selected={activeTab === 'alternatives'}
-            aria-controls="panel-alternatives"
-            tabIndex={activeTab === 'alternatives' ? 0 : -1}
-            onClick={() => setActiveTab('alternatives')}
-            className={`px-4 py-2 rounded-[6px] text-xs font-sans transition cursor-pointer flex items-center gap-2 ${
-              activeTab === 'alternatives'
-                ? 'bg-emerald-700 text-bone font-semibold shadow-raised border border-emerald-800 dark:border-emerald-500 dark:bg-emerald-800'
-                : 'bg-stone-900 border border-stone-800 text-stone-400 hover:text-stone-100 hover:bg-stone-850'
-            }`}
-          >
-            <Sparkles size={14} />
-            <span>3. Kebutuhan Pembaca & Alternatif Etis</span>
-          </button>
+        <div className="pt-3">
+          <SegmentedTabs
+            items={GUIDE_TAB_ITEMS}
+            value={activeTab}
+            onChange={(id) => setActiveTab(id as GuideTab)}
+            ariaLabel="Navigasi Panduan Kata"
+            fill
+            size="lg"
+          />
         </div>
       </div>
 
@@ -513,133 +476,119 @@ export const WordGuideView: React.FC = () => {
             </p>
           </div>
 
-          {/* Function Selector Filter Pills (from v1) */}
+          {/* Function Selector */}
           <div className="space-y-2">
-            <span className="font-mono text-xs text-stone-400 uppercase tracking-wider block font-semibold">
+            <span className="text-[11px] font-sans font-bold uppercase tracking-[0.14em] text-stone-500 block">
               Pilih kebutuhan yang ingin dibahas
             </span>
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={() => setSelectedFunctionId('all')}
-                aria-pressed={selectedFunctionId === 'all'}
-                className={`px-3 py-2 rounded-lg border text-xs font-sans transition cursor-pointer flex items-center gap-1.5 ${
-                  selectedFunctionId === 'all'
-                    ? 'bg-emerald-700 text-bone font-semibold border-emerald-800 shadow-raised dark:border-emerald-500 dark:bg-emerald-800'
-                    : 'bg-stone-900 border border-stone-800 text-stone-400 hover:text-stone-100 hover:bg-stone-850'
-                }`}
-              >
-                <span>Semua Kebutuhan ({ETHICAL_ALTERNATIVES.length})</span>
-              </button>
-              {ETHICAL_ALTERNATIVES.map((alt) => {
-                const isSelected = selectedFunctionId === alt.id;
-                return (
-                  <button
-                    key={alt.id}
-                    onClick={() => setSelectedFunctionId(alt.id)}
-                    aria-pressed={isSelected}
-                    className={`px-3 py-2 rounded-lg border text-left text-xs font-sans transition cursor-pointer flex items-center gap-2 ${
-                      isSelected
-                        ? 'bg-emerald-700 text-bone font-semibold border-emerald-800 shadow-raised dark:border-emerald-500 dark:bg-emerald-800'
-                        : 'bg-stone-900 border border-stone-800 text-stone-400 hover:text-stone-100 hover:bg-stone-850'
-                    }`}
-                  >
-                    <span className="font-medium whitespace-nowrap">{alt.shortLabel}</span>
-                  </button>
-                );
-              })}
-            </div>
+            <SegmentedTabs
+              items={[
+                { id: 'all', label: `Semua Kebutuhan (${ETHICAL_ALTERNATIVES.length})` },
+                ...ETHICAL_ALTERNATIVES.map((alt) => ({ id: alt.id, label: alt.shortLabel })),
+              ]}
+              value={selectedFunctionId}
+              onChange={setSelectedFunctionId}
+              ariaLabel="Pilih kebutuhan yang ingin dibahas"
+            />
           </div>
 
-          {/* Cards with HIGHLIGHTED NEED (The Spine) */}
+          {/* One need per card, read as a sequence: what the reader wants, why the
+              pull works, the two ways of answering it, and the line to write by.
+              Every block used to be a filled panel at the same weight, so the card
+              was four competing boxes and the reader had no entry point. The need
+              is now the lead, the two answers are a matched pair, and the rule
+              closes on `gold` — the palette's one occasional surface (§2.1), which
+              is exactly what a takeaway line is for. */}
           <div className="grid grid-cols-1 gap-6">
             {(selectedFunctionId === 'all'
               ? ETHICAL_ALTERNATIVES
               : ETHICAL_ALTERNATIVES.filter((a) => a.id === selectedFunctionId)
             ).map((item) => (
-              <div
+              <article
                 key={item.id}
-                className="rounded-2xl border border-stone-800 bg-stone-900 p-5 md:p-6 space-y-5 shadow-raised transition"
+                className="rounded-2xl border border-stone-800 bg-stone-900 overflow-hidden"
               >
                 {/* Card Header */}
-                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-stone-800 pb-3">
-                  <div>
-                    <span className="font-mono text-[10.5px] text-amber-500 uppercase font-bold tracking-wider block mb-0.5">
+                <header className="flex items-start gap-3.5 border-b border-stone-800 bg-stone-950 p-5 md:p-6">
+                  <span className="h-11 w-11 shrink-0 rounded-[10px] border border-sky-900 bg-sky-950 text-sky-700 dark:border-sky-800 dark:text-sky-400 flex items-center justify-center">
+                    <HeartHandshake size={20} strokeWidth={1.9} />
+                  </span>
+                  <div className="min-w-0 space-y-0.5">
+                    <span className="text-[10.5px] font-sans font-bold uppercase tracking-[0.16em] text-amber-500 block">
                       Kebutuhan dan cara menanggapinya
                     </span>
-                    <h4 className="text-xl font-serif font-bold text-stone-100">
+                    <h4 className="text-lg md:text-xl font-serif font-semibold text-stone-100 leading-tight">
                       {item.functionName}
                     </h4>
                   </div>
-                </div>
+                </header>
 
-                {/* 1 & 2: THE HIGHLIGHTED LEGITIMATE NEED (SPINE) */}
-                <div className="rounded-xl border border-sky-800/60 bg-sky-950/60 p-4 sm:p-5 space-y-3 shadow-xs">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-sky-800 text-bone font-mono text-[10.5px] font-bold uppercase tracking-wider">
-                      <HeartHandshake size={13} />
-                      <span>1. Kebutuhan yang ingin dipenuhi</span>
-                    </span>
-                    <span className="text-[10px] font-mono text-stone-400">
-                      Kebutuhan pembaca
-                    </span>
-                  </div>
-                  <p className="text-stone-100 font-medium text-sm md:text-[15px] leading-relaxed font-sans">
-                    {item.psychologicalNeed}
-                  </p>
-                  
-                  {/* Psychological Appeal */}
-                  <div className="pt-2.5 border-t border-sky-800/40 flex items-start gap-2 text-xs">
-                    <span className="font-mono font-bold text-amber-500 uppercase text-[10.5px] shrink-0 mt-0.5">
-                      2. Mengapa menarik
-                    </span>
-                    <span className="text-stone-300 leading-relaxed font-medium">
-                      {item.whyCompelling}
-                    </span>
-                  </div>
-                </div>
-
-                {/* 3 & 4: THE TWO IMPLEMENTATIONS GRID */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-sans">
-                  {/* 3. Harmful Version */}
-                  <div className="rounded-xl border border-rose-900/40 bg-rose-950/40 p-4 space-y-2">
-                    <div className="flex items-center gap-1.5 text-rose-700 dark:text-rose-400 font-bold">
-                      <X size={16} className="shrink-0 stroke-[2.5]" />
-                      <span className="font-mono uppercase text-[10.5px] font-bold tracking-wider">
-                        3. Cara yang dapat merugikan
+                <div className="p-5 md:p-6 space-y-5">
+                  {/* The need itself — the card's lead, set larger than anything under it. */}
+                  <div className="space-y-3">
+                    <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                      <span className="text-[10.5px] font-sans font-bold uppercase tracking-[0.14em] text-sky-700 dark:text-sky-400">
+                        1. Kebutuhan yang ingin dipenuhi
+                      </span>
+                      <span className="text-[10px] font-mono text-stone-500">
+                        Kebutuhan pembaca
                       </span>
                     </div>
-                    <p className="text-stone-100 font-medium leading-relaxed font-sans">
-                      {item.harmfulVersion}
+                    <p className="text-[15px] md:text-base text-stone-100 leading-[1.6] font-sans">
+                      {item.psychologicalNeed}
                     </p>
-                  </div>
 
-                  {/* 4. Ethical Alternative */}
-                  <div className="rounded-xl border border-emerald-900/40 bg-emerald-950/40 p-4 space-y-2">
-                    <div className="flex items-center gap-1.5 text-emerald-700 dark:text-emerald-400 font-bold">
-                      <Check size={16} className="shrink-0 stroke-[2.5]" />
-                      <span className="font-mono uppercase text-[10.5px] font-bold tracking-wider">
-                        4. Pendekatan Menungsa
+                    <div className="border-t border-stone-800 pt-3 space-y-1.5">
+                      <span className="text-[10.5px] font-sans font-bold uppercase tracking-[0.14em] text-stone-500 block">
+                        2. Mengapa menarik
                       </span>
+                      <p className="text-[13px] text-stone-400 leading-[1.65] font-sans">
+                        {item.whyCompelling}
+                      </p>
                     </div>
-                    <p className="text-stone-100 font-medium leading-relaxed font-sans">
-                      {item.ethicalAlternative}
-                    </p>
                   </div>
-                </div>
 
-                {/* Governing Rule / Prinsip Emas */}
-                <div className="rounded-xl bg-stone-850 p-3.5 border border-stone-800 text-xs flex items-center justify-between gap-3 shadow-xs">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="font-mono text-amber-500 font-bold uppercase text-[11px] shrink-0">
-                      Pegangan penulisan
-                    </span>
-                    <span className="text-stone-100 font-serif italic text-sm font-medium">
-                      "{item.keyPrinciple}"
-                    </span>
+                  {/* The two answers, as a matched pair at equal weight. */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
+                    <div className="h-full rounded-xl border border-rose-900 bg-rose-950 p-4 space-y-2">
+                      <div className="flex items-center gap-1.5 text-rose-700 dark:text-rose-400">
+                        <X size={15} className="shrink-0 stroke-[2.5]" />
+                        <span className="text-[10.5px] font-sans font-bold uppercase tracking-[0.14em]">
+                          3. Cara yang dapat merugikan
+                        </span>
+                      </div>
+                      <p className="text-[13px] text-stone-400 leading-[1.65] font-sans">
+                        {item.harmfulVersion}
+                      </p>
+                    </div>
+
+                    <div className="h-full rounded-xl border border-emerald-900 bg-emerald-950 p-4 space-y-2">
+                      <div className="flex items-center gap-1.5 text-emerald-700 dark:text-emerald-400">
+                        <Check size={15} className="shrink-0 stroke-[2.5]" />
+                        <span className="text-[10.5px] font-sans font-bold uppercase tracking-[0.14em]">
+                          4. Pendekatan Menungsa
+                        </span>
+                      </div>
+                      <p className="text-[13px] text-stone-400 leading-[1.65] font-sans">
+                        {item.ethicalAlternative}
+                      </p>
+                    </div>
                   </div>
-                  <ShieldCheck size={18} className="text-amber-500 shrink-0" />
+
+                  {/* Governing Rule / Prinsip Emas — blue on gold is 7.81:1 (§3). */}
+                  <div className="rounded-xl bg-mn-gold-soft p-4 flex items-start gap-3">
+                    <ShieldCheck size={18} strokeWidth={1.9} className="shrink-0 text-mn-blue mt-0.5" />
+                    <div className="min-w-0 space-y-1">
+                      <span className="text-[10.5px] font-sans font-bold uppercase tracking-[0.14em] text-mn-green block">
+                        Pegangan penulisan
+                      </span>
+                      <p className="font-serif italic text-[15px] md:text-base text-mn-blue leading-snug">
+                        "{item.keyPrinciple}"
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>

@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { playSound } from '../../utils/sound';
 import { ComparisonTable } from '../common/ComparisonTable';
+import { SegmentedTabs } from '../common/SegmentedTabs';
 
 const CONTEXT_ID_MAP: Record<string, string> = {
   C01: 'Psikoedukasi & Ritme Tubuh',
@@ -274,66 +275,70 @@ export const WritingStudioView: React.FC = () => {
       </div>
 
       {/* Control Bar: Format Filters, Situasi Naskah Dropdown, Search, and Layout Toggle */}
-      <div className="ctl-sticky space-y-2.5 rounded-[9px] border border-stone-800 bg-stone-900/50 p-4 shadow-raised">
+      {/* Both filters were laid out as `label: control` on one line, which reads
+          as a sentence the eye skims rather than as a set of options. Each label
+          now sits above the control it names, so the bar announces two choices
+          before the reader has to parse either one. */}
+      <div className="ctl-sticky ctl-sticky-raised space-y-4 rounded-xl border border-stone-800 p-4 sm:p-5">
         {/* Row 1: Channel Chips & Layout Switcher */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-stone-800/60 pb-3">
-          {/* Format Chips */}
-          <div role="group" aria-label="Pilihan format kanal" className="ctl-row no-scrollbar scroll-hint-x">
-            <span className="text-xs font-sans text-stone-400 font-semibold mr-1 hidden sm:inline">Kanal:</span>
-            {CHANNELS_LIST.map((ch) => (
+        <div className="space-y-2 border-b border-stone-800 pb-4">
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-[11px] font-sans font-bold uppercase tracking-[0.14em] text-stone-500">
+              Kanal:
+            </span>
+
+            {/* Layout Mode Switcher (Icons only) */}
+            <div
+              className="flex items-center gap-0.5 bg-stone-950 border border-stone-800 rounded-[10px] p-1 shrink-0"
+              role="group"
+              aria-label="Susunan kartu contoh"
+            >
               <button
-                key={ch.id}
-                onClick={() => setSelectedChannel(ch.id)}
-                aria-pressed={selectedChannel === ch.id}
-                className={`px-3 py-1.5 rounded-[6px] text-xs font-sans whitespace-nowrap transition cursor-pointer flex items-center gap-1.5 ${
-                  selectedChannel === ch.id
-                    ? 'bg-amber-500 text-[#F1ECDF] font-semibold shadow-raised'
-                    : 'bg-stone-900 border border-stone-800 text-stone-400 hover:text-stone-200 hover:border-stone-700'
+                type="button"
+                onClick={() => setLayoutMode('two-column')}
+                aria-pressed={layoutMode === 'two-column'}
+                aria-label="Tampilkan kartu dalam dua kolom"
+                className={`p-1.5 rounded-[6px] cursor-pointer transition ${
+                  layoutMode === 'two-column'
+                    ? 'bg-amber-500 text-stone-950'
+                    : 'text-stone-500 hover:text-stone-200'
                 }`}
+                title="Dua kolom"
               >
-                <span>{ch.label}</span>
+                <LayoutGrid size={15} />
               </button>
-            ))}
+              <button
+                type="button"
+                onClick={() => setLayoutMode('single-column')}
+                aria-pressed={layoutMode === 'single-column'}
+                aria-label="Tampilkan kartu dalam satu kolom"
+                className={`p-1.5 rounded-[6px] cursor-pointer transition ${
+                  layoutMode === 'single-column'
+                    ? 'bg-amber-500 text-stone-950'
+                    : 'text-stone-500 hover:text-stone-200'
+                }`}
+                title="Satu kolom"
+              >
+                <StretchHorizontal size={15} />
+              </button>
+            </div>
           </div>
 
-          {/* Layout Mode Switcher (Icons only) */}
-          <div className="flex items-center gap-0.5 self-end md:self-auto bg-stone-900 border border-stone-800 rounded-[6px] p-1 shrink-0" role="group" aria-label="Susunan kartu contoh">
-            <button
-              type="button"
-              onClick={() => setLayoutMode('two-column')}
-              aria-pressed={layoutMode === 'two-column'}
-              aria-label="Tampilkan kartu dalam dua kolom"
-              className={`p-1.5 rounded-[4px] cursor-pointer transition ${
-                layoutMode === 'two-column'
-                  ? 'bg-amber-500 text-[#F1ECDF] shadow-raised'
-                  : 'text-stone-400 hover:text-stone-200'
-              }`}
-              title="Dua kolom"
-            >
-              <LayoutGrid size={15} />
-            </button>
-            <button
-              type="button"
-              onClick={() => setLayoutMode('single-column')}
-              aria-pressed={layoutMode === 'single-column'}
-              aria-label="Tampilkan kartu dalam satu kolom"
-              className={`p-1.5 rounded-[4px] cursor-pointer transition ${
-                layoutMode === 'single-column'
-                  ? 'bg-amber-500 text-[#F1ECDF] shadow-raised'
-                  : 'text-stone-400 hover:text-stone-200'
-              }`}
-              title="Satu kolom"
-            >
-              <StretchHorizontal size={15} />
-            </button>
-          </div>
+          <SegmentedTabs
+            items={CHANNELS_LIST}
+            value={selectedChannel}
+            onChange={setSelectedChannel}
+            ariaLabel="Pilihan format kanal"
+          />
         </div>
 
         {/* Row 2: Situasi Naskah Dropdown & Search Input */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
-          {/* Situasi Naskah Dropdown (Space-saving replacement for horizontal pills) */}
-          <div className="flex items-center gap-2 flex-1 max-w-full md:max-w-md">
-            <label htmlFor="context-select" className="text-xs font-sans text-stone-300 font-semibold whitespace-nowrap shrink-0">
+        <div className="flex flex-col md:flex-row md:items-end gap-3">
+          <div className="space-y-2 flex-1 min-w-0">
+            <label
+              htmlFor="context-select"
+              className="text-[11px] font-sans font-bold uppercase tracking-[0.14em] text-stone-500 block"
+            >
               Situasi:
             </label>
             <div className="relative w-full">
@@ -342,7 +347,7 @@ export const WritingStudioView: React.FC = () => {
                 value={selectedContext}
                 onChange={(e) => setSelectedContext(e.target.value)}
                 aria-label="Pilih situasi"
-                className="w-full appearance-none rounded-[6px] border border-stone-800 bg-stone-900/90 pl-3 pr-8 py-2 text-xs font-sans text-stone-200 focus:outline-2 focus:outline-amber-500 focus:outline-offset-1 cursor-pointer hover:border-stone-700 transition"
+                className="w-full appearance-none rounded-[10px] border border-stone-800 bg-stone-950 pl-3.5 pr-9 py-3 text-[13px] font-sans text-stone-200 focus:outline-2 focus:outline-amber-500 focus:outline-offset-1 cursor-pointer hover:border-stone-700 transition"
               >
                 <option value="all">Semua Situasi Naskah ({toneExemplars.length} contoh)</option>
                 {toneContexts.map((ctx) => {
@@ -350,39 +355,41 @@ export const WritingStudioView: React.FC = () => {
                   const count = contextCounts[ctx.context_id] || 0;
                   return (
                     <option key={ctx.context_id} value={ctx.context_id}>
-                      {ctx.context_id} · {label} ({count} contoh)
+                      {label} ({count} contoh)
                     </option>
                   );
                 })}
               </select>
-              <ChevronDown size={14} className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400" />
+              <ChevronDown size={15} className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-stone-500" />
             </div>
           </div>
 
           {/* Search Box */}
-          <div className="relative w-full md:w-80">
-            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-500" />
+          <div className="relative w-full md:w-80 shrink-0">
+            <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-500" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Cari kata atau topik dalam contoh…"
               aria-label="Cari contoh naskah"
-              className="w-full rounded-[6px] border border-stone-800 bg-stone-900/70 pl-8.5 pr-3 py-2 text-xs text-stone-200 placeholder-stone-500 focus:outline-2 focus:outline-amber-500 focus:outline-offset-1 font-sans"
+              className="w-full rounded-[10px] border border-stone-800 bg-stone-950 pl-10 pr-3.5 py-3 text-[13px] text-stone-200 placeholder-stone-500 focus:outline-2 focus:outline-amber-500 focus:outline-offset-1 hover:border-stone-700 transition font-sans"
             />
           </div>
         </div>
 
         {/* Counter and Active Filter Notification */}
-        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-stone-400 font-sans">
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 border-t border-stone-800 pt-3 text-[13px] text-stone-500 font-sans">
           {/* Changing a filter changes only this number. Announcing it is the
               only feedback a screen-reader user gets that the filter did
               anything at all. */}
-          <span aria-live="polite">
-            Menampilkan <strong className="text-amber-500 font-bold">{filteredExemplars.length}</strong> dari {toneExemplars.length} contoh naskah terkalibrasi
+          <span aria-live="polite" className="flex flex-wrap items-center gap-x-1.5 gap-y-1">
+            <span>
+              Menampilkan <strong className="text-amber-500 font-bold text-base">{filteredExemplars.length}</strong> dari {toneExemplars.length} contoh naskah terkalibrasi
+            </span>
             {selectedContext !== 'all' && (
-              <span className="ml-1.5 text-stone-300">
-                · Menyaring: <strong className="text-stone-200">{selectedContext} ({CONTEXT_ID_MAP[selectedContext]})</strong>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-stone-800 bg-stone-950 px-2.5 py-1 text-[11px] text-stone-400">
+                · Menyaring: <strong className="text-stone-200 font-semibold">{CONTEXT_ID_MAP[selectedContext]}</strong>
               </span>
             )}
           </span>
@@ -393,7 +400,7 @@ export const WritingStudioView: React.FC = () => {
                 setSelectedChannel('all');
                 setSearchQuery('');
               }}
-              className="text-amber-500 hover:text-amber-500 dark:text-amber-400 text-xs cursor-pointer underline underline-offset-2 transition"
+              className="text-amber-500 text-xs font-medium cursor-pointer underline underline-offset-2 hover:no-underline transition"
             >
               Hapus semua filter
             </button>

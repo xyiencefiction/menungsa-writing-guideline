@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import type { ViewType } from '../../types';
-import { CheckCircle2, XCircle, Sparkles, ArrowRight, SlidersHorizontal } from 'lucide-react';
+import { CheckCircle2, XCircle, Sparkles, ArrowRight, SlidersHorizontal, Lightbulb, ShieldCheck } from 'lucide-react';
 import { ValueSpectrum } from '../charts/ValueSpectrum';
 import { ContextCheck } from './ContextCheck';
 import { ComparisonTable } from '../common/ComparisonTable';
+import { SegmentedTabs } from '../common/SegmentedTabs';
 import { brandValues } from '../../data';
 
 interface Props {
@@ -13,7 +14,6 @@ interface Props {
 interface ValuePillar {
   id: string;
   title: string;
-  tagline: string;
   voiceTrait: string;
   positionNote: string;
   boundaryCondition: string;
@@ -24,8 +24,7 @@ interface ValuePillar {
 const VALUE_PILLARS: ValuePillar[] = [
   {
     id: "V1",
-    title: "Teman Pembaca yang Baik",
-    tagline: "Teman Pembaca yang Baik",
+    title: "Setara, Bukan Menghakimi",
     voiceTrait: "Sapa dan temui pembaca di titik mereka berada (meet them where they are). Jangan menilai mereka dari kekuatan, keberanian, atau kepantasan untuk dihargai.",
     positionNote: "Memberikan rasa aman dan mengurangi kemungkinan pembaca bereaksi secara defensif. Membuat audiens merasa menjadi bagian dari Menungsa, alih-alih merasa sebagai orang luar yang perlu 'diperbaiki' atau 'diubah'.",
     boundaryCondition: "Prinsip ini tidak berarti menghindari penilaian terhadap risiko, perilaku, atau situasi. Dalam konteks keselamatan, kesehatan, atau kondisi darurat, gunakan bahasa yang akurat dan tegas untuk menjelaskan risiko. Yang dihindari adalah menghakimi pembaca, bukan menyamarkan atau mereduksi realita dan risiko.",
@@ -57,7 +56,6 @@ const VALUE_PILLARS: ValuePillar[] = [
   {
     id: "V2",
     title: "Mudah untuk Dimulai",
-    tagline: "Mudah untuk Dimulai",
     voiceTrait: "Jelaskan secara konkret dan ringkas. Jangan bertele-tele; menambah langkah, istilah, atau tuntutan yang tidak diperlukan..",
     positionNote: "Kejelasan mengurangi beban untuk memahami, memutuskan, dan mengambil langkah pertama. Audiens lebih mudah merespons ketika proses, pilihan, dan apa yang akan mereka dapatkan terasa jelas dan sederhana.",
     boundaryCondition: "Pada kondisi krisis atau darurat, gunakan instruksi yang singkat, tegas, dan terarah.",
@@ -84,8 +82,7 @@ const VALUE_PILLARS: ValuePillar[] = [
   },
   {
     id: "V3",
-    title: "Ajakan yang Konkret",
-    tagline: "Ajakan yang Konkret",
+    title: "Satu Langkah Nyata",
     voiceTrait: "Tawarkan satu tindakan yang konkret dan realistis. Jika ada banyak pilihan, bantu pembaca menentukan langkah yang paling masuk akal untuk dilakukan terlebih dahulu.",
     positionNote: "Terlalu banyak saran sekaligus dapat membuat pembaca bingung atau tidak melakukan apa pun. Satu langkah yang jelas membantu mengubah pemahaman menjadi tindakan.",
     boundaryCondition: "Tidak semua situasi cukup ditangani dengan satu langkah. Untuk masalah yang kompleks atau berkelanjutan, satu langkah berfungsi sebagai titik awal menuju dukungan atau penanganan berikutnya.",
@@ -112,8 +109,7 @@ const VALUE_PILLARS: ValuePillar[] = [
   },
   {
     id: "V4",
-    title: "Urutan Penyampaian Emosi",
-    tagline: "Urutan Penyampaian Emosi",
+    title: "Mulai dari yang Terlihat",
     voiceTrait: "Mulailah dari situasi, kebiasaan, atau perubahan yang bisa dikenali pembaca. Tunjukkan apa yang terjadi terlebih dahulu. Jangan langsung menyimpulkan apa yang mereka rasakan, pikirkan, atau alami.",
     positionNote: "Seseorang sering lebih mudah mengenali apa yang berubah dalam kesehariannya sebelum bisa menjelaskan apa yang sedang ia rasakan. Mulai dari hal yang bisa ia lihat atau alami langsung, lalu beri ruang baginya untuk menghubungkan pola tersebut dan menamai perasaannya sendiri.",
     boundaryCondition: "Situasi konkret tetap perlu beragam dan sesuai konteks. Jangan menganggap satu kebiasaan atau pengalaman mewakili semua laki-laki.",
@@ -140,8 +136,7 @@ const VALUE_PILLARS: ValuePillar[] = [
   },
   {
     id: "V5",
-    title: "Tingkat Kepastian Informasi",
-    tagline: "Tingkat Kepastian Informasi",
+    title: "Jelas soal Batasan",
     voiceTrait: "Sampaikan informasi sesuai tingkat kepastian yang tersedia. Bedakan apa yang sudah diketahui, apa yang masih berupa kemungkinan, dan apa yang belum diketahui. Jangan mengklaim lebih dari bukti atau kapasitas yang Menungsa miliki.",
     positionNote: "Dengan jujur dan terbuka menjelaskan apa yang sudah diketahui, apa yang belum diketahui, dan apa yang belum bisa dilakukan, audiens dapat memahami informasi yang diterima dengan lebih jelas dan akurat.",
     boundaryCondition: "Tidak semua ketidakpastian perlu dijelaskan panjang lebar. Sesuaikan dengan pentingnya informasi dan risiko jika terjadi kesalahpahaman. Dalam situasi darurat, prioritaskan langkah yang jelas dan informasi layanan yang sudah diverifikasi.",
@@ -168,8 +163,7 @@ const VALUE_PILLARS: ValuePillar[] = [
   },
   {
     id: "V6",
-    title: "Arah Tindakan",
-    tagline: "Arah Tindakan",
+    title: "Tindakan, Bukan Tuntutan",
     voiceTrait: "Jelaskan secara konkret apa yang Menungsa lakukan, pilih, atau ubah. Saat menyatakan nilai atau sikap, tunjukkan bagaimana hal itu diterapkan dalam tindakan.",
     positionNote: "Mengatakan apa yang “seharusnya” dilakukan orang lain (misalnya, “laki-laki harus...”) dapat terasa seperti tekanan terhadap kebebasan mereka untuk memilih, sehingga memicu sikap defensif atau penolakan. Menunjukkan apa yang Menungsa lakukan sendiri memberi contoh tanpa memaksa dan membuat sikap lebih nyata lewat praktiknya.",
     boundaryCondition: "Ada situasi ketika Menungsa perlu menyampaikan batas atau sikap dengan tegas, terutama terkait keselamatan, kekerasan, diskriminasi, atau tindakan yang merugikan orang lain. Dalam situasi seperti ini, ketegasan tetap perlu diikuti dengan penjelasan tentang apa yang akan Menungsa lakukan atau batas apa yang akan Menungsa pegang.",
@@ -412,30 +406,44 @@ export const VoiceFoundationsView: React.FC<Props> = ({ onNavigate }) => {
             const val = VALUE_PILLARS.find((v) => v.id === id);
             if (!val) return null;
             return (
-              <div className="space-y-4">
-                <div className="flex flex-col md:flex-row md:items-start justify-between gap-3">
-                  <span className="text-xs font-sans font-bold tracking-widest uppercase text-amber-500 dark:text-amber-400/90 block">
-                    VALUE {val.id.replace('V', '').padStart(2, '0')}
-                  </span>
-                  <div className="text-xs font-sans text-stone-300 bg-stone-950/60 px-3.5 py-2 rounded-lg border border-stone-800 md:max-w-md">
-                    <span className="font-semibold text-amber-500 dark:text-amber-400 font-mono text-[10.5px] uppercase block mb-0.5">
-                      Karakter Suara
+              <div className="space-y-5">
+                <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:gap-6 lg:items-start">
+                  <div className="space-y-2.5">
+                    <span className="inline-block rounded-full border border-amber-900 bg-amber-950 px-3 py-1 text-[10px] font-sans font-bold uppercase tracking-[0.18em] text-amber-500">
+                      VALUE {val.id.replace('V', '').padStart(2, '0')}
                     </span>
-                    {val.voiceTrait}
+                    <h5 className="font-serif text-xl sm:text-2xl font-semibold text-stone-100 leading-tight">
+                      Karakter Suara
+                    </h5>
+                    <p className="text-[13.5px] sm:text-sm text-stone-400 leading-[1.65] font-sans">
+                      {val.voiceTrait}
+                    </p>
+                  </div>
+
+                  <div className="rounded-xl border border-stone-800 bg-stone-950 p-4 sm:p-5">
+                    <div className="flex items-start gap-3">
+                      <span className="h-9 w-9 shrink-0 rounded-[8px] border border-mn-gold-mid bg-mn-gold-soft text-mn-blue dark:border-mn-gold-mid/45 dark:bg-mn-gold-mid/15 dark:text-mn-gold flex items-center justify-center">
+                        <Lightbulb size={17} strokeWidth={1.9} />
+                      </span>
+                      <div className="space-y-1.5 min-w-0">
+                        <h6 className="text-[10.5px] font-sans font-bold uppercase tracking-[0.14em] text-stone-400">
+                          Mengapa ini penting
+                        </h6>
+                        <p className="text-[13.5px] text-stone-400 leading-[1.6] font-sans">
+                          {val.positionNote}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div>
-                  <h6 className="text-xs font-mono font-bold uppercase tracking-wider text-stone-400 mb-2">
-                    Mengapa ini penting
-                  </h6>
-                  <p className="text-sm text-stone-300 leading-relaxed font-sans bg-stone-950/30 p-4 rounded-xl border border-stone-800/60">
-                    {val.positionNote}
+                <div className="flex items-start gap-3 rounded-xl border border-stone-800 bg-stone-950 p-4">
+                  <span className="h-9 w-9 shrink-0 rounded-[8px] border border-emerald-900 bg-emerald-950 text-emerald-700 dark:border-emerald-800 dark:text-emerald-400 flex items-center justify-center">
+                    <ShieldCheck size={17} strokeWidth={1.9} />
+                  </span>
+                  <p className="text-[13px] text-stone-400 leading-[1.65] font-sans">
+                    <strong className="text-stone-100 font-semibold">Kapan perlu disesuaikan:</strong> {val.boundaryCondition}
                   </p>
-                </div>
-
-                <div className="text-xs text-stone-400 bg-stone-950/40 p-3.5 rounded-xl border border-stone-800/80 leading-relaxed font-sans">
-                  <strong className="text-stone-200">Kapan perlu disesuaikan:</strong> {val.boundaryCondition}
                 </div>
 
                 <ComparisonTable
@@ -485,56 +493,47 @@ export const VoiceFoundationsView: React.FC<Props> = ({ onNavigate }) => {
       <ContextCheck />
 
       {/* The Golden Do's & Don'ts Playbook */}
-      <section className="space-y-6">
-        <div className="space-y-3">
-          <div>
-            <h2 className="text-xl md:text-2xl font-serif font-semibold text-stone-100 flex items-center gap-2">
-              <SlidersHorizontal size={18} className="text-amber-500" />
-              Panduan singkat menulis
-            </h2>
-            <p className="text-xs md:text-sm text-stone-400 mt-1 font-sans">
-              Gunakan contoh berikut untuk meninjau cara menyapa, mengajak, dan menjelaskan informasi kepada pembaca.
-            </p>
+      <section className="rounded-2xl sm:rounded-3xl border border-stone-800 bg-stone-900 p-5 sm:p-7 lg:p-9 space-y-7">
+        <div className="space-y-5">
+          <div className="flex items-start gap-3.5">
+            <span className="h-10 w-10 shrink-0 rounded-[10px] border border-amber-900 bg-amber-950 text-amber-500 flex items-center justify-center">
+              <SlidersHorizontal size={18} strokeWidth={1.9} />
+            </span>
+            <div className="space-y-1 pt-0.5">
+              <h2 className="text-xl md:text-2xl font-serif font-semibold text-stone-100 leading-tight">
+                Panduan singkat menulis
+              </h2>
+              <p className="text-xs md:text-sm text-stone-500 font-sans leading-relaxed max-w-[64ch]">
+                Gunakan contoh berikut untuk meninjau cara menyapa, mengajak, dan menjelaskan informasi kepada pembaca.
+              </p>
+            </div>
           </div>
 
-          {/* Filter Pills */}
-          <div role="group" aria-label="Panduan singkat menulis" className="ctl-row no-scrollbar scroll-hint-x">
-            {categories.map((c) => (
-              <button
-                key={c.id}
-                onClick={() => setSelectedCategory(c.id)}
-                aria-pressed={selectedCategory === c.id}
-                className={`px-3 py-1.5 rounded-[6px] text-xs font-sans whitespace-nowrap transition cursor-pointer ${
-                  selectedCategory === c.id
-                    ? 'bg-amber-500 text-stone-950 font-semibold shadow-raised'
-                    : 'bg-stone-900 border border-stone-800 text-stone-400 hover:text-stone-200 hover:bg-stone-800'
-                }`}
-              >
-                {c.label}
-              </button>
-            ))}
-          </div>
+          <SegmentedTabs
+            items={categories}
+            value={selectedCategory}
+            onChange={setSelectedCategory}
+            ariaLabel="Panduan singkat menulis"
+          />
         </div>
 
         {/* Playbook Rules Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {filteredRules.map((rule) => (
             <div
               key={rule.id}
-              className="rounded-[9px] border border-stone-800 bg-stone-900/50 p-5 space-y-4 hover:border-stone-700 transition shadow-raised"
+              className="rounded-xl border border-stone-800 bg-stone-950 p-5 space-y-3.5 hover:border-stone-700 transition-colors"
             >
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <span className="text-[10px] font-sans font-bold uppercase tracking-wider text-amber-500">
-                    {rule.categoryLabel}
-                  </span>
-                  <h3 className="text-base font-serif font-semibold text-stone-100 mt-0.5 leading-snug">
-                    {rule.action}
-                  </h3>
-                </div>
+              <div className="space-y-1">
+                <span className="text-[10px] font-sans font-bold uppercase tracking-[0.14em] text-amber-500">
+                  {rule.categoryLabel}
+                </span>
+                <h3 className="text-base font-serif font-semibold text-stone-100 leading-snug">
+                  {rule.action}
+                </h3>
               </div>
 
-              <p className="text-xs text-stone-300 leading-relaxed font-sans">
+              <p className="text-[13px] text-stone-500 leading-[1.65] font-sans">
                 {rule.rationale}
               </p>
 
@@ -559,13 +558,13 @@ export const VoiceFoundationsView: React.FC<Props> = ({ onNavigate }) => {
                     positive: (
                       <>
                         <p className="font-serif italic text-emerald-300 leading-snug">"{rule.doText}"</p>
-                        <p className="text-[13px] text-stone-300 leading-relaxed">{rule.doWhy}</p>
+                        <p className="text-[13px] text-stone-400 leading-[1.6]">{rule.doWhy}</p>
                       </>
                     ),
                     negative: (
                       <>
                         <p className="font-serif italic text-rose-300 leading-snug">"{rule.dontText}"</p>
-                        <p className="text-[13px] text-stone-300 leading-relaxed">{rule.dontWhy}</p>
+                        <p className="text-[13px] text-stone-400 leading-[1.6]">{rule.dontWhy}</p>
                       </>
                     ),
                   },

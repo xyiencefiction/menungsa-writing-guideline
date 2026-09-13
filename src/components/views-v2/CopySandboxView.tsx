@@ -652,7 +652,7 @@ export const CopySandboxView: React.FC = () => {
           {/* 1. Skor pencocokan kata Menungsa (Composite Calibration Score) */}
           {/* Pinned on wide screens: editing happens in the left column, and a
               score that scrolls away is a score nobody watches while they edit. */}
-          <div className="rounded-[9px] border border-stone-800 bg-stone-900/60 p-5 space-y-4 shadow-raised lg:sticky lg:top-20 lg:z-10">
+          <div className="rounded-[9px] border border-stone-800 bg-stone-900 p-5 space-y-4 shadow-raised lg:sticky lg:top-20 lg:z-20 lg:shadow-lg">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
                 <div className="p-2 rounded-[6px] bg-amber-500/10 border border-amber-500/25 text-amber-500">

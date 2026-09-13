@@ -114,7 +114,6 @@ export const LunarPips: React.FC<{
       title={`${label}: ${level}/${max}`}
       aria-label={`${label} ${level} dari ${max}`}
     >
-      <MoonPhase level={level} size={13} className="text-amber-500 dark:text-amber-400 shrink-0" />
       <span className="text-stone-400 text-[10.5px] font-mono">{label}</span>
       <span className="inline-flex items-center gap-1" aria-hidden="true">
         {Array.from({ length: max }, (_, i) => {

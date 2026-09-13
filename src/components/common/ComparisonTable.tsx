@@ -69,17 +69,17 @@ export const ComparisonTable: React.FC<Props> = ({
 
   return (
     <div
-      className={`cmp ${measure === 'long' ? 'cmp-wide' : ''} overflow-hidden rounded-lg border border-stone-800 bg-stone-950/70 shadow-raised ${className}`}
+      className={`cmp ${measure === 'long' ? 'cmp-wide' : ''} overflow-hidden rounded-lg border border-stone-800 bg-stone-950 ${className}`}
     >
       {/* Header. Hidden by the container query as soon as the halves stack. */}
-      <div className="cmp-head border-b border-stone-800 bg-stone-900/90">
+      <div className="cmp-head border-b border-stone-800">
         <div
-          className={`${HEAD_CELL} justify-between border-r border-stone-800 text-emerald-700 dark:text-emerald-400`}
+          className={`${HEAD_CELL} justify-between border-r border-stone-800 bg-emerald-950 text-emerald-700 dark:text-emerald-400`}
         >
           <span className="flex items-center gap-1.5">{positiveLabel}</span>
           {positiveHeaderAction}
         </div>
-        <div className={`${HEAD_CELL} text-rose-700 dark:text-rose-400`}>{negativeLabel}</div>
+        <div className={`${HEAD_CELL} bg-rose-950 text-rose-700 dark:text-rose-400`}>{negativeLabel}</div>
       </div>
 
       <div>
