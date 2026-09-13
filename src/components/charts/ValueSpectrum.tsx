@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   ChevronDown,
   Users,
@@ -114,26 +114,13 @@ export const ValueSpectrum: React.FC<Props> = ({
   renderDetail,
   className,
 }) => {
-  // Interactive slider values state with Menungsa default calibrated positions
-  const [positions, setPositions] = useState<Record<string, number>>(() => {
-    const init: Record<string, number> = {};
-    values.forEach((v) => {
-      init[v.id] = SPECTRUM_CONFIG[v.id]?.defaultPosition ?? v.spectrum?.position ?? 4;
-    });
-    return init;
-  });
-
-  const handleSliderChange = (id: string, val: number) => {
-    setPositions((prev) => ({ ...prev, [id]: val }));
-  };
-
   return (
     <div
       className={`rounded-3xl border border-stone-200 dark:border-stone-800 bg-[#FDFDFC] dark:bg-stone-950/80 p-5 sm:p-7 md:p-9 shadow-raised space-y-6 sm:space-y-8 ${
         className ?? ''
       }`}
     >
-      {/* Header matching the updated clean design mockup (No Panduan card) */}
+      {/* Header */}
       <div className="border-b border-stone-200/80 dark:border-stone-800/80 pb-6">
         <div className="space-y-1.5 max-w-2xl">
           <span className="text-[11px] font-sans font-bold tracking-[0.2em] text-stone-500 dark:text-stone-400 uppercase block">
@@ -143,7 +130,7 @@ export const ValueSpectrum: React.FC<Props> = ({
             Spektrum Voice Menungsa
           </h2>
           <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300 font-sans leading-relaxed">
-            Atur posisi yang paling sesuai dengan voice Menungsa. Geser slider untuk setiap aspek.
+            Posisi spektrum yang terkalibrasi sesuai karakter voice Menungsa pada setiap aspek.
           </p>
         </div>
       </div>
@@ -165,7 +152,7 @@ export const ValueSpectrum: React.FC<Props> = ({
 
           const IconComponent = cfg.icon;
           const isOpen = selectedId === v.id;
-          const currentPos = positions[v.id] ?? cfg.defaultPosition;
+          const currentPos = cfg.defaultPosition;
           const positionPercent = pct(currentPos);
 
           return (
@@ -207,16 +194,20 @@ export const ValueSpectrum: React.FC<Props> = ({
                   </div>
                 </div>
 
-                {/* Right Block: Slider Rail directly followed by Chevron */}
+                {/* Right Block: Static Spectrum Rail directly followed by Chevron */}
                 <div className="flex items-center gap-4 sm:gap-6 shrink-0 w-full lg:w-auto pt-2 lg:pt-0 border-t lg:border-t-0 border-stone-100 dark:border-stone-800/60 justify-between lg:justify-end">
-                  {/* Spectrum Slider Rail */}
-                  <div className="w-full sm:w-[300px] md:w-[360px] lg:w-[380px] xl:w-[440px] select-none">
+                  {/* Spectrum Rail (Static visual representation) */}
+                  <div
+                    className="w-full sm:w-[300px] md:w-[360px] lg:w-[380px] xl:w-[440px] select-none pointer-events-none cursor-default"
+                    role="img"
+                    aria-label={`Posisi ${cfg.title}: ${currentPos} dari 5`}
+                  >
                     <div className="relative py-2 flex flex-col justify-center">
                       {/* Range Rail Container */}
                       <div className="relative h-2.5 sm:h-3 w-full rounded-full bg-stone-200/80 dark:bg-stone-800 overflow-hidden shadow-inner">
-                        {/* Gradient Fill clipped to current position */}
+                        {/* Gradient Fill clipped to static calibrated position */}
                         <div
-                          className="absolute inset-0 rounded-full transition-[clip-path] duration-150 ease-out"
+                          className="absolute inset-0 rounded-full"
                           style={{
                             background:
                               'linear-gradient(90deg, #AF4D28 0%, #CE7859 25%, #D9B44F 50%, #6A8E60 75%, #2E4034 100%)',
@@ -234,31 +225,20 @@ export const ValueSpectrum: React.FC<Props> = ({
                         ))}
                       </div>
 
-                      {/* Interactive Knob / Thumb */}
+                      {/* Static Handle / Indicator Knob */}
                       <div
-                        className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-white dark:bg-stone-100 border-2 border-stone-800 dark:border-stone-900 shadow-raised pointer-events-none transition-[left] duration-150 ease-out z-10"
+                        className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-white dark:bg-stone-100 border-[2.5px] border-stone-300 dark:border-stone-600 shadow-sm pointer-events-none select-none z-10"
                         style={{ left: `${positionPercent}%` }}
-                      />
-
-                      {/* Native transparent range input for full accessibility and drag */}
-                      <input
-                        type="range"
-                        min="1"
-                        max="5"
-                        step="1"
-                        value={currentPos}
-                        aria-label={`Skala ${cfg.title}: ${currentPos} dari 5`}
-                        onChange={(e) => handleSliderChange(v.id, parseInt(e.target.value, 10))}
-                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20"
+                        aria-hidden="true"
                       />
                     </div>
 
                     {/* Numbers 1 - 5 directly below track */}
-                    <div className="relative w-full h-4 mt-0.5">
+                    <div className="relative w-full h-4 mt-0.5" aria-hidden="true">
                       {SCALE.map((tick) => (
                         <span
                           key={tick}
-                          className={`absolute -translate-x-1/2 font-mono text-[10px] sm:text-[11px] tabular-nums transition-colors ${
+                          className={`absolute -translate-x-1/2 font-mono text-[10px] sm:text-[11px] tabular-nums ${
                             currentPos === tick
                               ? 'text-stone-900 dark:text-stone-100 font-bold'
                               : 'text-stone-400 dark:text-stone-500'
