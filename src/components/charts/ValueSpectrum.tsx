@@ -10,12 +10,19 @@ import {
 } from 'lucide-react';
 import type { BrandValue } from '../../types';
 
+/**
+ * One chip treatment for every row.
+ *
+ * This was six per-value colours. They differentiated nothing the glyph and the
+ * title did not already differentiate, and touring four territories in one
+ * component is exactly what DESIGN.md §0.3 rules out. `blue` is the Evidence &
+ * Editorial territory (§4) and the default ink on `bone`, so it is the quietest
+ * chip the palette offers.
+ */
+const ICON_CHIP = 'bg-sky-950 text-sky-700 border border-sky-900 dark:text-sky-400 dark:border-sky-800';
+
 interface ValueConfig {
   icon: React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }>;
-  iconBgLight: string;
-  iconBgDark: string;
-  /** The row's own surface tint — its family's wash step, so the card carries colour on its own once it sits directly on the page. */
-  cardBg: string;
   title: string;
   description: string;
   left: string;
@@ -26,9 +33,6 @@ interface ValueConfig {
 const SPECTRUM_CONFIG: Record<string, ValueConfig> = {
   V1: {
     icon: Users,
-    iconBgLight: 'bg-amber-950 text-amber-500 border border-amber-900',
-    iconBgDark: 'dark:bg-amber-950 dark:text-amber-500 dark:border-amber-900',
-    cardBg: 'bg-amber-950',
     title: 'Setara, Bukan Menghakimi',
     description: 'Seberapa setara dan tidak menghakimi cara kami berbicara kepada pembaca.',
     left: 'Menilai pembaca',
@@ -37,9 +41,6 @@ const SPECTRUM_CONFIG: Record<string, ValueConfig> = {
   },
   V2: {
     icon: MessageCircle,
-    iconBgLight: 'bg-sky-950 text-sky-700 border border-sky-900',
-    iconBgDark: 'dark:text-sky-400 dark:border-sky-800',
-    cardBg: 'bg-sky-950',
     title: 'Mudah untuk Dimulai',
     description: 'Seberapa ringan langkah pertama yang dibutuhkan pembaca untuk mulai terlibat.',
     left: 'Berat untuk dimulai',
@@ -48,9 +49,6 @@ const SPECTRUM_CONFIG: Record<string, ValueConfig> = {
   },
   V3: {
     icon: Lightbulb,
-    iconBgLight: 'bg-mn-gold-soft text-mn-blue border border-mn-gold-mid',
-    iconBgDark: 'dark:bg-mn-gold-mid/15 dark:text-mn-gold dark:border-mn-gold-mid/45',
-    cardBg: 'bg-yellow-950',
     title: 'Satu Langkah Nyata',
     description: 'Seberapa jelas dan realistis tindakan pertama yang kami tawarkan.',
     left: 'Dorongan yang umum',
@@ -59,9 +57,6 @@ const SPECTRUM_CONFIG: Record<string, ValueConfig> = {
   },
   V4: {
     icon: Heart,
-    iconBgLight: 'bg-amber-950 text-amber-500 border border-amber-900',
-    iconBgDark: 'dark:bg-amber-950 dark:text-amber-500 dark:border-amber-900',
-    cardBg: 'bg-amber-950',
     title: 'Mulai dari yang Terlihat',
     description: 'Seberapa jauh kami memulai dari situasi yang bisa dikenali sebelum menafsirkan pengalaman pembaca.',
     left: 'Label/perasaan dulu',
@@ -70,9 +65,6 @@ const SPECTRUM_CONFIG: Record<string, ValueConfig> = {
   },
   V5: {
     icon: ShieldCheck,
-    iconBgLight: 'bg-emerald-950 text-emerald-700 border border-emerald-900',
-    iconBgDark: 'dark:text-emerald-400 dark:border-emerald-800',
-    cardBg: 'bg-emerald-950',
     title: 'Jelas soal Batasan',
     description: 'Seberapa jelas kami membedakan apa yang diketahui, belum diketahui, dan belum bisa dilakukan.',
     left: 'Kepastian mutlak',
@@ -81,9 +73,6 @@ const SPECTRUM_CONFIG: Record<string, ValueConfig> = {
   },
   V6: {
     icon: Target,
-    iconBgLight: 'bg-sky-950 text-sky-700 border border-sky-900',
-    iconBgDark: 'dark:text-sky-400 dark:border-sky-800',
-    cardBg: 'bg-sky-950',
     title: 'Tindakan, Bukan Tuntutan',
     description: 'Seberapa konkret kami menunjukkan tindakan Menungsa tanpa menentukan apa yang orang lain seharusnya lakukan.',
     left: 'Menuntut berubah',
@@ -132,9 +121,6 @@ export const ValueSpectrum: React.FC<Props> = ({
         {values.map((v) => {
           const cfg = SPECTRUM_CONFIG[v.id] ?? {
             icon: Users,
-            iconBgLight: 'bg-amber-950 text-amber-500 border border-amber-900',
-            iconBgDark: 'dark:bg-amber-950 dark:text-amber-500 dark:border-amber-900',
-            cardBg: 'bg-amber-950',
             title: rowTitles?.[v.id] ?? v.value,
             description: v.voiceTrait,
             left: v.spectrum.leftPole,
@@ -148,10 +134,10 @@ export const ValueSpectrum: React.FC<Props> = ({
           return (
             <div
               key={v.id}
-              className={`rounded-2xl border transition-all duration-200 p-4 sm:p-5 lg:p-6 ${cfg.cardBg} ${
+              className={`rounded-2xl border bg-stone-900 transition-all duration-200 p-4 sm:p-5 lg:p-6 ${
                 isOpen
                   ? 'border-amber-500 shadow-raised'
-                  : 'border-transparent hover:border-stone-800'
+                  : 'border-stone-800 hover:border-stone-700'
               }`}
             >
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
@@ -159,7 +145,7 @@ export const ValueSpectrum: React.FC<Props> = ({
                 <div className="flex items-start gap-3.5 sm:gap-4 flex-1 min-w-0">
                   {/* Icon Circle with individual wash background */}
                   <div
-                    className={`w-11 h-11 rounded-full flex items-center justify-center shrink-0 transition-colors ${cfg.iconBgLight} ${cfg.iconBgDark}`}
+                    className={`w-11 h-11 rounded-full flex items-center justify-center shrink-0 ${ICON_CHIP}`}
                   >
                     <IconComponent size={20} strokeWidth={1.85} />
                   </div>
@@ -168,7 +154,7 @@ export const ValueSpectrum: React.FC<Props> = ({
                   <div className="space-y-1 min-w-0 flex-1 pt-0.5">
                     <h3
                       onClick={() => onSelect(v.id)}
-                      className="font-serif font-bold text-base sm:text-lg lg:text-xl text-stone-100 hover:text-amber-600 dark:hover:text-amber-400 leading-snug cursor-pointer transition-colors"
+                      className="font-serif font-bold text-base sm:text-lg lg:text-xl text-stone-100 hover:text-amber-500 leading-snug cursor-pointer transition-colors"
                     >
                       {rowTitles?.[v.id] ?? cfg.title}
                     </h3>
