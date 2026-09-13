@@ -108,10 +108,10 @@ export const ValueSpectrum: React.FC<Props> = ({
             MENUNGSA
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-stone-100 tracking-tight leading-tight">
-            Spektrum Voice Menungsa
+            Spektrum <em>Voice</em> Menungsa
           </h2>
           <p className="text-xs sm:text-sm text-stone-500 font-sans leading-relaxed">
-            Atur posisi yang paling sesuai dengan voice Menungsa untuk setiap aspek.
+            Atur posisi yang paling sesuai dengan <em>voice</em> Menungsa untuk setiap aspek.
           </p>
         </div>
       </div>

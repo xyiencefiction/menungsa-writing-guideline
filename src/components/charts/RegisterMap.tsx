@@ -180,14 +180,14 @@ export const RegisterMap: React.FC<Props> = ({ registers, selectedId, onSelect, 
         <div>
           <div className="flex items-center gap-2">
             <h3 className="font-serif font-semibold text-stone-100 text-sm md:text-base">
-              Peta Koordinat Ragam Bahasa &amp; Kata Ganti
+              Ragam Bahasa &amp; Kata Ganti
             </h3>
             <span className="px-1.5 py-0.5 rounded font-mono text-[9.5px] uppercase tracking-wider bg-stone-800 text-stone-300 border border-stone-700">
               Otoritas × Keakraban
             </span>
           </div>
           <p className="text-stone-400 text-[11px] font-sans">
-            Titik tengah (3/5, 3/5) adalah jangkar kesetaraan Menungsa ("kamu")
+            Titik tengah (3/5, 3/5) adalah acuan Menungsa untuk prinsip membersamai ("kamu").
           </p>
         </div>
 
@@ -223,7 +223,7 @@ export const RegisterMap: React.FC<Props> = ({ registers, selectedId, onSelect, 
           role="group"
           aria-label="Peta ragam bahasa dan kata ganti berdasarkan tingkat otoritas dan kedekatan hubungan"
         >
-          <title>Peta Koordinat Ragam Bahasa dan Kata Ganti</title>
+          <title>Ragam Bahasa dan Kata Ganti</title>
 
           <defs>
             {/* Ambient Glow for Active Nodes */}

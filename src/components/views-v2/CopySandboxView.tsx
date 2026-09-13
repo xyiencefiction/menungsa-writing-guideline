@@ -396,7 +396,7 @@ export const CopySandboxView: React.FC = () => {
           Periksa Draf sebelum Dipublikasikan
         </h1>
         <p className="text-sm md:text-base text-stone-300 max-w-[74ch] leading-relaxed font-sans">
-          Tempel (copy-paste) draf tulisan untuk melihat kata atau frasa yang mungkin perlu ditinjau kembali. Pemeriksaan akan menandai bahasa yang berpotensi judgmental, terlalu klinis, atau kurang sesuai dengan Voice Menungsa.
+          Tempel (<em>copy-paste</em>) draf tulisan untuk melihat kata atau frasa yang mungkin perlu ditinjau kembali. Pemeriksaan akan menandai bahasa yang berpotensi <em>judgmental</em>, terlalu klinis, atau kurang sesuai dengan <em>Voice</em> Menungsa.
         </p>
       </div>
 

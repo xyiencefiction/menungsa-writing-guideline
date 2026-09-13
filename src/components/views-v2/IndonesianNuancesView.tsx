@@ -10,7 +10,7 @@ import {
 
 interface ExamplePair {
   example: string;
-  why: string;
+  why: React.ReactNode;
 }
 
 interface ContrastItem {
@@ -20,7 +20,7 @@ interface ContrastItem {
   statusLabel: string;
   north?: number;
   south?: number;
-  note: string;
+  note: React.ReactNode;
   writerImplication: string;
   dos: ExamplePair;
   donts: ExamplePair;
@@ -70,7 +70,11 @@ const INDONESIAN_CONTRASTS: ContrastItem[] = [
     statusLabel: 'Berlaku Sama di Indonesia',
     north: 25,
     south: 24,
-    note: 'Tema tuntutan untuk terlihat tangguh muncul dengan frekuensi yang berdekatan dalam kelompok studi Global North dan Global South. Ini bukan ukuran kekuatan norma pada seluruh penduduk Indonesia.',
+    note: (
+      <>
+        Tema tuntutan untuk terlihat tangguh muncul dengan frekuensi yang berdekatan dalam kelompok studi <em>Global North</em> dan <em>Global South</em>. Ini bukan ukuran kekuatan norma pada seluruh penduduk Indonesia.
+      </>
+    ),
     writerImplication: 'Jangan melawan tuntutan “laki-laki harus kuat” dengan standar baru tentang seperti apa laki-laki yang benar-benar kuat. Pisahkan kebutuhan akan bantuan, istirahat, atau keterbukaan dari ukuran maskulinitas.',
     dos: {
       example: 'Belum siap cerita bukan berarti kamu gagal menghadapi masalah. Kamu bisa mulai dari bagian yang terasa cukup aman untuk dibicarakan—atau cukup mendengarkan dulu.',
@@ -88,7 +92,11 @@ const INDONESIAN_CONTRASTS: ContrastItem[] = [
     statusLabel: 'Berbeda di Indonesia',
     north: 5,
     south: 34,
-    note: 'Agama dibahas dengan frekuensi berbeda dalam kelompok studi Global North dan Global South. Pengaruhnya terhadap pencarian bantuan dapat berbeda menurut keyakinan dan konteks.',
+    note: (
+      <>
+        Agama dibahas dengan frekuensi berbeda dalam kelompok studi <em>Global North</em> dan <em>Global South</em>. Pengaruhnya terhadap pencarian bantuan dapat berbeda menurut keyakinan dan konteks.
+      </>
+    ),
     writerImplication: 'Gunakan kerangka agama atau spiritualitas ketika memang relevan bagi penutur atau audiens. Jangan menjelaskan masalah kesehatan mental sebagai ukuran kualitas iman, dan jangan memosisikan dukungan spiritual serta layanan profesional sebagai dua pilihan yang harus saling menggantikan.',
     dos: {
       example: 'Kalau doa atau ibadah penting bagimu, itu bisa tetap menjadi bagian dari caramu menghadapi masa sulit. Mencari bantuan profesional juga bisa berjalan bersamaan.',
@@ -188,7 +196,11 @@ const INDONESIAN_CONTRASTS: ContrastItem[] = [
     writerImplication: 'Sebelum menjelaskan pencarian bantuan sebagai persoalan malu, gengsi, atau maskulinitas, pertimbangkan juga biaya, jarak, jam layanan, transportasi, ketersediaan tenaga, prosedur rujukan, antrean, dan privasi.',
     dos: {
       example: 'Untuk layanan di [fasilitas], pendaftaran tersedia [waktu], biaya atau skema pembiayaannya [informasi terverifikasi], dan cara mendaftarnya [alur]. Kalau informasi ini berubah, cek kembali melalui [kontak resmi].',
-      why: 'Template informasi layanan. Isi bagian dalam kurung siku setelah diverifikasi.'
+      why: (
+        <>
+          <em>Template</em> informasi layanan. Isi bagian dalam kurung siku setelah diverifikasi.
+        </>
+      )
     },
     donts: {
       example: 'Kalau belum mencari bantuan, mungkin yang menghalangi kamu cuma gengsi.',
@@ -446,13 +458,13 @@ export const IndonesianNuancesView: React.FC = () => {
                 {item.north !== undefined && item.south !== undefined ? (
                   <div className="space-y-2">
                     <div className="space-y-1" title="Frekuensi tema dalam kelompok studi Global North (154 studi)">
-                      <span className="block">Studi Global North: <strong className="text-stone-300 font-semibold font-mono tabular-nums">{item.north}%</strong></span>
+                      <span className="block">Studi <em>Global North</em>: <strong className="text-stone-300 font-semibold font-mono tabular-nums">{item.north}%</strong></span>
                       <div className="h-1.5 w-full rounded-full bg-stone-800 overflow-hidden" aria-hidden="true">
                         <div className="h-full rounded-full bg-stone-500" style={{ width: `${item.north}%` }} />
                       </div>
                     </div>
                     <div className="space-y-1" title="Frekuensi tema dalam kelompok studi Global South (154 studi)">
-                      <span className="block">Studi Global South: <strong className="text-amber-500 font-semibold font-mono tabular-nums">{item.south}%</strong></span>
+                      <span className="block">Studi <em>Global South</em>: <strong className="text-amber-500 font-semibold font-mono tabular-nums">{item.south}%</strong></span>
                       <div className="h-1.5 w-full rounded-full bg-stone-800 overflow-hidden" aria-hidden="true">
                         <div className="h-full rounded-full bg-amber-500" style={{ width: `${item.south}%` }} />
                       </div>

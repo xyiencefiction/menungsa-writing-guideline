@@ -16,12 +16,12 @@ interface Props {
 
 const PRIMARY_TABS: {
   id: ViewType;
-  label: string;
+  label: React.ReactNode;
   icon: React.ComponentType<{ size: number; className?: string }>;
 }[] = [
-  { id: 'foundations', label: 'Menungsa Voice', icon: Sparkles },
+  { id: 'foundations', label: <>Menungsa <em>Voice</em></>, icon: Sparkles },
   { id: 'studio', label: 'Contoh Penulisan', icon: PenTool },
-  { id: 'lexicon', label: 'Pemilihan Kata', icon: BookOpen },
+  { id: 'lexicon', label: 'Pilihan Kata', icon: BookOpen },
   { id: 'sandbox', label: 'Cek Tulisan', icon: Sliders },
   { id: 'indonesia', label: 'Konteks Lokal', icon: MapPin },
 ];

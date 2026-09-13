@@ -22,10 +22,10 @@ interface RegisterItem {
   name: string;
   authorityLevel: number;
   intimacyLevel: number;
-  socialRelationship: string;
-  impression: string;
-  risks: string;
-  contexts: string;
+  socialRelationship: React.ReactNode;
+  impression: React.ReactNode;
+  risks: React.ReactNode;
+  contexts: React.ReactNode;
   example: string;
 }
 
@@ -38,7 +38,11 @@ const REGISTERS: RegisterItem[] = [
     socialRelationship: 'Langsung, personal, dan cukup netral untuk banyak konteks. Menjadi sapaan utama Menungsa ketika berbicara langsung kepada pembaca.',
     impression: 'Menyapa pembaca secara langsung. Kehangatannya bergantung pada kalimat dan konteks.',
     risks: 'Bisa terasa menggurui jika terlalu sering dipasangkan dengan tuntutan seperti "kamu harus", "kamu wajib", atau kesimpulan tentang pengalaman pembaca.',
-    contexts: 'Konten edukasi, panduan praktis, caption, halaman website, email umum, dan komunikasi langsung yang tidak membutuhkan formalitas tinggi.',
+    contexts: (
+      <>
+        Konten edukasi, panduan praktis, <em>caption</em>, halaman <em>website</em>, <em>email</em> umum, dan komunikasi langsung yang tidak membutuhkan formalitas tinggi.
+      </>
+    ),
     example: 'Kalau belakangan ada yang terasa berbeda dari rutinitasmu, coba perhatikan perubahan yang paling mudah kamu kenali dulu.'
   },
   {
@@ -81,7 +85,11 @@ const REGISTERS: RegisterItem[] = [
     intimacyLevel: 5,
     socialRelationship: 'Ragam orang pertama yang santai dan sangat bergantung pada kebiasaan penutur. Umum dalam sebagian lingkungan urban, terutama ragam Jakarta dan sekitarnya.',
     impression: 'Dapat terasa akrab jika memang digunakan penutur sehari-hari.',
-    risks: 'Terasa dibuat-buat jika digunakan hanya untuk membuat Menungsa terdengar lebih muda, maskulin, atau “tongkrongan”. Jangan jadikan gue sebagai brand voice default.',
+    risks: (
+      <>
+        Terasa dibuat-buat jika digunakan hanya untuk membuat Menungsa terdengar lebih muda, maskulin, atau “tongkrongan”. Jangan jadikan gue sebagai <em>brand voice default</em>.
+      </>
+    ),
     contexts: 'Kesaksian personal, dialog, video, atau percakapan ketika penutur memang menggunakan gue/gua secara alami.',
     example: 'Waktu usaha gue tutup, beberapa minggu pertama gue masih bangun pagi seperti mau berangkat kerja.'
   },
@@ -147,7 +155,11 @@ const REGISTERS: RegisterItem[] = [
     intimacyLevel: 4,
     socialRelationship: 'Sebutan kasual yang lebih ringan dan dekat dengan percakapan sehari-hari, terutama di kalangan usia muda.',
     impression: 'Ringan, santai, dan tidak kaku.',
-    risks: 'Bisa terasa terlalu santai, kekanak-kanakan, atau tidak cocok untuk konteks formal maupun pembaca yang lebih tua. Jangan menjadikannya cara default agar konten laki-laki terdengar relatable.',
+    risks: (
+      <>
+        Bisa terasa terlalu santai, kekanak-kanakan, atau tidak cocok untuk konteks formal maupun pembaca yang lebih tua. Jangan menjadikannya cara <em>default</em> agar konten laki-laki terdengar <em>relatable</em>.
+      </>
+    ),
     contexts: 'Humor ringan, percakapan personal, dialog, atau konten kasual ketika istilah tersebut memang terdengar alami.',
     example: 'Kadang obrolan antar-cowok justru mulai dari hal yang kelihatannya nggak penting: kerjaan, motor, game, atau siapa yang telat datang.'
   },
@@ -308,7 +320,7 @@ export const WordGuideView: React.FC = () => {
               Menanggapi kebutuhan tanpa memperkuat kebencian
             </h3>
             <p className="text-xs md:text-sm text-stone-400 mt-1 max-w-3xl leading-relaxed">
-              Sebagian konten manosphere menawarkan kejelasan, pengakuan, atau rasa diterima. Tanggapi kebutuhan itu tanpa membenarkan penjelasan yang menyalahkan atau merendahkan kelompok lain.
+              Sebagian konten <em>manosphere</em> menawarkan kejelasan, pengakuan, atau rasa diterima. Tanggapi kebutuhan itu tanpa membenarkan penjelasan yang menyalahkan atau merendahkan kelompok lain.
             </p>
           </div>
 

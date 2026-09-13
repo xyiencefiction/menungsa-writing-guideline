@@ -267,10 +267,10 @@ export const WritingStudioView: React.FC = () => {
           <span>CONTOH PENERAPAN</span>
         </div>
         <h1 className="text-3xl md:text-4xl font-serif font-semibold tracking-tight text-stone-100 leading-tight">
-          Voice Menungsa dalam Praktik
+          <em>Voice</em> Menungsa dalam Praktik
         </h1>
         <p className="text-sm md:text-base text-stone-300 max-w-[74ch] leading-relaxed font-sans">
-          Lihat bagaimana Voice Menungsa diterapkan dalam berbagai situasi, lengkap dengan alasan di balik pilihan katanya. Gunakan contoh-contoh ini sebagai acuan. Sesuaikan kembali fakta, konteks, informasi layanan, dan ketentuan privasi sebelum digunakan.
+          Lihat bagaimana <em>Voice</em> Menungsa diterapkan dalam berbagai situasi, lengkap dengan alasan di balik pilihan katanya. Gunakan contoh-contoh ini sebagai acuan. Sesuaikan kembali fakta, konteks, informasi layanan, dan ketentuan privasi sebelum digunakan.
         </p>
       </div>
 

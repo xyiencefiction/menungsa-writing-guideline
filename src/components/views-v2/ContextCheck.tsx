@@ -3,10 +3,10 @@ import { Eye, Lock, Globe, Users, CheckCircle2, XCircle, ShieldAlert, ChevronDow
 import { ComparisonTable } from '../common/ComparisonTable';
 
 interface DoDontPair {
-  doText: string;
-  doWhy?: string;
-  dontText: string;
-  dontWhy?: string;
+  doText: React.ReactNode;
+  doWhy?: React.ReactNode;
+  dontText: React.ReactNode;
+  dontWhy?: React.ReactNode;
 }
 
 interface TabData {
@@ -46,7 +46,11 @@ const CONTEXT_TABS: TabData[] = [
       },
       {
         doText: 'Sesi bincang santai ini menyediakan opsi nama samaran dan kamera nonaktif demi kenyamanan.',
-        doWhy: 'Menurunkan social cost dengan menjamin kendali privasi dan anonimitas peserta.',
+        doWhy: (
+          <>
+            Menurunkan <em>social cost</em> dengan menjamin kendali privasi dan anonimitas peserta.
+          </>
+        ),
         dontText: 'Buktikan kamu berani terbuka dan hadapi rasa takutmu dengan ikut siaran langsung ini.',
         dontWhy: 'Membingkai keterbukaan sebagai ajang uji nyali atau pembuktian keberanian.',
       },
@@ -80,7 +84,11 @@ const CONTEXT_TABS: TabData[] = [
       },
       {
         doText: 'Pesan ini sekadar menyapa berkala. Kamu tidak harus membalas sekarang kalau sedang butuh waktu.',
-        doWhy: 'Follow-up rendah tekanan yang menghormati ritme dan ruang pribadi seseorang.',
+        doWhy: (
+          <>
+            <em>Follow-up</em> rendah tekanan yang menghormati ritme dan ruang pribadi seseorang.
+          </>
+        ),
         dontText: 'Kenapa kamu tiba-tiba menghilang? Menutup diri dari bantuan tidak akan menyelesaikan masalahmu.',
         dontWhy: 'Menghakimi keheningan seseorang sebagai bentuk kesalahan atau pembangkangan.',
       },
@@ -108,14 +116,22 @@ const CONTEXT_TABS: TabData[] = [
       },
       {
         doText: 'Mendiskusikan masalah dengan pihak profesional memberi sudut pandang baru yang objektif.',
-        doWhy: 'Menempatkan konsultasi setara dengan mencari masukan objektif atau second opinion.',
+        doWhy: (
+          <>
+            Menempatkan konsultasi setara dengan mencari masukan objektif atau <em>second opinion</em>.
+          </>
+        ),
         dontText: 'Tunjukkan kejantananmu dengan berani jujur soal kesehatan mentalmu.',
         dontWhy: 'Menjadikan kesehatan mental sebagai standar uji maskulinitas baru.',
       },
       {
         doText: 'Rasa kewalahan atau sedih adalah respons wajar atas situasi berat yang sedang dihadapi siapa pun.',
         doWhy: 'Menormalisasi beban secara situasional dan manusiawi tanpa menyudutkan pembaca.',
-        dontText: 'Zaman sekarang cowok jangan sok keras; buang gengsi dan ego toxic masculinity-mu.',
+        dontText: (
+          <>
+            Zaman sekarang cowok jangan sok keras; buang gengsi dan ego <em>toxic masculinity</em>-mu.
+          </>
+        ),
         dontWhy: 'Menggurui dengan jargon moralis yang justru memicu penolakan defensif.',
       },
     ],
@@ -126,8 +142,8 @@ const CONTEXT_TABS: TabData[] = [
 /** The three checks, in the order they are meant to be run. */
 interface ContextStepItem {
   id: string;
-  stepNumber: string;
-  label: string;
+  stepNumber: React.ReactNode;
+  label: React.ReactNode;
   scopeTag: string;
   focusTitle: string;
   question: string;
@@ -152,8 +168,12 @@ const CONTEXT_STEPS: ContextStepItem[] = [
   },
   {
     id: 'social-cost',
-    stepNumber: 'Social Cost',
-    label: 'Cek social cost',
+    stepNumber: <em>Social Cost</em>,
+    label: (
+      <>
+        Cek <em>social cost</em>
+      </>
+    ),
     scopeTag: 'Stigma & Norma',
     focusTitle: 'Menilai potensi risiko penilaian sosial',
     question: '“Apakah tindakan yang kita dorong dan ajak berpotensi dinilai memalukan, lemah, atau ‘kurang laki-laki’ dalam konteks audiens ini?”',
@@ -188,7 +208,7 @@ export const ContextCheck: React.FC = () => {
       <div className="space-y-2 max-w-3xl">
         <div className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold uppercase tracking-wider text-amber-500">
           <Eye size={13} />
-          <span>CONTEXT CHECK</span>
+          <span><em>CONTEXT CHECK</em></span>
         </div>
         <h2 className="text-2xl sm:text-3xl font-serif font-bold text-stone-100 leading-tight">
           Selalu pertimbangkan situasi

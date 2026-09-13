@@ -14,24 +14,32 @@ interface Props {
 interface ValuePillar {
   id: string;
   title: string;
-  voiceTrait: string;
-  positionNote: string;
-  boundaryCondition: string;
-  dos: { example: string; why: string }[];
-  donts: { example: string; why: string }[];
+  voiceTrait: React.ReactNode;
+  positionNote: React.ReactNode;
+  boundaryCondition: React.ReactNode;
+  dos: { example: string; why: React.ReactNode }[];
+  donts: { example: string; why: React.ReactNode }[];
 }
 
 const VALUE_PILLARS: ValuePillar[] = [
   {
     id: "V1",
     title: "Membersamai, Bukan Menghakimi",
-    voiceTrait: "Sapa dan temui pembaca di titik mereka berada (meet them where they are). Jangan menilai mereka dari kekuatan, keberanian, atau kepantasan untuk dihargai.",
+    voiceTrait: (
+      <>
+        Sapa dan temui pembaca di titik mereka berada (<em>meet them where they are</em>). Jangan menilai mereka dari kekuatan, keberanian, atau kepantasan untuk dihargai.
+      </>
+    ),
     positionNote: "Memberikan rasa aman dan mengurangi kemungkinan pembaca bereaksi secara defensif. Membuat audiens merasa menjadi bagian dari Menungsa, alih-alih merasa sebagai orang luar yang perlu 'diperbaiki' atau 'diubah'.",
     boundaryCondition: "Prinsip ini tidak berarti menghindari penilaian terhadap risiko, perilaku, atau situasi. Dalam konteks keselamatan, kesehatan, atau kondisi darurat, gunakan bahasa yang akurat dan tegas untuk menjelaskan risiko. Yang dihindari adalah menghakimi pembaca, bukan menyamarkan atau mereduksi realita dan risiko.",
     dos: [
       {
         example: "Ini ruang buat cerita dan ngobrol bareng. Kamu tidak harus cerita apa-apa jika memang belum siap.",
-        why: "Menyapa pembaca dan menjelaskan suasana program tanpa membebaninya dengan syarat atau tuntutan yang mungkin sebelumnya sudah berat (i.e. bercerita)"
+        why: (
+          <>
+            Menyapa pembaca dan menjelaskan suasana program tanpa membebaninya dengan syarat atau tuntutan yang mungkin sebelumnya sudah berat (<em>i.e.</em> bercerita)
+          </>
+        )
       },
       {
         example: "Minggu lalu, program kami dihadiri oleh tujuh orang. Empat di antaranya lebih banyak mendengarkan.",
@@ -62,7 +70,11 @@ const VALUE_PILLARS: ValuePillar[] = [
     dos: [
       {
         example: "Ruang MENdukung pada Selasa ini pukul 19.00 WIB via Google Meet. Gratis, dan kamu bebas memilih mau bercerita, menguatkan, atau sekadar mendengarkan.",
-        why: "Menjelaskan hal penting–waktu, biaya (cost), tempat–sejak awal dan memberi pilihan yang jelas kepada audiens."
+        why: (
+          <>
+            Menjelaskan hal penting–waktu, biaya (<em>cost</em>), tempat–sejak awal dan memberi pilihan yang jelas kepada audiens.
+          </>
+        )
       },
       {
         example: "Belum siap cerita? Nggak apa-apa. Kamu bisa ikut dulu sebagai pendengar.",
@@ -196,10 +208,10 @@ interface PlaybookItem {
   categoryLabel: string;
   action: string;
   rationale: string;
-  doText: string;
-  doWhy: string;
-  dontText: string;
-  dontWhy: string;
+  doText: React.ReactNode;
+  doWhy: React.ReactNode;
+  dontText: React.ReactNode;
+  dontWhy: React.ReactNode;
 }
 
 const PLAYBOOK_ITEMS: PlaybookItem[] = [
@@ -255,7 +267,11 @@ const PLAYBOOK_ITEMS: PlaybookItem[] = [
     rationale: 'Di ruang publik, hindari meminta pembaca mengungkap pengalaman pribadi. Topik emosi tetap dapat dibahas; sediakan pilihan untuk merespons secara privat.',
     doText: 'Di linimasa publik: bahas pengalaman sehari-hari dan emosi tanpa meminta pembaca menceritakan masalahnya di komentar.',
     doWhy: 'Pembaca dapat mengikuti pembahasan tanpa perlu membagikan pengalaman pribadi.',
-    dontText: 'Share di kolom komentar, cerita paling sedih atau aib rumah tangga yang selama ini kamu pendam dari pasanganmu!',
+    dontText: (
+      <>
+        <em>Share</em> di kolom komentar, cerita paling sedih atau aib rumah tangga yang selama ini kamu pendam dari pasanganmu!
+      </>
+    ),
     dontWhy: 'Meminta pembongkaran privasi keluarga di linimasa terbuka yang melanggar batas martabat pria di ruang publik.'
   },
   {
@@ -267,7 +283,11 @@ const PLAYBOOK_ITEMS: PlaybookItem[] = [
     doText: 'Menyelesaikan pekerjaan dengan tuntas dan menjaga keluarga tetap aman.',
     doWhy: 'Fokus pada tanggung jawab dan fungsi nyata tanpa embel-embel jargon maskulinitas.',
     dontText: 'Cowok yang bernilai tinggi itu nggak kenal kata menyerah. Buktikan kamu punya mental baja untuk sukses!',
-    dontWhy: 'Slogan hustle/manosphere klise yang menekan pembaca dengan tuntutan performa semu.'
+    dontWhy: (
+      <>
+        Slogan <em>hustle</em>/<em>manosphere</em> klise yang menekan pembaca dengan tuntutan performa semu.
+      </>
+    )
   }
 ];
 
@@ -366,7 +386,7 @@ export const VoiceFoundationsView: React.FC<Props> = ({ onNavigate }) => {
                   key={idx}
                   className="inline-flex items-center px-3.5 py-1 rounded-full text-xs sm:text-[13px] font-serif text-stone-200/90 bg-stone-900/50 border border-stone-700/40 shadow-xs backdrop-blur-xs whitespace-nowrap select-none tracking-wide"
                 >
-                  <span>{trait}</span>
+                  <span className={trait === 'Male-Friendly' ? 'italic' : ''}>{trait}</span>
                 </span>
               ))}
             </div>
