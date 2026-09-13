@@ -24,7 +24,7 @@ interface ValueConfig {
 const SPECTRUM_CONFIG: Record<string, ValueConfig> = {
   V1: {
     icon: Users,
-    iconBgLight: 'bg-[#FCEFEA] text-[#AF4D28] border border-[#FADCD1]',
+    iconBgLight: 'bg-[#FFEBE5] text-[#AF4D28] border border-[#FCBFAA]',
     iconBgDark: 'dark:bg-amber-950/50 dark:text-amber-300 dark:border-amber-800/50',
     title: 'Teman Pembaca yang Baik',
     description: 'Nada sapaan dan cara kami membangun kedekatan dengan pembaca.',
@@ -34,7 +34,7 @@ const SPECTRUM_CONFIG: Record<string, ValueConfig> = {
   },
   V2: {
     icon: MessageCircle,
-    iconBgLight: 'bg-[#EDF3FA] text-[#17243D] border border-[#D5E3F5]',
+    iconBgLight: 'bg-[#EBF0FA] text-[#17243D] border border-[#C6D0E2]',
     iconBgDark: 'dark:bg-sky-950/50 dark:text-sky-300 dark:border-sky-800/50',
     title: 'Mudah untuk Dimulai',
     description: 'Seberapa ringan usaha yang dibutuhkan pembaca untuk mulai terlibat.',
@@ -44,7 +44,7 @@ const SPECTRUM_CONFIG: Record<string, ValueConfig> = {
   },
   V3: {
     icon: Lightbulb,
-    iconBgLight: 'bg-[#FDF9ED] text-[#8C6A18] border border-[#F7EAC4]',
+    iconBgLight: 'bg-[#FDF9ED] text-[#AD8E3C] border border-[#E2CE9C]',
     iconBgDark: 'dark:bg-yellow-950/50 dark:text-yellow-300 dark:border-yellow-800/50',
     title: 'Ajakan yang Konkret',
     description: 'Seberapa konkret dan praktis ajakan atau saran yang kami berikan.',
@@ -54,7 +54,7 @@ const SPECTRUM_CONFIG: Record<string, ValueConfig> = {
   },
   V4: {
     icon: Heart,
-    iconBgLight: 'bg-[#FDF0ED] text-[#AF4D28] border border-[#FAD7CE]',
+    iconBgLight: 'bg-[#FDF0ED] text-[#AF4D28] border border-[#FCBFAA]',
     iconBgDark: 'dark:bg-rose-950/50 dark:text-rose-300 dark:border-rose-800/50',
     title: 'Urutan Penyampaian Emosi',
     description: 'Urutan penyampaian antara label/emosi dan situasi yang mendasarinya.',
@@ -64,7 +64,7 @@ const SPECTRUM_CONFIG: Record<string, ValueConfig> = {
   },
   V5: {
     icon: ShieldCheck,
-    iconBgLight: 'bg-[#EDF4EF] text-[#2E4034] border border-[#D3E3D7]',
+    iconBgLight: 'bg-[#ECF2EE] text-[#2E4034] border border-[#C7D3CB]',
     iconBgDark: 'dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800/50',
     title: 'Tingkat Kepastian Informasi',
     description: 'Seberapa tegas kami menyampaikan batasan dan tingkat kepastian informasi.',
@@ -74,7 +74,7 @@ const SPECTRUM_CONFIG: Record<string, ValueConfig> = {
   },
   V6: {
     icon: Target,
-    iconBgLight: 'bg-[#F2EFFC] text-[#4A3575] border border-[#DDD6FE]',
+    iconBgLight: 'bg-[#F2EFFC] text-[#5B3E96] border border-[#DDD6FE]',
     iconBgDark: 'dark:bg-purple-950/50 dark:text-purple-300 dark:border-purple-800/50',
     title: 'Arah Tindakan',
     description: 'Bagaimana kami mendorong perubahan pada pembaca.',
@@ -104,20 +104,20 @@ export const ValueSpectrum: React.FC<Props> = ({
 }) => {
   return (
     <div
-      className={`rounded-3xl border border-stone-200 dark:border-stone-800 bg-[#FDFDFC] dark:bg-stone-950/80 p-5 sm:p-7 md:p-9 shadow-raised space-y-6 sm:space-y-8 ${
+      className={`rounded-3xl border border-stone-800/80 bg-stone-900/40 dark:bg-stone-950/70 p-5 sm:p-7 md:p-9 shadow-sm space-y-6 sm:space-y-8 ${
         className ?? ''
       }`}
     >
-      {/* Header matching the latest design mockup */}
-      <div className="border-b border-stone-200/80 dark:border-stone-800/80 pb-6">
+      {/* Header matching DESIGN.md typography tokens */}
+      <div className="border-b border-stone-800/70 pb-6">
         <div className="space-y-1.5 max-w-2xl">
           <span className="text-[11px] font-sans font-bold tracking-[0.2em] text-stone-500 dark:text-stone-400 uppercase block">
             MENUNGSA
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-stone-900 dark:text-stone-100 tracking-tight leading-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-stone-100 tracking-tight leading-tight">
             Spektrum Voice Menungsa
           </h2>
-          <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300 font-sans leading-relaxed">
+          <p className="text-xs sm:text-sm text-stone-500 dark:text-stone-300 font-sans leading-relaxed">
             Atur posisi yang paling sesuai dengan voice Menungsa untuk setiap aspek.
           </p>
         </div>
@@ -128,7 +128,7 @@ export const ValueSpectrum: React.FC<Props> = ({
         {values.map((v) => {
           const cfg = SPECTRUM_CONFIG[v.id] ?? {
             icon: Users,
-            iconBgLight: 'bg-[#FCEFEA] text-[#AF4D28] border border-[#FADCD1]',
+            iconBgLight: 'bg-[#FFEBE5] text-[#AF4D28] border border-[#FCBFAA]',
             iconBgDark: 'dark:bg-amber-950/50 dark:text-amber-300 dark:border-amber-800/50',
             title: rowTitles?.[v.id] ?? v.value,
             description: v.voiceTrait,
@@ -145,8 +145,8 @@ export const ValueSpectrum: React.FC<Props> = ({
               key={v.id}
               className={`rounded-2xl border transition-all duration-200 p-4 sm:p-5 lg:p-6 shadow-2xs ${
                 isOpen
-                  ? 'border-amber-400/80 dark:border-amber-500/50 bg-[#FCFBF8] dark:bg-stone-900/90 shadow-raised'
-                  : 'border-stone-200/90 dark:border-stone-800/80 bg-white/95 dark:bg-stone-900/50 hover:border-stone-300 dark:hover:border-stone-700/80'
+                  ? 'border-amber-500/80 dark:border-amber-500/60 bg-stone-900 dark:bg-stone-900/90 shadow-sm'
+                  : 'border-stone-800/80 bg-stone-900/80 dark:bg-stone-900/50 hover:border-stone-700 dark:hover:border-stone-700 hover:bg-stone-900'
               }`}
             >
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
@@ -163,18 +163,18 @@ export const ValueSpectrum: React.FC<Props> = ({
                   <div className="space-y-1 min-w-0 flex-1 pt-0.5">
                     <h3
                       onClick={() => onSelect(v.id)}
-                      className="font-serif font-bold text-base sm:text-lg lg:text-xl text-stone-900 dark:text-stone-100 leading-snug cursor-pointer hover:text-amber-700 dark:hover:text-amber-400 transition-colors"
+                      className="font-serif font-bold text-base sm:text-lg lg:text-xl text-stone-100 hover:text-amber-600 dark:hover:text-amber-400 leading-snug cursor-pointer transition-colors"
                     >
                       {rowTitles?.[v.id] ?? cfg.title}
                     </h3>
-                    <p className="text-xs sm:text-[13px] text-stone-600 dark:text-stone-300 font-sans leading-relaxed">
+                    <p className="text-xs sm:text-[13px] text-stone-500 dark:text-stone-300 font-sans leading-relaxed">
                       {cfg.description}
                     </p>
                   </div>
                 </div>
 
                 {/* Right Block: Spectrum Rail directly followed by Chevron */}
-                <div className="flex items-center gap-4 sm:gap-6 shrink-0 w-full lg:w-auto pt-2 lg:pt-0 border-t lg:border-t-0 border-stone-100 dark:border-stone-800/60 justify-between lg:justify-end">
+                <div className="flex items-center gap-4 sm:gap-6 shrink-0 w-full lg:w-auto pt-2 lg:pt-0 border-t lg:border-t-0 border-stone-800/60 justify-between lg:justify-end">
                   {/* Spectrum Rail Container */}
                   <div
                     className="w-full sm:w-[300px] md:w-[360px] lg:w-[380px] xl:w-[440px] select-none pointer-events-none cursor-default"
@@ -182,23 +182,25 @@ export const ValueSpectrum: React.FC<Props> = ({
                     aria-label={`Spektrum ${cfg.title}: dari ${cfg.left} ke ${cfg.right}`}
                   >
                     <div className="relative py-2 flex flex-col justify-center">
-                      {/* Rail Track */}
-                      <div className="relative h-2.5 sm:h-3 w-full rounded-full bg-stone-200/90 dark:bg-stone-800 overflow-hidden shadow-inner">
-                        {/* Gradient Fill */}
+                      {/* Rail Track: soft warm bone in light mode, dark stone in dark mode */}
+                      <div className="relative h-2.5 sm:h-3 w-full rounded-full bg-[#E5DFD1] dark:bg-stone-800 overflow-hidden shadow-inner">
+                        {/* Gradient Fill ending in calibrated target green */}
                         <div
-                          className="absolute inset-0 rounded-full"
+                          className="absolute top-0 bottom-0 left-0 rounded-full"
                           style={{
+                            width: `${cfg.positionPercent}%`,
                             background:
-                              'linear-gradient(90deg, #AF4D28 0%, #D47B53 25%, #D9B44F 50%, #688C68 75%, #2E4034 100%)',
-                            clipPath: `inset(0 ${100 - cfg.positionPercent}% 0 0)`,
+                              cfg.positionPercent === 100
+                                ? 'linear-gradient(90deg, #AF4D28 0%, #D47B53 25%, #D9B44F 50%, #688C68 75%, #2E4034 100%)'
+                                : 'linear-gradient(90deg, #AF4D28 0%, #D47B53 30%, #D9B44F 55%, #2E4034 100%)',
                           }}
                         />
 
-                        {/* Segment separators at 25%, 50%, 75% */}
-                        {[25, 50, 75].map((sep) => (
+                        {/* Segment separators over the track */}
+                        {(cfg.positionPercent === 100 ? [25, 50, 75] : [25, 50]).map((sep) => (
                           <div
                             key={sep}
-                            className="absolute top-0 bottom-0 w-[1.5px] bg-white/70 dark:bg-stone-900/60 pointer-events-none -translate-x-1/2"
+                            className="absolute top-0 bottom-0 w-[1.5px] bg-white/50 dark:bg-stone-900/60 pointer-events-none -translate-x-1/2"
                             style={{ left: `${sep}%` }}
                           />
                         ))}
@@ -210,7 +212,7 @@ export const ValueSpectrum: React.FC<Props> = ({
                       <span className="text-stone-500 dark:text-stone-400 font-sans text-left">
                         {cfg.left}
                       </span>
-                      <span className="text-stone-700 dark:text-stone-200 font-medium font-sans text-right">
+                      <span className="text-stone-300 dark:text-stone-200 font-medium font-sans text-right">
                         {cfg.right}
                       </span>
                     </div>
@@ -222,7 +224,7 @@ export const ValueSpectrum: React.FC<Props> = ({
                     onClick={() => onSelect(v.id)}
                     aria-expanded={isOpen}
                     aria-label={`${isOpen ? 'Tutup' : 'Buka'} rincian ${cfg.title}`}
-                    className="p-2 rounded-lg text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-100 dark:hover:bg-stone-800/60 transition cursor-pointer shrink-0 ml-1"
+                    className="p-2 rounded-lg text-stone-500 dark:text-stone-400 hover:text-stone-100 hover:bg-stone-800/40 dark:hover:bg-stone-800/60 transition cursor-pointer shrink-0 ml-1"
                   >
                     <ChevronDown
                       size={20}
@@ -237,7 +239,7 @@ export const ValueSpectrum: React.FC<Props> = ({
                 <div
                   role="region"
                   id={`vs-panel-${v.id}`}
-                  className="mt-5 pt-5 border-t border-stone-200 dark:border-stone-800/80 animate-fadeIn"
+                  className="mt-5 pt-5 border-t border-stone-800/70 animate-fadeIn"
                 >
                   {renderDetail(v.id)}
                 </div>
